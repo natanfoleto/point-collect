@@ -6,7 +6,6 @@ import logo from '../../assets/logo3.png'
 
 import styles from './styles'
 
-
 export default function Home() {
 
   const navigation = useNavigation();
@@ -16,7 +15,7 @@ export default function Home() {
   }
 
   function navigateToLogin() {
-    navigation.navigate('Login')
+    navigation.navigate('Login');
   }
 
   return (
@@ -26,7 +25,6 @@ export default function Home() {
       <Image source={logo} style={styles.logo} />
 
       <View>
-
         <TouchableOpacity
           style={styles.btnCadastrar}
           onPress={navigateToSignUp}

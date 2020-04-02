@@ -6,12 +6,11 @@ export default StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    
   },
 
   logo:{
-    marginBottom:40,
-    width:300,
+    marginBottom: 40,
+    width: 300,
   },
 
   btnCadastrar: {
@@ -26,10 +25,8 @@ export default StyleSheet.create({
     padding: 10,
     marginBottom: 12,
 
-    
     borderColor: '#000',
     borderWidth: 0.5
-
   },
 
   textCadastrar: {
@@ -48,7 +45,6 @@ export default StyleSheet.create({
     backgroundColor: '#4BCB56',
     borderRadius: 50,
     padding: 10,
-
   },
 
   textLogin: {
