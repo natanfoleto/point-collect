@@ -2,6 +2,12 @@ import * as Yup from 'yup';
 import User from '../models/User';
 
 class UserController {
+  async index(req, res) {
+    const users = await User.findAll();
+
+    return res.json(users);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string()
@@ -12,6 +18,10 @@ class UserController {
       password: Yup.string()
         .required()
         .min(6),
+      latitude: Yup.number()
+        .required(),
+      longitude: Yup.number()
+        .required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -23,7 +33,7 @@ class UserController {
     });
 
     if (userExists) {
-      return res.status(400).json({ error: "Usuário ja existe." });
+      return res.status(400).json({ error: 'Usuário ja existe.' });
     }
 
     const { id, name, email, latitude, longitude } = await User.create(req.body);
@@ -68,7 +78,7 @@ class UserController {
       });
 
       if (userExists) {
-        return res.status(400).json({ error: "Usuário ja existe." });
+        return res.status(400).json({ error: 'Usuário ja existe.' });
       }
     }
 
