@@ -2,7 +2,7 @@ module.exports = {
   dialect: 'postgres',
   host: 'localhost',
   username: 'postgres',
-  password: 'docker',
+  password: '143010',
   database: 'gorecicle',
   define: {
     timestamp: true,

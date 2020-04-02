@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: (queryInterface, Sequelize, DataTypes) => {
     return queryInterface.createTable('users', { 
       id: {
-        type: Sequelize.INTERGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -22,22 +22,22 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      location : {
-        type: {
-          type: Sequelize.STRING,
-          enum: ['Point'],
-          allowNull: false,
-        },
-        index: '2dsphere',
+      latitude: {
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
+      longitude: {
+        type: Sequelize.DECIMAL,
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      update_at: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-      }
+      },
     });
   },
 
