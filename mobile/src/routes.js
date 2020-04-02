@@ -6,6 +6,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 const AppStack = createStackNavigator();
 
 import Home from './pages/Home';
+import SignUp from './pages/SignUp';
+import Login from './pages/Login';
+
 
 export default function Routes(){ 
   return(
@@ -14,6 +17,8 @@ export default function Routes(){
       <AppStack.Navigator screenOptions={{ headerShown: false}}>
 
           <AppStack.Screen name="Home" component={Home} />
+          <AppStack.Screen name="SignUp" component={SignUp} />
+          <AppStack.Screen name="Login" component={Login} />
           
       </AppStack.Navigator>
 
