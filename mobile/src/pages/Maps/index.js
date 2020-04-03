@@ -4,6 +4,8 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import api from '../../services/api';
+
 import styles from './styles'
 
 export default function Maps() {
@@ -32,6 +34,12 @@ export default function Maps() {
     loadInitialPosition();
   }, []);
 
+  async function loadCollectors() {
+    const { latitude, longitude } = currentRegion;
+
+    const response = api.get('/')
+  }
+
   if (!currentRegion) {
     return null;
   }
@@ -50,12 +58,12 @@ export default function Maps() {
       </Marker>
     </MapView>
     <View style={styles.searchForm}>
-      <TextInput 
+      <TextInput
         style={styles.searchInput}
-        placeholder="Buscar pontos por cidade..."
+        placeholder="O que você quer reciclar...?"
         placeholderTextColor="#999"
         autoCapitalize="words"
-        autoCorrect={false} 
+        autoCorrect={false}
       />
 
       <TouchableOpacity style={styles.loadButton}>

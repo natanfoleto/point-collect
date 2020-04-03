@@ -5,6 +5,7 @@ import multerConfig from './config/multer';
 import UserController from './app/controllers/UserController';
 import CollectorController from './app/controllers/CollectorController';
 import SessionController from './app/controllers/SessionController';
+import SearchController from './app/controllers/SearchController';
 import FileController from './app/controllers/FileController';
 
 import authMiddleware from './app/middlewares/auth';
@@ -22,6 +23,7 @@ routes.get('/users', UserController.index);
 routes.put('/users', UserController.update);
 routes.get('/collectors', CollectorController.index);
 routes.put('/collectors', CollectorController.update);
+routes.get('/search', SearchController.index);
 
 routes.post('/files', upload.single('file'), FileController.store);
 

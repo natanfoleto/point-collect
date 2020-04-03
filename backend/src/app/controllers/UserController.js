@@ -17,11 +17,7 @@ class UserController {
         .required(),
       password: Yup.string()
         .required()
-        .min(6),
-      latitude: Yup.number()
-        .required(),
-      longitude: Yup.number()
-        .required(),
+        .min(6)
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -36,14 +32,12 @@ class UserController {
       return res.status(400).json({ error: 'Usuário ja existe.' });
     }
 
-    const { id, name, email, latitude, longitude } = await User.create(req.body);
+    const { id, name, email } = await User.create(req.body);
 
     return res.json({
       id, 
       name, 
-      email, 
-      latitude, 
-      longitude
+      email
     });
   }
 
@@ -86,14 +80,12 @@ class UserController {
       return res.status(401).json({ error: 'A senha está incorreta.' });
     }
 
-    const { id, name, latitude, longitude } = await user.update(req.body);
+    const { id, name } = await user.update(req.body);
 
     return res.json({
       id,
       name,
-      email,
-      latitude,
-      longitude,
+      email
     });
   }
 }
