@@ -9,6 +9,7 @@ import api from '../../services/api';
 import styles from './styles'
 
 export default function Maps() {
+  const [collectors, setCollectors] = useState([]);
   const [currentRegion, setCurrentRegion] = useState(null);
 
   useEffect(() => {
@@ -35,9 +36,14 @@ export default function Maps() {
   }, []);
 
   async function loadCollectors() {
-    const { latitude, longitude } = currentRegion;
+    // const { latitude, longitude } = currentRegion;
+    const response = api.get('/collectors');
 
-    const response = api.get('/')
+    setCollectors(response);
+  }
+
+  function handleRegionChanged(region) {
+    setCurrentRegion(region);
   }
 
   if (!currentRegion) {
@@ -46,7 +52,11 @@ export default function Maps() {
 
   return (
     <>
-    <MapView initialRegion={currentRegion} style={styles.map}>
+    <MapView 
+      onRegionChangeComplete={handleRegionChanged} 
+      initialRegion={currentRegion} 
+      style={styles.map}
+    >
       <Marker coordinate={{ latitude: -20.697764, longitude: -48.416833 }}>
         <Image style={styles.marker} />
         <Callout>
