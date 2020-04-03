@@ -18,7 +18,6 @@ export default function Login() {
     navigation.navigate('Maps')
   }
 
-
   return (
     <>
       <View style={styles.header}>
