@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
 
 export default StyleSheet.create({
   container: {
@@ -6,11 +7,12 @@ export default StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight + 20,
+    paddingHorizontal:20,
   },
 
   logo:{
     marginBottom: 40,
-    width: 300,
   },
 
   btnCadastrar: {

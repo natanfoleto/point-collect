@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { Text, SafeAreaView, Image, View, TouchableOpacity } from 'react-native'
+import { Text, Image, View, TouchableOpacity } from 'react-native'
 
 import logo from '../../assets/logo3.png'
 
@@ -15,12 +15,12 @@ export default function Home() {
   }
 
   function navigateToLogin() {
-    navigation.navigate('Maps');
+    navigation.navigate('Login');
   }
 
   return (
 
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
 
       <Image source={logo} style={styles.logo} />
 
@@ -41,7 +41,8 @@ export default function Home() {
 
       </View>
 
-    </SafeAreaView>
+    </View>
+
 
   );
 }
