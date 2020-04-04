@@ -30,8 +30,8 @@ export default function Maps() {
         setCurrentRegion({
           latitude, 
           longitude,
-          latitudeDelta: 0.04,
-          longitudeDelta: 0.04
+          latitudeDelta: 0.03,
+          longitudeDelta: 0.03
         });
       }
     }
@@ -40,10 +40,9 @@ export default function Maps() {
   }, []);
 
   async function loadCollectors() {
-    // const { latitude, longitude } = currentRegion;
-    const response = api.get('/collectors');
+    const response = await api.get('collectors');
 
-    setCollectors(response);
+    setCollectors(response.data);
   }
 
   async function getRegionLocation() {
@@ -147,6 +146,25 @@ export default function Maps() {
             </View>
           </Callout>
         </Marker>
+
+        {collectors.map(collector => (
+          <Marker
+            key={collector.id}
+            coordinate={{ 
+              latitude: Number(collector.latitude), 
+              longitude: Number(collector.longitude) 
+            }}
+          >
+            <Image style={styles.markerCollector} />
+            <Callout>
+              <View style={styles.callout}>
+          <Text style={styles.be}>{collector.name}</Text>
+                <Text style={styles.point}>O local mais próximo do seu endereço é uma Cooperativa a 34,2km</Text>
+              </View>
+            </Callout>
+          </Marker>  
+        ))}
+
       </MapView>
 
       <View style={styles.searchForm}>
@@ -175,6 +193,17 @@ export default function Maps() {
             onSubmitEditing={fadeOutWidth}
           />
         </Animated.View> 
+      </View>
+
+      <View style={styles.initForm}>
+        <TouchableOpacity 
+          style={styles.initButton}
+          onPress={loadCollectors}
+        >
+          <Text style={styles.textInit}>
+            INICIAR
+          </Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.sideBar}>

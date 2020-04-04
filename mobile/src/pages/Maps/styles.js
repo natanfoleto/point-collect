@@ -20,6 +20,15 @@ export default StyleSheet.create({
     borderColor: 'rgba(205, 220, 250, 0.9)'
   },
 
+  markerCollector: {
+    width: 30,
+    height: 30,
+    borderRadius: 50,
+    backgroundColor: '#a11',
+    borderWidth: 7,
+    borderColor: 'rgba(100, 020, 250, 0.9)'
+  },
+
   callout: {
     width: 260,
   },
@@ -74,7 +83,37 @@ export default StyleSheet.create({
       width: 5,
       height: 5,
     },
-    elevation: 3
+    elevation: 5
+  },
+
+  initForm: {
+    position: 'absolute',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    bottom: 70,
+    height: 70,
+    left: 0,
+    right: 0,
+  },
+
+  initButton: {
+    width: 70,
+    height: 70,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    elevation: 5,
+  },
+
+  textInit: {
+    color: '#666'
   },
 
   sideBar: {
@@ -87,7 +126,6 @@ export default StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    zIndex: 5,
     backgroundColor: '#F9F9F9',
   },
 
