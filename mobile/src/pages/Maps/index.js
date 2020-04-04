@@ -140,9 +140,9 @@ export default function Maps() {
         <Marker coordinate={{ latitude: -20.697764, longitude: -48.416833 }}>
           <Image style={styles.marker} />
           <Callout>
-            <View style={styles.callout}>
-              <Text style={styles.be}>Você está aqui!</Text>
-              <Text style={styles.point}>O local mais próximo do seu endereço é uma Cooperativa a 34,2km</Text>
+            <View style={styles.calloutUser}>
+              <Text style={styles.textYou}>Você está aqui!</Text>
+              <Text style={styles.textPoint}>O local mais próximo do seu endereço é uma Cooperativa a 34,2km</Text>
             </View>
           </Callout>
         </Marker>
@@ -155,13 +155,40 @@ export default function Maps() {
               longitude: Number(collector.longitude) 
             }}
           >
-            <Image style={styles.markerCollector} />
-            <Callout>
-              <View style={styles.callout}>
-          <Text style={styles.be}>{collector.name}</Text>
-                <Text style={styles.point}>O local mais próximo do seu endereço é uma Cooperativa a 34,2km</Text>
+            <Image style={styles.markerCollector} source={ {uri: 'https://avatars0.githubusercontent.com/u/39577730?s=400&u=a7f7b5fcc2da2df8dece626fb456746147df9261&v=4'} } />
+            
+            <Callout style={styles.calloutCollector}>
+
+              <View style={styles.calloutInfo}>
+                <Text style={styles.textName}>{collector.name}</Text>
+                
+                <Text style={styles.text}>Avenida Paulo Castor Gomes, 0 - Rural Barretos - SP</Text>
+                
+                <Text style={styles.text}>Telefone: 
+                  <Text style={styles.textTelephone}> {collector.telephone}</Text> 
+                </Text>
+                
+                <Text style={styles.text}>E-mail:
+                  <Text style={styles.textEmail}> {collector.email}</Text> 
+                </Text>
               </View>
+
+              <View style={styles.calloutButton}>
+                <TouchableOpacity 
+                  style={styles.buttonSite}
+                >
+                  <MaterialIcons name="directions" size={36} color="#1E90FF" />
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                  style={styles.buttonRoute}
+                >
+                  <MaterialIcons name="language" size={30} color="#1E90FF" />
+                </TouchableOpacity>
+              </View>
+
             </Callout>
+
           </Marker>  
         ))}
 

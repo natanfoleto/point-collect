@@ -20,27 +20,73 @@ export default StyleSheet.create({
     borderColor: 'rgba(205, 220, 250, 0.9)'
   },
 
-  markerCollector: {
-    width: 30,
-    height: 30,
-    borderRadius: 50,
-    backgroundColor: '#a11',
-    borderWidth: 7,
-    borderColor: 'rgba(100, 020, 250, 0.9)'
+  calloutUser: {
+    width: 270,
   },
 
-  callout: {
-    width: 260,
-  },
-
-  be: {
+  textYou: {
     fontWeight: 'bold',
     fontSize: 16,
   },
 
-  point: {
+  textPoint: {
     color: '#666',
     marginTop: 6,
+  },
+
+  markerCollector: {
+    width: 34,
+    height: 34,
+    borderRadius: 4,
+    borderWidth: 4,
+    backgroundColor: '#333',
+    borderColor: '#fff',
+  },
+
+  calloutCollector: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 4,
+  },
+
+  calloutInfo: {
+    width: 230,
+  },
+
+  textName: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginBottom: 4,
+  },
+
+  text: {
+    color: '#666',
+    marginTop: 2,
+  },
+
+  textTelephone: {
+    fontWeight: 'bold',
+    marginTop: 2,
+  },
+
+  textEmail: {
+    color: '#1E90FF',
+    marginTop: 2,
+  },
+
+  calloutButton: {
+    width: 60,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  buttonSite: {
+    marginTop: 7,
+  },
+
+  buttonRoute: {
+    marginBottom: 7,
   },
 
   searchForm: {
