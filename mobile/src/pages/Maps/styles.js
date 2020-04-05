@@ -8,10 +8,10 @@ export default StyleSheet.create({
 
   map: {
     flex: 1,
-    marginBottom: 50,
   },
 
-  marker: {
+  // ===== User ======================================
+  userMarker: {
     width: 30,
     height: 30,
     borderRadius: 50,
@@ -20,21 +20,22 @@ export default StyleSheet.create({
     borderColor: 'rgba(205, 220, 250, 0.9)'
   },
 
-  calloutUser: {
+  userCallout: {
     width: 270,
   },
 
-  textYou: {
+  userText: {
     fontWeight: 'bold',
     fontSize: 16,
   },
 
-  textPoint: {
+  userPoint: {
     color: '#666',
     marginTop: 6,
   },
 
-  markerCollector: {
+  // ===== Collector ======================================
+  collectorMarker: {
     width: 34,
     height: 34,
     borderRadius: 4,
@@ -43,38 +44,38 @@ export default StyleSheet.create({
     borderColor: '#fff',
   },
 
-  calloutCollector: {
+  collectorCallout: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingBottom: 4,
   },
 
-  calloutInfo: {
+  collectorInfo: {
     width: 230,
   },
 
-  textName: {
+  collectorName: {
     fontWeight: 'bold',
     fontSize: 16,
     marginBottom: 4,
   },
 
-  text: {
+  collectorText: {
     color: '#666',
     marginTop: 2,
   },
 
-  textTelephone: {
+  collectorTelephne: {
     fontWeight: 'bold',
     marginTop: 2,
   },
 
-  textEmail: {
+  collectorEmail: {
     color: '#1E90FF',
     marginTop: 2,
   },
 
-  calloutButton: {
+  collectorButton: {
     width: 60,
     flexDirection: 'column',
     alignItems: 'center',
@@ -89,24 +90,24 @@ export default StyleSheet.create({
     marginBottom: 7,
   },
 
+  // ===== Search ======================================
   searchForm: {
     position: 'absolute',
     flexDirection: 'row',
+    justifyContent: 'center',
     top: 40,
-    left: 20,
-    right: 20,
-    zIndex: 5,
+    left: 25,
+    right: 25,
   },
 
   searchInput: {
     flex: 1,
     height: 50,
-    backgroundColor: '#fff',
-    color: '#333',
-    borderRadius: 25,
     paddingHorizontal: 20,
-    marginLeft: 10,
     fontSize: 16,
+    color: '#333',
+    backgroundColor: '#fff',
+    borderRadius: 25,
     shadowColor: '#000',
     shadowOpacity: 0.2,
     shadowOffset: {
@@ -116,69 +117,30 @@ export default StyleSheet.create({
     elevation: 2
   },
 
-  searchButton: {
-    width: 50,
-    height: 50,
-    backgroundColor: '#fff',
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowOffset: {
-      width: 5,
-      height: 5,
-    },
-    elevation: 5
-  },
-
-  initForm: {
-    position: 'absolute',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    bottom: 70,
-    height: 70,
-    left: 0,
-    right: 0,
-  },
-
-  initButton: {
-    width: 70,
-    height: 70,
-    backgroundColor: '#fff',
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowOffset: {
-      width: 5,
-      height: 5,
-    },
-    elevation: 5,
-  },
-
-  textInit: {
-    color: '#666'
-  },
-
-  sideBar: {
-    position: 'absolute',
+  // ===== Sidebar ======================================
+  bottomBar: {
+    position: 'relative',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingVertical: 0,
     paddingLeft: 15,
     paddingRight: 15,
-    height: 50,
+    height: 60,
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: '#47AF50',
   },
 
-  sideBarButton: {
-    width: 50,
-    height: 50,
+  bottomBarButton: {
+    width: 60,
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  textButton: {
+    fontSize: 12,
+    color: '#D8D8D8',
+  }
 });
