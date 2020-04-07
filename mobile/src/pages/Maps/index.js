@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Image, View, Text, TextInput, TouchableOpacity } from 'react-native'
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { requestPermissionsAsync, getCurrentPositionAsync, reverseGeocodeAsync, geocodeAsync } from 'expo-location';
@@ -11,6 +11,8 @@ import styles from './styles'
 export default function Maps() {
   const [collectors, setCollectors] = useState([]);
   const [currentRegion, setCurrentRegion] = useState(null);
+
+  const inputSearch = useRef(null);
 
   useEffect(() => {
     async function loadInitialPosition() {
@@ -83,6 +85,10 @@ export default function Maps() {
     return null;
   }
 
+  const focusSearchInput = () => {
+      inputSearch.current.focus();
+  };
+
   return (
     <>
       <View style={styles.statusBar}/>
@@ -123,7 +129,7 @@ export default function Maps() {
                 <Text style={styles.collectorText}>Avenida Paulo Castor Gomes, 0 - Rural Barretos - SP</Text>
                 
                 <Text style={styles.collectorText}>Telefone: 
-                  <Text style={styles.collectorTelephne}> {collector.telephone}</Text> 
+                  <Text style={styles.collectorTelephne}> {collector.telephone}</Text>
                 </Text>
                 
                 <Text style={styles.collectorText}>E-mail:
@@ -154,6 +160,7 @@ export default function Maps() {
 
       <View style={styles.searchForm}>
         <TextInput 
+          ref={inputSearch}
           style={styles.searchInput}
           placeholder="O que você quer reciclar...?"
           placeholderTextColor="#999"
@@ -165,6 +172,7 @@ export default function Maps() {
       <View style={styles.bottomBar}>
         <TouchableOpacity 
           style={styles.bottomBarButton}
+          onPress={focusSearchInput}
         >
           <MaterialIcons name="search" size={28} color="#E8E8E8" />
           <Text style={styles.textButton}>Pesquisa</Text>
