@@ -15,7 +15,7 @@ export default function Home() {
   }
 
   function navigateToLogin() {
-    navigation.navigate('Maps');
+    navigation.navigate('Login');
   }
 
   return (
@@ -26,21 +26,20 @@ export default function Home() {
 
       <View>
         <TouchableOpacity
-          style={styles.btnCadastrar}
-          onPress={navigateToSignUp}
-        >
-          <Text style={styles.textCadastrar}> CADASTRE-SE </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
           style={styles.btnLogin}
           onPress={navigateToLogin}
         >
           <Text style={styles.textLogin}> LOGIN </Text>
         </TouchableOpacity>
 
+        <TouchableOpacity
+          style={styles.btnCadastrar}
+          onPress={navigateToSignUp}
+        >
+          <Text style={styles.textCadastrar}> CADASTRE-SE </Text>
+        </TouchableOpacity>
       </View>
-
+      
     </View>
 
 

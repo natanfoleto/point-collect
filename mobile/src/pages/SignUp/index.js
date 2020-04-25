@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles'
 
@@ -16,15 +16,18 @@ export default function SignUp() {
 
   return (
     <>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={navigateToHome} style={styles.btnBack}>
-          <Feather name='arrow-left' size='35' color='#4BCB56' />
-        </TouchableOpacity>
-      </View>
+      <View style={styles.statusBar}/>
+      
+      <TouchableOpacity 
+        style={styles.buttonBack}
+        onPress={navigateToHome}
+      >
+        <MaterialIcons name="keyboard-backspace" size={35} color="#4BCB56" />
+      </TouchableOpacity>
     
       <View style={styles.container}>
         
-          <View style={styles.logo}>
+          <View>
             <Image source={logo} />
           </View>
 
@@ -39,12 +42,8 @@ export default function SignUp() {
               <Text style={styles.textCadastrar}>CADASTRAR</Text>
             </TouchableOpacity>
           </View>
-        
-
-
 
       </View>
-
     </>
   );
 }

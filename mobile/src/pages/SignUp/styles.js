@@ -3,48 +3,48 @@ import Constants from 'expo-constants';
 
 export default StyleSheet.create({
   
-  header:{
+  statusBar: {
     paddingTop: Constants.statusBarHeight + 20,
   },
 
-  container:{
+  buttonBack: {
+    paddingHorizontal: 20,
+  },
+
+  container: {
     flex: 1,
     flexDirection: 'column',
-    paddingHorizontal:20,
-    justifyContent:'center',
-    alignItems:'center'
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 25,
   },
 
-  
-
-  input:{
-    height: 40,
+  input: {
+    paddingHorizontal: 18,
+    height: 50,
     width: 320,
     padding: 10,
-
     borderColor: '#000',
-    borderWidth: 0.7,
+    borderWidth: 0.3,
     borderRadius: 50,
-    marginBottom: 15,
+    marginBottom: 10,
+    fontSize: 16,
   },
+
   btnCadastrar: {
     justifyContent: 'center',
     alignItems: 'center',
-
     width: 320,
-    height: 40,
-    
+    height: 50,
     backgroundColor: '#4BCB56',
     borderRadius: 50,
     padding: 10,
     marginTop: 12,
-
   },
 
   textCadastrar: {
-    fontSize: 16,
+    fontSize: 20,
     color: '#f9f9f9',
     fontWeight: 'bold',
-  },
-  
+  },  
 })

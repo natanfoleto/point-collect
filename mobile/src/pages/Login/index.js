@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles'
 
 import logo from '../../assets/logo3.png';
 
 export default function Login() {
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
   const navigation = useNavigation();
+
+  function handleSubmit() {
+
+  }
 
   function navigateToHome() {
     navigation.navigate('Home')
@@ -20,28 +27,46 @@ export default function Login() {
 
   return (
     <>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={navigateToHome}>
-          <Feather name='arrow-left' size='35' color='#4BCB56' />
-        </TouchableOpacity>
-      </View>
-
+      <View style={styles.statusBar}/>
+      
+      <TouchableOpacity 
+        style={styles.buttonBack}
+        onPress={navigateToHome}
+      >
+        <MaterialIcons name="keyboard-backspace" size={35} color="#4BCB56" />
+      </TouchableOpacity>
+      
       <View style={styles.container}>
 
-          <View style={styles.logo}>
+          <View>
             <Image source={logo} />
           </View>
 
           <View >
 
-            <TextInput style={styles.input} placeholder="Email" />
-            <TextInput style={styles.input} placeholder="Senha" />
+            <TextInput 
+              style={styles.input} 
+              placeholder="Email"
+              ref={emailRef}
+              returnKeyType="next"
+              onSubmitEditing={() => passwordRef.current.focus()}
+            />
 
-            <TouchableOpacity style={styles.btnCadastrar} onPress={navigateToMaps}>
-              <Text style={styles.textCadastrar}>LOGIN</Text>
+            <TextInput 
+              style={styles.input} 
+              placeholder="Senha"
+              ref={passwordRef}
+              returnKeyType="send"
+              onSubmitEditing={handleSubmit}
+            />
+
+            <TouchableOpacity 
+              style={styles.btnLogin} 
+              onPress={handleSubmit}
+            >
+              <Text style={styles.textLogin}>LOGIN</Text>
             </TouchableOpacity>
-          </View>
-        
+          </View>  
 
       </View>
     </>

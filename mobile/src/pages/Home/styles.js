@@ -12,47 +12,41 @@ export default StyleSheet.create({
   },
 
   logo:{
-    marginBottom: 40,
-  },
-
-  btnCadastrar: {
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    width: 230,
-    height: 40,
-    
-    backgroundColor: '#f9f9f9',
-    borderRadius: 50,
-    padding: 10,
-    marginBottom: 12,
-
-    borderColor: '#000',
-    borderWidth: 0.5
-  },
-
-  textCadastrar: {
-    fontSize: 16,
-    color: '#4BCB56',
-    fontWeight: 'bold',
+    marginBottom: 20,
   },
 
   btnLogin: {
     justifyContent: 'center',
     alignItems: 'center',
-
-    width: 235,
-    height: 40,
-
+    marginBottom: 12,
+    width: 270,
+    height: 50,
     backgroundColor: '#4BCB56',
     borderRadius: 50,
     padding: 10,
   },
 
   textLogin: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#f9f9f9',
     fontWeight: 'bold'
-  }
+  },
 
+  btnCadastrar: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 270,
+    height: 50,
+    backgroundColor: '#f9f9f9',
+    borderRadius: 50,
+    padding: 10,
+    borderColor: '#000',
+    borderWidth: 0.3
+  },
+
+  textCadastrar: {
+    fontSize: 18,
+    color: '#4BCB56',
+    fontWeight: 'bold',
+  },
 })
