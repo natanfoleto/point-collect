@@ -15,7 +15,7 @@ export default function Home() {
   }
 
   function navigateToLogin() {
-    navigation.navigate('Login');
+    navigation.navigate('Maps');
   }
 
   return (
