@@ -35,6 +35,13 @@ class SessionController {
 
     const collector = await Collector.findOne({ 
       where: { email },
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url']
+        }
+      ]
     });
 
     if (user) {
@@ -60,13 +67,14 @@ class SessionController {
         return res.status(401).json({ error: 'A senha está incorreta.' });
       }
 
-      const { id, name } = collector;
+      const { id, name, avatar } = collector;
 
       return res.json({
         collector: {
           id,
           name,
           email,
+          avatar,
         },
         token: jwt.sign({ id }, authConfig.secret, {
           expiresIn: authConfig.expiresIn,

@@ -29,8 +29,8 @@ export default function SignIn() {
       <img src={logo} alt="GoRecicle"/>
 
       <Form onSubmit={handleSubmit} schema={schema}>
-        <Input name="email" type="email" placeholder="Seu e-mail" />
-        <Input name="password" type="password" placeholder="Sua senha secreta" />
+        <Input name="email" type="email" placeholder="Seu e-mail" autoComplete="off" />
+        <Input name="password" type="password" placeholder="Sua senha secreta" autoComplete="off" />
 
         <button type="submit">{ loading ? 'Carregando...' : 'Acessar' }</button>
 

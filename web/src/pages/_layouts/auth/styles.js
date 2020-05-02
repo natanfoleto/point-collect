@@ -23,7 +23,7 @@ export const Content = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+    margin-top: 20px;
 
     input {
       background: rgba(0, 0, 0, 0.1);
@@ -41,6 +41,7 @@ export const Content = styled.div`
 
     span {
       color: #F64C75;
+      font-size: 13px;
       align-self: flex-start;
       margin: 0 0 10px;
       font-weight: bold;

@@ -38,6 +38,6 @@ RouteWrapper.protoType = {
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
 };
 
-RouteWrapper.defaulProps = {
+RouteWrapper.defaultProps = {
   isPrivate: false,
 };

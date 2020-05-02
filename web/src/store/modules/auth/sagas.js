@@ -15,17 +15,49 @@ export function* signIn({ payload }) {
       password
     });
 
-    const { token, user } = response.data;
+    const { token, collector } = response.data;
 
-    yield put(signInSuccess(token, user));
+    if (!collector) {
+      displayToast('Usuário não é um ponto de coleta!'); 
+      yield put(signFailure());
+      return;
+    }
+
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+
+    yield put(signInSuccess(token, collector));
 
     history.push('/dashboard');
   } catch (err) {
-    toast.error('Falha na autenticação, verifique seus dados'); 
+    console.log(err)
+    displayToast('Falha na autenticação, verifique seus dados'); 
     yield put(signFailure());
   }
 }
 
+function displayToast(msg) {
+  toast.error(msg, {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+  });
+}
+
+export function setToken({ payload }) {
+  if (!payload) return;
+
+  const { token } = payload.auth;
+
+  if (token) {
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+  }
+}
+
 export default all([
+  takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn)
 ]);
