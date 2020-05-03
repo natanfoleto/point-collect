@@ -4,7 +4,8 @@ import InputMask from 'react-input-mask';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import { SelectGroup, Select, Next, InputGroup, MaterialList, Scroll, Material, Trash } from './styles';
-import { FiArrowRight, FiArrowLeft, FiTrash2 } from 'react-icons/fi';
+import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
+import { GrFormClose, GrFormTrash } from 'react-icons/gr';
 
 import logo from '~/assets/logo.png';
 import cooperativeImg from '~/assets/cooperative.png';
@@ -174,13 +175,19 @@ export default function SignUp() {
             className="material" 
             value={materials} 
             readOnly={true} 
-            placeholder="Materiais" 
+            placeholder="Materiais ..." 
             autoComplete="off"
             onClick={handleMaterial}
           />
 
           <MaterialList materialVisible={visibleMaterial}>
-            <Scroll>
+            <div className="close">
+              <button type="button" onClick={handleMaterial}>
+                <GrFormClose size={18} />
+              </button>
+            </div>
+
+            <Scroll>   
               <div className="materials">
                 {materialList.map(material => (
                   <Material key={material}>
@@ -195,9 +202,8 @@ export default function SignUp() {
                 <h1>Materiais escolhidos:</h1>
                 <p>{materials}</p>
 
-                <button type="button" className="button-trash" onClick={removeMaterialField}>
-                  <p>Limpar lista de materiais!</p>
-                  <FiTrash2 size={22} />
+                <button type="button" onClick={removeMaterialField}>
+                  <GrFormTrash size={20} />
                 </button>
               </Trash>
             </Scroll>

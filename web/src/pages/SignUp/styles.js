@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 export const SelectGroup = styled.div`
@@ -106,11 +106,26 @@ export const MaterialList = styled.div`
   position: absolute;
   left: calc(50% + 185px);
   top: calc(50% + 65px);
-  width: 220px;
-  background: rgba(0, 0, 0, 0.5);
+  width: 250px;
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 4px;
-  padding: 10px 10px;
+  padding: 0 5px;
   display: ${props => (props.materialVisible ? 'block' : 'none')};
+
+  .close {
+    position: absolute;
+    right: 5px;
+    top: 0px;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      height: 18px;
+      width: 18px;
+    }
+  }
 
   &::before {
     content: '';
@@ -121,19 +136,16 @@ export const MaterialList = styled.div`
     height: 0;
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
-    border-right: 20px solid rgba(0, 0, 0, 0.5);
+    border-right: 20px solid rgba(0, 0, 0, 0.3);
   }
-`;
-
-export const Material = styled.div`
-  
 `;
 
 export const Scroll = styled(PerfectScrollbar)`
   align-items: center;
   max-height: 160px;
   min-height: 170px;
-  padding: 5px 15px 5px 10px;
+  padding: 0px 20px 5px 10px;
+  margin: 30px 0px 5px 0;
 
   .materials {
     display: grid;
@@ -162,25 +174,31 @@ export const Scroll = styled(PerfectScrollbar)`
   }
 `;
 
+export const Material = styled.div`
+  
+`;
+
 export const Trash = styled.div`
   display: ${props => (props.trashVisible ? 'flex' : 'none')};
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 5px;
 
-  .button-trash {
-    background: transparent;
-    font-size: 13px;
-    color: #fff;
-    margin-top: 15px;
+  h1 {
+    margin-bottom: 5px;
+  }
 
-    p {
-      margin-bottom: 7px;
-    }
+  p {
+    margin-bottom: 10px;
+  }
 
-    &:hover {
-      background: none;
-    }
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    height: 20px !important;
+    width: 20px;
+    margin-top: 100px;
   }
 `;
