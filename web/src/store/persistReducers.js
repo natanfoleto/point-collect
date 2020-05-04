@@ -5,7 +5,7 @@ export default reducers => {
   const persistedReducer = persistReducer({
     key: 'gorecicle',
     storage,
-    whitelist: ['auth', 'user'],
+    whitelist: ['auth', 'collector'],
   }, reducers);
   
   return persistedReducer;

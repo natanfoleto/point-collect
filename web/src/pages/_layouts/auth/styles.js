@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Wrapper = styled.div`
-  height: 100vh;
+  height: 100%;
   background: linear-gradient(-90deg, #1C897C, #27F260);
   display: flex;
   justify-content: center;
@@ -23,7 +23,7 @@ export const Content = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 30px;
 
     input {
       background: rgba(0, 0, 0, 0.1);

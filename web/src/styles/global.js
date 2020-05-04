@@ -17,7 +17,7 @@ export default createGlobalStyle `
     outline: 0;
   }
 
-  html, box-sizing, #root {
+  html, body, box-sizing, #root {
     height: 100%;
   }
 

@@ -1,49 +1,82 @@
-import React, { useState } from 'react';
-import * as Yup from 'yup';
-import InputMask from 'react-input-mask';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
-import { SelectGroup, Select, Next, InputGroup, MaterialList, Scroll, Material, Trash } from './styles';
+import { Image, SelectGroup, Select, Go, Back, InputGroup, MaterialList, Scroll, Material, Trash } from './styles';
 import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import { GrFormClose, GrFormTrash } from 'react-icons/gr';
+import * as Yup from 'yup';
 
-import logo from '~/assets/logo.png';
+import { signUpRequest } from '~/store/modules/auth/actions';
+
+import logoImg from '~/assets/logo.png';
 import cooperativeImg from '~/assets/cooperative.png';
 import tradeImg from '~/assets/trade.png';
 import volunterImg from '~/assets/volunter.png';
 
-let materialList = ['Plásticos', 'Garrafas', 'Tubos e canos', 'Brinquedos', 'Sacos', 'Isopor', 
-'Alumínio', 'Papel', 'Papelão', 'Embalagens longa-vida', 'Vidros', 'Cerâmicas', 'Acrílico', 
-'Lâmpadas', 'Pilhas', 'Movéis'];
-
 const schema = Yup.object().shape({
+  entity: Yup.string()
+    .required('A entidade é obrigatória'),
+  name: Yup.string()
+    .required('O nome da empresa é obrigatório'),
   email: Yup.string()
     .email('Insira um e-mail válido')
     .required('O e-mail é obrigatório'),
   password: Yup.string()
     .min(6, 'A senha deve conter mais de 6 digitos')
     .required('A senha é obrigatória'),
+  latitude: Yup.number()
+    .required('A latitude é obrigatória'),
+  longitude: Yup.number()
+    .required('A latitude é obrigatória'),
+  site: Yup.string(),
+  materials: Yup.string()
+    .required('Os materiais são obrigatórios'),
+  whatsapp: Yup.string(),
+  telephone: Yup.string(),
 });
 
+let materialList = ['Plásticos', 'Garrafas', 'Tubos e canos', 'Brinquedos', 'Sacos', 'Isopor', 
+'Alumínio', 'Papel', 'Papelão', 'Embalagens longa-vida', 'Vidros', 'Cerâmicas', 'Acrílico', 
+'Lâmpadas', 'Pilhas', 'Movéis'];
+
 export default function SignUp() {
+  const dispatch = useDispatch();
 
-  const [entity, setEntity] = useState();
-  const [materials, setMaterials] = useState("");
-
-  const [entity1, setEntity1] = useState(false);
-  const [entity2, setEntity2] = useState(false);
-  const [entity3, setEntity3] = useState(false);
+  const [goEnable, setGoEnable] = useState('disabled');
+  const [materials, setMaterials] = useState('');
+  const [entity, setEntity] = useState('');
+  const [cooperative, setCooperative] = useState(false);
+  const [trade, setTrade] = useState(false);
+  const [pev, setPev] = useState(false);
   
-  const [visibleSelect, setVisibleSelect] = useState(false);
-  const [visibleNext, setVisibleNext] = useState(false);
-  const [visibleInput, setVisibleInput] = useState(true);
+  const [visibleTrue, setVisibleTrue] = useState(true);
+  const [visibleFalse, setVisibleFalse] = useState(false);
   const [visibleMaterial, setVisibleMaterial] = useState(false);
   const [visibleTrash, setVisibleTrash] = useState(false);
 
-  const [nextEnable, setNextEnable] = useState("disabled");
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+
+        setLatitude(latitude);
+        setLongitude(longitude);
+      },
+      (err) => {
+        console.log(err);
+      },
+      {
+        timeout: 30000,
+      }
+    );
+  }, []);
 
   function handleSubmit(data) {
-    
+    dispatch(signUpRequest(data));
   }
 
   function handleSelect(op, entity) {
@@ -51,38 +84,36 @@ export default function SignUp() {
 
     switch (op) {
       case 1:
-        setEntity1(true);
-        setEntity2(false);
-        setEntity3(false);
+        setCooperative(true);
+        setTrade(false);
+        setPev(false);
         break;
       case 2:
-        setEntity2(true);
-        setEntity1(false);
-        setEntity3(false);
+        setTrade(true);
+        setCooperative(false);
+        setPev(false);
         break;
       case 3:
-        setEntity3(true);
-        setEntity2(false);
-        setEntity1(false);
+        setPev(true);
+        setTrade(false);
+        setCooperative(false);
         break;
     
       default:
         break;
     }
 
-    setNextEnable("");
+    setGoEnable("");
   }
 
-  function handleNext() {
-    setVisibleNext(!visibleNext);
-    setVisibleSelect(!visibleSelect);
-    setVisibleInput(!visibleInput);
+  function handleGo() {
+    setVisibleTrue(!visibleTrue);
+    setVisibleFalse(!visibleFalse);
   }
 
   function handleBack() {
-    setVisibleNext(!visibleNext);
-    setVisibleSelect(!visibleSelect);
-    setVisibleInput(!visibleInput);
+    setVisibleTrue(!visibleTrue);
+    setVisibleFalse(!visibleFalse);
   }
 
   function handleMaterial() {
@@ -116,15 +147,17 @@ export default function SignUp() {
 
   return (
     <>
-      <img src={logo} alt="GoRecicle"/>
+      <Image visibleValue={visibleTrue}>
+        <img src={logoImg} alt="GoRecicle"/>
+      </Image>
 
-      <Form onSubmit={handleSubmit} schema={schema}>        
+      <Form onSubmit={handleSubmit} schema={schema} autoComplete="off">        
 
-        <SelectGroup selectVisible={visibleSelect}>
+        <SelectGroup visibleValue={visibleTrue}>
           <h1>Selecione uma entidade</h1>
 
-          <Select selected={entity1}>
-            <button type="button" className="select" onClick={(e) => handleSelect(1, 'Cooperativa')} selected={true}>
+          <Select selected={cooperative}>
+            <button type="button" className="select" onClick={() => handleSelect(1, 'Cooperativa')}>
               <img src={cooperativeImg} alt="Cooperativa"/>
               <div className="entity">
                 <h1>Cooperativas</h1>
@@ -133,7 +166,7 @@ export default function SignUp() {
             </button>
           </Select>
 
-          <Select selected={entity2}>
+          <Select selected={trade}>
             <button type="button" className="select" onClick={() => handleSelect(2, 'Comércio')}>
               <img src={tradeImg} alt="Comércio"/>
               <div className="entity">
@@ -143,7 +176,7 @@ export default function SignUp() {
             </button>
           </Select>
 
-          <Select selected={entity3}>
+          <Select selected={pev}>
             <button type="button" className="select" onClick={() => handleSelect(3, 'PEV')}>
               <img src={volunterImg} alt="Voluntário"/>
               <div className="entity">
@@ -154,31 +187,66 @@ export default function SignUp() {
           </Select>
         </SelectGroup>
 
-        <InputGroup inputVisible={visibleInput}>
-          <button type="button" className="button-back" onClick={handleBack}>
+        <Back visibleValue={visibleFalse}>
+          <button type="button" onClick={handleBack}>
             <FiArrowLeft size={24}/>
           </button>
-          
+        </Back>
+
+        <InputGroup visibleValue={visibleFalse}>
+
           <Input name="entity" value={entity} disabled="disabled" />
-          <Input name="nome" placeholder="Nome da empresa" autoComplete="off"/>
-          <Input name="email" type="email" placeholder="E-mail" autoComplete="off" />
-          <Input name="password" type="password" placeholder="Senha secreta" autoComplete="off" />
+          <Input name="name" placeholder="Nome da empresa" maxLength="50" />
+          <Input name="email" type="email" placeholder="E-mail" maxLength="50" />
+          <Input name="password" type="password" placeholder="Senha secreta" maxLength="32" />
 
           <div className="input-group">
-            <Input name="latitude" placeholder="Latitude" autoComplete="off" />
-            <Input name="longitude" placeholder="Longitude" autoComplete="off" />
+            <Input 
+              name="latitude" 
+              type="number"
+              placeholder="Latitude" 
+              value={latitude} 
+              onChange={e => setLatitude(e.target.value)}
+            />
+            <Input 
+              name="longitude"
+              type="number" 
+              placeholder="Longitude" 
+              value={longitude} 
+              onChange={e => setLongitude(e.target.value)}
+            />
           </div>
 
-          <Input name="site" placeholder="Site" autoComplete="off" />
+          <Input name="site" placeholder="Rede social / Website" maxLength="32" />
           <Input 
-            name="material" 
+            name="materials" 
             className="material" 
+            placeholder="Materiais reciclados na empresa" 
             value={materials} 
             readOnly={true} 
-            placeholder="Materiais ..." 
-            autoComplete="off"
             onClick={handleMaterial}
           />
+          
+          <div className="input-group">
+            <Input 
+              name="whatsapp" 
+              type="number"
+              placeholder="WhatsApp" 
+              autoComplete="off" 
+              onInput = {(e) => {
+                e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,11)
+              }}
+            />
+            <Input 
+              name="telephone" 
+              type="number"
+              placeholder="Telefone fixo" 
+              autoComplete="off" 
+              onInput = {(e) => {
+                e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,11)
+              }}
+            />
+          </div>
 
           <MaterialList materialVisible={visibleMaterial}>
             <div className="close">
@@ -199,7 +267,7 @@ export default function SignUp() {
               </div>
               
               <Trash trashVisible={visibleTrash}>
-                <h1>Materiais escolhidos:</h1>
+                <h1>Materiais selecionados</h1>
                 <p>{materials}</p>
 
                 <button type="button" onClick={removeMaterialField}>
@@ -208,23 +276,18 @@ export default function SignUp() {
               </Trash>
             </Scroll>
           </MaterialList>
-          
-          <div className="input-group">
-            <InputMask name="telephone" mask="(99) 99999-9999" placeholder="Telefone" autoComplete="off" />
-            <InputMask name="whatsapp" mask="(99) 99999-9999" placeholder="Whatsapp" autoComplete="off" />
-          </div>
 
           <button type="submit">Finalizar cadastro</button>
         </InputGroup>
           
-        <Next nextVisible={visibleNext}>
-          <button type="button" disabled={nextEnable} onClick={handleNext}>
+        <Go visibleValue={visibleTrue}>
+          <button type="button" disabled={goEnable} onClick={handleGo}>
             <FiArrowRight size={30}/>
           </button>
-        </Next> 
+        </Go> 
 
         <Link to="/">Já tenho login</Link>
-      </Form>
+      </Form>   
     </>
   );
 }

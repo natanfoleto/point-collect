@@ -6,6 +6,28 @@ import api from '~/services/api';
 
 import { signInSuccess, signFailure } from './actions';
 
+function displayToast(msg) {
+  toast.error(msg, {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+  });
+}
+
+export function setToken({ payload }) {
+  if (!payload) return;
+
+  const { token } = payload.auth;
+
+  if (token) {
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+  }
+}
+
 export function* signIn({ payload }) {
   try {
     const { email, password } = payload;
@@ -29,35 +51,49 @@ export function* signIn({ payload }) {
 
     history.push('/dashboard');
   } catch (err) {
-    console.log(err)
     displayToast('Falha na autenticação, verifique seus dados'); 
     yield put(signFailure());
   }
 }
 
-function displayToast(msg) {
-  toast.error(msg, {
-    position: toast.POSITION.TOP_CENTER,
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-  });
-}
+export function* signUp({ payload }) {
+  try {
+    const { 
+      name, 
+      email, 
+      password, 
+      latitude, 
+      longitude, 
+      entity, 
+      telephone, 
+      whatsapp,
+      site,
+      materials,
+    } = payload.data;
 
-export function setToken({ payload }) {
-  if (!payload) return;
+    yield call(api.post, 'collectors', {
+      name, 
+      email, 
+      password, 
+      latitude, 
+      longitude, 
+      entity, 
+      telephone, 
+      whatsapp,
+      site,
+      materials,
+    });
 
-  const { token } = payload.auth;
-
-  if (token) {
-    api.defaults.headers.Authorization = `Bearer ${token}`;
+    history.push('/');
+  } catch (err) {
+    console.log(err);
+    displayToast('Falha no cadastro, verifique seus dados'); 
+    yield put(signFailure());
   }
 }
 
 export default all([
   takeLatest('persist/REHYDRATE', setToken),
-  takeLatest('@auth/SIGN_IN_REQUEST', signIn)
+  takeLatest('@auth/SIGN_IN_REQUEST', signIn),
+  takeLatest('@auth/SIGN_UP_REQUEST', signUp),
 ]);

@@ -1,14 +1,19 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
+export const Image = styled.div`
+  display: ${props => (props.visibleValue ? '' : 'none')};
+`;
+
 export const SelectGroup = styled.div`
-  display: ${props => (props.selectVisible ? '' : 'none')};
+  display: ${props => (props.visibleValue ? '' : 'none')};
 
   h1 {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.8);
     text-align: left;
-    margin: 0 0 3px 0;
+    margin: 0 0 5px 0;
   }
 `;
 
@@ -53,8 +58,8 @@ export const Select = styled.div`
   }
 `;
 
-export const Next = styled.div`
-  display: ${props => (props.nextVisible ? 'flex' : 'none')};
+export const Go = styled.div`
+  display: ${props => (props.visibleValue ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
   margin: 10px 0 10px 0;
@@ -63,7 +68,7 @@ export const Next = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20%;
+    width: 44px;
 
     &:disabled {
       background: rgba(255, 255, 255, 0.6);
@@ -72,20 +77,23 @@ export const Next = styled.div`
   }
 `;
 
-export const InputGroup = styled.div`
-  display: ${props => (props.inputVisible ? 'flex' : 'none')};
-  flex-direction: column;
+export const Back = styled.div`
+  display: ${props => (props.visibleValue ? 'flex' : 'none')};
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
 
-  .button-back {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.8);
-    text-align: left;
-    width: 25px;
-
-    &:hover {
-      background: none;
-    }
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
   }
+`;
+
+export const InputGroup = styled.div`
+  display: ${props => (props.visibleValue ? 'flex' : 'none')};
+  flex-direction: column;
 
   .input-group {
     display: grid;
@@ -94,6 +102,11 @@ export const InputGroup = styled.div`
     
     input {
       width: 80%;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
     }
   }
 
@@ -104,12 +117,13 @@ export const InputGroup = styled.div`
 
 export const MaterialList = styled.div`
   position: absolute;
+  top: calc(50% + 32px);
   left: calc(50% + 185px);
-  top: calc(50% + 65px);
   width: 250px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 4px;
   padding: 0 5px;
+  border: 2px solid rgba(0, 0, 0, 1);
   display: ${props => (props.materialVisible ? 'block' : 'none')};
 
   .close {
@@ -121,9 +135,13 @@ export const MaterialList = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #fff;
+      background: transparent;
       height: 18px;
       width: 18px;
+
+      &:hover {
+        background: #1E9E76;
+      }
     }
   }
 
@@ -136,7 +154,7 @@ export const MaterialList = styled.div`
     height: 0;
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
-    border-right: 20px solid rgba(0, 0, 0, 0.3);
+    border-right: 20px solid rgba(0, 0, 0, 1);
   }
 `;
 
@@ -155,22 +173,17 @@ export const Scroll = styled(PerfectScrollbar)`
     margin-bottom: 20px;
 
     button {
-      background: rgba(255, 255, 255, 0.8);
+      background: #1E9E76;
+      color: rgba(255, 255, 255, 0.8);
       font-size: 12px;
       height: 32px;
       padding: 0 10px;
+      margin: 0;
+
+      &:hover {
+        background: ${darken(0.07, '#1E9E76')};
+      }
     }
-  }
-
-  h1 {
-    font-size: 16px;
-    color: #ff1;
-  }
-
-  p {
-    color: #fff;
-    text-align: center;
-    margin-top: 5px;
   }
 `;
 
@@ -183,12 +196,19 @@ export const Trash = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 
   h1 {
+    font-size: 18px;
+    color: #1E9E76;
     margin-bottom: 5px;
   }
 
   p {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 5px;
     margin-bottom: 10px;
   }
 
@@ -196,7 +216,7 @@ export const Trash = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
+    background: #1E9E76 !important;
     height: 20px !important;
     width: 20px;
     margin-top: 100px;
