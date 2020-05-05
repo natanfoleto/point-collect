@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import Collector from '../models/Collector';
+import User from '../models/User';
 
 class CollectorControler {
   async index(req, res) {
@@ -42,7 +43,11 @@ class CollectorControler {
         where: { email: req.body.email }
     });
 
-    if (collectorExists) {
+    const userExists = await User.findOne({ 
+      where: { email: req.body.email }
+    });
+
+    if (collectorExists || userExists) {
       return res.status(400).json({ error: 'Ja existe uma coletora com este email.' });
     }
 

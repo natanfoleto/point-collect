@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import { Image, SelectGroup, Select, Go, Back, InputGroup, MaterialList, Scroll, Material, Trash } from './styles';
@@ -42,6 +42,7 @@ let materialList = ['Plásticos', 'Garrafas', 'Tubos e canos', 'Brinquedos', 'Sa
 
 export default function SignUp() {
   const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
 
   const [goEnable, setGoEnable] = useState('disabled');
   const [materials, setMaterials] = useState('');
@@ -277,7 +278,7 @@ export default function SignUp() {
             </Scroll>
           </MaterialList>
 
-          <button type="submit">Finalizar cadastro</button>
+          <button type="submit">{ loading ? 'Carregando...' : 'Finalizar cadastro' }</button>
         </InputGroup>
           
         <Go visibleValue={visibleTrue}>

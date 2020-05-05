@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { darken } from 'polished';
 
 export const Image = styled.div`
   display: ${props => (props.visibleValue ? '' : 'none')};
