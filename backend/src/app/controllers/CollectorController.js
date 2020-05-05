@@ -29,8 +29,6 @@ class CollectorControler {
         .required(),
       whatsapp: Yup.string()
         .required(),
-      site: Yup.string()
-        .required(),
       materials: Yup.string()
         .required(),
     });

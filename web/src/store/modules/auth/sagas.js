@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import history from '~/services/history';
 import api from '~/services/api';
 
-import { signInSuccess, signFailure } from './actions';
+import { signInSuccess, signUpSuccess, signFailure } from './actions';
 
 function displayToast(msg) {
   toast.error(msg, {
@@ -83,6 +83,8 @@ export function* signUp({ payload }) {
       site,
       materials,
     });
+
+    yield put(signUpSuccess());
 
     history.push('/');
   } catch (err) {

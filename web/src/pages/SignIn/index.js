@@ -8,14 +8,6 @@ import { signInRequest } from '~/store/modules/auth/actions';
 
 import logoImg from '~/assets/logo.png';
 
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .email('Insira um e-mail válido')
-    .required('O e-mail é obrigatório'),
-  password: Yup.string()
-    .required('A senha é obrigatória'),
-});
-
 export default function SignIn() {
   const dispatch = useDispatch();
   const loading = useSelector(state => state.auth.loading);
@@ -28,9 +20,21 @@ export default function SignIn() {
     <>
       <img src={logoImg} alt="GoRecicle"/>
 
-      <Form onSubmit={handleSubmit} schema={schema}>
-        <Input name="email" type="email" placeholder="Seu e-mail" autoComplete="off" />
-        <Input name="password" type="password" placeholder="Sua senha secreta" autoComplete="off" />
+      <Form onSubmit={handleSubmit}>
+        <Input 
+          name="email" 
+          type="email" 
+          placeholder="Seu e-mail" 
+          autoComplete="off" 
+          required
+        />
+        <Input 
+          name="password" 
+          type="password" 
+          placeholder="Sua senha secreta" 
+          autoComplete="off" 
+          required
+        />
 
         <button type="submit">{ loading ? 'Carregando...' : 'Acessar' }</button>
 

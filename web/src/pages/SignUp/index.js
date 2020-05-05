@@ -5,7 +5,6 @@ import { Form, Input } from '@rocketseat/unform';
 import { Image, SelectGroup, Select, Go, Back, InputGroup, MaterialList, Scroll, Material, Trash } from './styles';
 import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import { GrFormClose, GrFormTrash } from 'react-icons/gr';
-import * as Yup from 'yup';
 
 import { signUpRequest } from '~/store/modules/auth/actions';
 
@@ -13,28 +12,6 @@ import logoImg from '~/assets/logo.png';
 import cooperativeImg from '~/assets/cooperative.png';
 import tradeImg from '~/assets/trade.png';
 import volunterImg from '~/assets/volunter.png';
-
-const schema = Yup.object().shape({
-  entity: Yup.string()
-    .required('A entidade é obrigatória'),
-  name: Yup.string()
-    .required('O nome da empresa é obrigatório'),
-  email: Yup.string()
-    .email('Insira um e-mail válido')
-    .required('O e-mail é obrigatório'),
-  password: Yup.string()
-    .min(6, 'A senha deve conter mais de 6 digitos')
-    .required('A senha é obrigatória'),
-  latitude: Yup.number()
-    .required('A latitude é obrigatória'),
-  longitude: Yup.number()
-    .required('A latitude é obrigatória'),
-  site: Yup.string(),
-  materials: Yup.string()
-    .required('Os materiais são obrigatórios'),
-  whatsapp: Yup.string(),
-  telephone: Yup.string(),
-});
 
 let materialList = ['Plásticos', 'Garrafas', 'Tubos e canos', 'Brinquedos', 'Sacos', 'Isopor', 
 'Alumínio', 'Papel', 'Papelão', 'Embalagens longa-vida', 'Vidros', 'Cerâmicas', 'Acrílico', 
@@ -152,7 +129,7 @@ export default function SignUp() {
         <img src={logoImg} alt="GoRecicle"/>
       </Image>
 
-      <Form onSubmit={handleSubmit} schema={schema} autoComplete="off">        
+      <Form onSubmit={handleSubmit} autoComplete="off">        
 
         <SelectGroup visibleValue={visibleTrue}>
           <h1>Selecione uma entidade</h1>
@@ -196,23 +173,37 @@ export default function SignUp() {
 
         <InputGroup visibleValue={visibleFalse}>
 
-          <Input name="entity" value={entity} disabled="disabled" />
-          <Input name="name" placeholder="Nome da empresa" maxLength="50" />
-          <Input name="email" type="email" placeholder="E-mail" maxLength="50" />
-          <Input name="password" type="password" placeholder="Senha secreta" maxLength="32" />
+          <Input name="entity" value={entity} disabled="disabled" required />
+          <Input name="name" placeholder="Nome da empresa" maxLength="50" required />
+          <Input 
+            name="email" 
+            type="email" 
+            placeholder="E-mail" 
+            maxLength="50"
+            required />
+          <Input 
+            name="password" 
+            type="password" 
+            placeholder="Senha secreta" 
+            maxLength="32" 
+            minLength="6"
+            required 
+          />
 
           <div className="input-group">
             <Input 
               name="latitude" 
               type="number"
               placeholder="Latitude" 
+              required
               value={latitude} 
               onChange={e => setLatitude(e.target.value)}
             />
             <Input 
               name="longitude"
               type="number" 
-              placeholder="Longitude" 
+              placeholder="Longitude"
+              required 
               value={longitude} 
               onChange={e => setLongitude(e.target.value)}
             />
@@ -223,8 +214,8 @@ export default function SignUp() {
             name="materials" 
             className="material" 
             placeholder="Materiais reciclados na empresa" 
-            value={materials} 
-            readOnly={true} 
+            required
+            value={materials}  
             onClick={handleMaterial}
           />
           
@@ -234,6 +225,8 @@ export default function SignUp() {
               type="number"
               placeholder="WhatsApp" 
               autoComplete="off" 
+              min={11}
+              required
               onInput = {(e) => {
                 e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,11)
               }}
@@ -243,6 +236,8 @@ export default function SignUp() {
               type="number"
               placeholder="Telefone fixo" 
               autoComplete="off" 
+              min={11}
+              required
               onInput = {(e) => {
                 e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,11)
               }}
