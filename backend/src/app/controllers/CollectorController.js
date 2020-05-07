@@ -91,13 +91,6 @@ class CollectorControler {
       confirmPassword: Yup.string().when('password', (password, field) =>
         password ? field.required().oneOf([Yup.ref('password')]) : field
       ),
-      latitude: Yup.number(),
-      longitude: Yup.number(),
-      entity: Yup.string(),
-      telephone: Yup.string(),
-      whatsapp: Yup.string(),
-      site: Yup.string(),
-      materials: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -106,17 +99,19 @@ class CollectorControler {
 
     const { email, oldPassword } = req.body;
 
-    console.log(req.collectorId);
-
-    const collector = await Collector.findByPk(req.userId);
+    const collector = await Collector.findByPk(req.id);
 
     if (email !== collector.email) {
       const collectorExists = await Collector.findOne({ 
         where: { email }
       });
 
-      if (collectorExists) {
-        return res.status(400).json({ error: 'Ja existe uma coletora com este email.' });
+      const userExists = await User.findOne({ 
+        where: { email }
+      });
+
+      if (collectorExists || userExists) {
+        return res.status(400).json({ error: 'Um usuário com este e-mail já existe.' });
       }
     }
 

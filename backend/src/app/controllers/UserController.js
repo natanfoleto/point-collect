@@ -31,10 +31,10 @@ class UserController {
 
     const collectorExists = await Collecotr.findOne({ 
       where: { email: req.body.email }
-  });
+    });
 
     if (userExists || collectorExists) {
-      return res.status(400).json({ error: 'Usuário ja existe.' });
+      return res.status(400).json({ error: 'Um usuário com este e-mail já existe.' });
     }
 
     const { id, name, email } = await User.create(req.body);
@@ -69,15 +69,19 @@ class UserController {
 
     const { email, oldPassword } = req.body;
 
-    const user = await User.findByPk(req.userId);
+    const user = await User.findByPk(req.id);
 
     if (email !== user.email) {
       const userExists = await User.findOne({ 
         where: { email }
       });
 
-      if (userExists) {
-        return res.status(400).json({ error: 'Usuário ja existe.' });
+      const collectorExists = await Collecotr.findOne({ 
+        where: { email }
+      });
+
+      if (userExists || collectorExists) {
+        return res.status(400).json({ error: 'Um usuário com este e-mail já existe.' });
       }
     }
 

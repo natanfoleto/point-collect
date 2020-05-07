@@ -217,6 +217,7 @@ export default function SignUp() {
             required
             value={materials}  
             onClick={handleMaterial}
+            readOnly={true}
           />
           
           <div className="input-group">
@@ -224,7 +225,6 @@ export default function SignUp() {
               name="whatsapp" 
               type="number"
               placeholder="WhatsApp" 
-              autoComplete="off" 
               min={11}
               required
               onInput = {(e) => {
@@ -235,7 +235,6 @@ export default function SignUp() {
               name="telephone" 
               type="number"
               placeholder="Telefone fixo" 
-              autoComplete="off" 
               min={11}
               required
               onInput = {(e) => {
