@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import File from '../models/File';
 import Collector from '../models/Collector';
 import User from '../models/User';
 
@@ -119,6 +120,8 @@ class CollectorControler {
       return res.status(401).json({ error: 'A senha está incorreta.' });
     }
 
+    await collector.update(req.body);
+
     const { 
       id, 
       name,
@@ -128,8 +131,17 @@ class CollectorControler {
       telephone,
       whatsapp,
       site,
-      materials
-    } = await collector.update(req.body);
+      materials,
+      avatar,
+    } = await Collector.findByPk(req.id, {
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
 
     return res.json({
       id, 
@@ -141,7 +153,8 @@ class CollectorControler {
       telephone,
       whatsapp,
       site,
-      materials
+      materials,
+      avatar,
     });
   }
 }
