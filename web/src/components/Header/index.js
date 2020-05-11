@@ -33,6 +33,12 @@ function Header() {
               }
               alt={profile.name}
             />
+            {/* <img 
+              src={
+                'https://api.adorable.io/avatars/50/abott@adorable.png'
+              }
+              alt=""
+            /> */}
           </Profile>
         </aside>
       </Content>
