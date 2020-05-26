@@ -21,52 +21,52 @@ export default function Login() {
     navigation.navigate('Home')
   }
 
-  function navigateToMaps(){
+  function navigateToMaps() {
     navigation.navigate('Maps')
   }
 
   return (
     <>
-      <View style={styles.statusBar}/>
-      
-      <TouchableOpacity 
+      <View style={styles.statusBar} />
+
+      <TouchableOpacity
         style={styles.buttonBack}
         onPress={navigateToHome}
       >
         <MaterialIcons name="keyboard-backspace" size={35} color="#4BCB56" />
       </TouchableOpacity>
-      
+
       <View style={styles.container}>
 
-          <View>
-            <Image source={logo} />
-          </View>
+        <View>
+          <Image source={logo} />
+        </View>
 
-          <View >
+        <View >
 
-            <TextInput 
-              style={styles.input} 
-              placeholder="Email"
-              ref={emailRef}
-              returnKeyType="next"
-              onSubmitEditing={() => passwordRef.current.focus()}
-            />
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            ref={emailRef}
+            returnKeyType="next"
+            onSubmitEditing={() => passwordRef.current.focus()}
+          />
 
-            <TextInput 
-              style={styles.input} 
-              placeholder="Senha"
-              ref={passwordRef}
-              returnKeyType="send"
-              onSubmitEditing={handleSubmit}
-            />
+          <TextInput
+            style={styles.input}
+            placeholder="Senha"
+            ref={passwordRef}
+            returnKeyType="send"
+            onSubmitEditing={handleSubmit}
+          />
 
-            <TouchableOpacity 
-              style={styles.btnLogin} 
-              onPress={handleSubmit}
-            >
-              <Text style={styles.textLogin}>LOGIN</Text>
-            </TouchableOpacity>
-          </View>  
+          <TouchableOpacity
+            style={styles.btnLogin}
+            onPress={handleSubmit}
+          >
+            <Text style={styles.textLogin}>LOGIN</Text>
+          </TouchableOpacity>
+        </View>
 
       </View>
     </>

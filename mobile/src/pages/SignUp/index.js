@@ -16,32 +16,32 @@ export default function SignUp() {
 
   return (
     <>
-      <View style={styles.statusBar}/>
-      
-      <TouchableOpacity 
+      <View style={styles.statusBar} />
+
+      <TouchableOpacity
         style={styles.buttonBack}
         onPress={navigateToHome}
       >
         <MaterialIcons name="keyboard-backspace" size={35} color="#4BCB56" />
       </TouchableOpacity>
-    
+
       <View style={styles.container}>
-        
-          <View>
-            <Image source={logo} />
-          </View>
 
-          <View style={styles.form}>
-            <TextInput style={styles.input} placeholder="Nome" />
-            <TextInput style={styles.input} placeholder="Sobrenome" />
-            <TextInput style={styles.input} placeholder="Email" />
-            <TextInput style={styles.input} placeholder="Senha" />
-            <TextInput style={styles.input} placeholder="Confirma senha" />
+        <View>
+          <Image source={logo} />
+        </View>
 
-            <TouchableOpacity style={styles.btnCadastrar}>
-              <Text style={styles.textCadastrar}>CADASTRAR</Text>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.form}>
+          <TextInput style={styles.input} placeholder="Nome" />
+          <TextInput style={styles.input} placeholder="Sobrenome" />
+          <TextInput autoCorrect={false} style={styles.input} placeholder="Email" />
+          <TextInput autoCorrect={false} style={styles.input} placeholder="Senha" />
+          <TextInput autoCorrect={false} style={styles.input} placeholder="Confirma senha" />
+
+          <TouchableOpacity style={styles.btnCadastrar}>
+            <Text style={styles.textCadastrar}>CADASTRAR</Text>
+          </TouchableOpacity>
+        </View>
 
       </View>
     </>
