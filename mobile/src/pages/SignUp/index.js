@@ -34,7 +34,7 @@ export default function SignUp() {
         <View style={styles.form}>
           <TextInput style={styles.input} placeholder="Nome" />
           <TextInput style={styles.input} placeholder="Sobrenome" />
-          <TextInput autoCorrect={false} style={styles.input} placeholder="Email" />
+          <TextInput  autoCorrect={false} style={styles.input} placeholder="Email" />
           <TextInput autoCorrect={false} style={styles.input} placeholder="Senha" />
           <TextInput autoCorrect={false} style={styles.input} placeholder="Confirma senha" />
 
