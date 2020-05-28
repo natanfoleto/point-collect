@@ -2,7 +2,10 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { Text, Image, View, TouchableOpacity } from 'react-native'
 
-import logo from '../../assets/logo3.png'
+import logo from '../../assets/logo.png'
+
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 import styles from './styles'
 
@@ -15,7 +18,7 @@ export default function Home() {
   }
 
   function navigateToLogin() {
-    navigation.navigate('Maps');
+    navigation.navigate('Login');
   }
 
   return (
@@ -38,8 +41,9 @@ export default function Home() {
         >
           <Text style={styles.textCadastrar}> CADASTRE-SE </Text>
         </TouchableOpacity>
+
       </View>
-      
+
     </View>
 
 

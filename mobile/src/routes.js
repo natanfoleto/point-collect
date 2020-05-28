@@ -11,7 +11,7 @@ import Login from './pages/Login';
 import Maps from './pages/Maps';
 
 
-export default function Routes() { 
+export default function Routes() {
   return (
     <NavigationContainer>
 
@@ -21,7 +21,7 @@ export default function Routes() {
           <AppStack.Screen name="SignUp" component={SignUp} />
           <AppStack.Screen name="Login" component={Login} />
           <AppStack.Screen name="Maps" component={Maps} />
-          
+
       </AppStack.Navigator>
 
     </NavigationContainer>

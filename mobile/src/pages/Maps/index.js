@@ -26,7 +26,7 @@ export default function Maps() {
         const { latitude, longitude } = coords;
 
         setCurrentRegion({
-          latitude, 
+          latitude,
           longitude,
           latitudeDelta: 0.03,
           longitudeDelta: 0.03
@@ -40,7 +40,7 @@ export default function Maps() {
   useEffect(() => {
     async function loadCollectors() {
       const response = await api.get('collectors');
-  
+
       setCollectors(response.data);
     }
 
@@ -53,7 +53,7 @@ export default function Maps() {
       const [{ latitude, longitude }] = coords;
 
       setCurrentRegion({
-        latitude, 
+        latitude,
         longitude,
         latitudeDelta: 0.04,
         longitudeDelta: 0.04
@@ -92,9 +92,9 @@ export default function Maps() {
   return (
     <>
       <View style={styles.statusBar}/>
-      
+
       <MapView
-        onRegionChangeComplete={handleRegionChanged} 
+        onRegionChangeComplete={handleRegionChanged}
         initialRegion={currentRegion}
         style={styles.map}
         rotateEnabled={false}
@@ -114,37 +114,37 @@ export default function Maps() {
         {collectors.map(collector => (
           <Marker
             key={collector.id}
-            coordinate={{ 
-              latitude: Number(collector.latitude), 
-              longitude: Number(collector.longitude) 
+            coordinate={{
+              latitude: Number(collector.latitude),
+              longitude: Number(collector.longitude)
             }}
           >
             <Image style={styles.collectorMarker} source={ {uri: 'https://avatars0.githubusercontent.com/u/39577730?s=400&u=a7f7b5fcc2da2df8dece626fb456746147df9261&v=4'} } />
-            
+
             <Callout style={styles.collectorCallout}>
 
               <View style={styles.collectorInfo}>
                 <Text style={styles.collectorName}>{collector.name}</Text>
-                
+
                 <Text style={styles.collectorText}>Avenida Paulo Castor Gomes, 0 - Rural Barretos - SP</Text>
-                
-                <Text style={styles.collectorText}>Telefone: 
+
+                <Text style={styles.collectorText}>Telefone:
                   <Text style={styles.collectorTelephne}> {collector.telephone}</Text>
                 </Text>
-                
+
                 <Text style={styles.collectorText}>E-mail:
-                  <Text style={styles.collectorEmail}> {collector.email}</Text> 
+                  <Text style={styles.collectorEmail}> {collector.email}</Text>
                 </Text>
               </View>
 
               <View style={styles.collectorButton}>
-                <TouchableOpacity 
+                <TouchableOpacity
                   style={styles.buttonSite}
                 >
                   <MaterialIcons name="directions" size={36} color="#1E90FF" />
                 </TouchableOpacity>
 
-                <TouchableOpacity 
+                <TouchableOpacity
                   style={styles.buttonRoute}
                 >
                   <MaterialIcons name="language" size={30} color="#1E90FF" />
@@ -153,24 +153,26 @@ export default function Maps() {
 
             </Callout>
 
-          </Marker>  
+          </Marker>
         ))}
 
       </MapView>
 
-      <View style={styles.searchForm}>
-        <TextInput 
+       <View style={styles.searchForm}>
+        <TextInput
           ref={inputSearch}
           style={styles.searchInput}
           placeholder="O que você quer reciclar...?"
           placeholderTextColor="#999"
           autoCapitalize="words"
           autoCorrect={false}
-        />    
+        />
       </View>
 
+
+
       <View style={styles.bottomBar}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.bottomBarButton}
           onPress={focusSearchInput}
         >
@@ -178,21 +180,21 @@ export default function Maps() {
           <Text style={styles.textButton}>Pesquisa</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.bottomBarButton}
         >
           <MaterialIcons name="favorite" size={28} color="#E8E8E8" />
           <Text style={styles.textButton}>Favoritos</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.bottomBarButton}
         >
           <MaterialIcons name="place" size={28} color="#E8E8E8" />
           <Text style={styles.textButton}>Local</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.bottomBarButton}
         >
           <MaterialIcons name="account-circle" size={28} color="#E8E8E8" />

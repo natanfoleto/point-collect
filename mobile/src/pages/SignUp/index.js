@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles'
 
-import logo from '../../assets/logo3.png'
+import logo from '../../assets/logo.png'
 
 export default function SignUp() {
   const navigation = useNavigation();
