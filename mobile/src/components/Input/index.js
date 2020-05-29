@@ -11,7 +11,7 @@ function Input({style, icon, ...rest}, ref){
   return (
 
     <Container style={style}>
-      { icon && <Icon name={icon} size={20} color="#fff"/>}
+      { icon && <Icon name={icon} size={20} color="#4BCB56"/>}
       <TInput {...rest} ref={ref}/>
     </Container>
   )

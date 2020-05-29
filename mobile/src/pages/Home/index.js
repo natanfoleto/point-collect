@@ -1,51 +1,57 @@
-import React from 'react'
-import { useNavigation } from '@react-navigation/native';
-import { Text, Image, View, TouchableOpacity } from 'react-native'
+import React, {useRef} from 'react';
+import {Image } from 'react-native';
 
-import logo from '../../assets/logo.png'
 
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import logo from '../../assets/logo.png';
 
-import styles from './styles'
+import { Container, Form, FormInput, SubmitButton, SignLink, SignLinkText } from './styles';
 
-export default function Home() {
 
-  const navigation = useNavigation();
 
-  function navigateToSignUp() {
-    navigation.navigate('SignUp');
-  }
 
-  function navigateToLogin() {
-    navigation.navigate('Login');
+export default function Home({ navigation }) {
+
+  const passwordRef = useRef();
+
+  function handleSubmit(){
+
   }
 
   return (
+    <>
+      <Container>
 
-    <View style={styles.container}>
+        <Image source={logo} />
 
-      <Image source={logo} style={styles.logo} />
+        <Form>
+          <FormInput
+            icon="mail-outline"
+            keyboardType="email-address"
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="Digite seu e-mail"
+            returnKeyType="next"
+            onSubmitEditing={() => passwordRef.current.focus()}
+          />
 
-      <View>
-        <TouchableOpacity
-          style={styles.btnLogin}
-          onPress={navigateToLogin}
-        >
-          <Text style={styles.textLogin}> LOGIN </Text>
-        </TouchableOpacity>
+          <FormInput
+            icon="lock-outline"
+            secureTextEntry
+            placeholder="Digite sua senha"
+            ref={passwordRef}
+            returnKeyType="send"
+            onSubmitEditing={handleSubmit}
+          />
 
-        <TouchableOpacity
-          style={styles.btnCadastrar}
-          onPress={navigateToSignUp}
-        >
-          <Text style={styles.textCadastrar}> CADASTRE-SE </Text>
-        </TouchableOpacity>
+          <SubmitButton onPress={handleSubmit}> Entrar </SubmitButton>
 
-      </View>
+        </Form>
 
-    </View>
-
+        <SignLink onPress={() => {navigation.navigate('SignUp')}} >
+          <SignLinkText> Cadastre-se </SignLinkText>
+        </SignLink>
+      </Container>
+    </>
 
   );
 }
