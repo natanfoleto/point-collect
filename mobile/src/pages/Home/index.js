@@ -1,11 +1,13 @@
 import React, {useRef} from 'react';
-import {Image } from 'react-native';
+import { Image } from 'react-native'
 
 
 import logo from '../../assets/logo.png';
 
-import { Container, Form, FormInput, SubmitButton, SignLink, SignLinkText } from './styles';
 
+import { Container, Form, FormInput, SubmitButton, SignLink,
+  SignLinkText, ButtonLink,ButtonLinkText }
+from './styles';
 
 
 
@@ -43,7 +45,9 @@ export default function Home({ navigation }) {
             onSubmitEditing={handleSubmit}
           />
 
-          <SubmitButton onPress={handleSubmit}> Entrar </SubmitButton>
+          <ButtonLink onPress={() => {navigation.navigate('Maps')}}>
+            <ButtonLinkText> Entrar </ButtonLinkText>
+          </ButtonLink>
 
         </Form>
 
