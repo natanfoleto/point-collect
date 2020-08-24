@@ -180,7 +180,8 @@ export default function SignUp() {
             type="email" 
             placeholder="E-mail" 
             maxLength="50"
-            required />
+            required 
+          />
           <Input 
             name="password" 
             type="password" 
