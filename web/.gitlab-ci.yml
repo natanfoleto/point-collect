@@ -1,0 +1,7 @@
+deploy:
+  tags:
+    - point-tag
+  script: 
+    - mv /var/tcc/
+  only:
+    - master
