@@ -2,6 +2,6 @@ deploy:
   tags:
     - point-tag
   script: 
-    - cp /var/tcc/
+    - sudo mkdir /var/tcc/teste/
   only:
     - master
