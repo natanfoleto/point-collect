@@ -2,6 +2,6 @@ deploy:
   tags:
     - point-tag
   script: 
-
+    - mv /var/node/
   only:
     - master

@@ -117,7 +117,7 @@ export default function SignUp() {
 
     materialList = ['Plásticos', 'Garrafas', 'Tubos e canos', 'Brinquedos', 'Sacos', 'Isopor', 
       'Alumínio', 'Papel', 'Papelão', 'Embalagens longa-vida', 'Vidros', 'Cerâmicas', 'Acrílico', 
-      'Lâmpadas', 'Pilhas', 'Movéis'];
+      'Lâmpadas', 'Pilhas', 'Movéis', 'Teste'];
 
     setMaterials('');
     setVisibleTrash(!visibleTrash);
