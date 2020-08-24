@@ -3,6 +3,7 @@ import path from 'path';
 import routes from'./routes';
 import cors from 'cors';
 
+
 import './database';
 
 class App {

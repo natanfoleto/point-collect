@@ -1,50 +1,45 @@
-import {StyleSheet} from 'react-native';
-import Constants from 'expo-constants';
+import { Platform } from 'react-native'
+import styled from 'styled-components/native';
 
-export default StyleSheet.create({
-  
-  statusBar: {
-    paddingTop: Constants.statusBarHeight + 20,
-  },
 
-  buttonBack: {
-    paddingHorizontal: 20,
-  },
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 25,
-  },
 
-  input: {
-    paddingHorizontal: 18,
-    height: 50,
-    width: 320,
-    padding: 10,
-    borderColor: '#000',
-    borderWidth: 0.3,
-    borderRadius: 50,
-    marginBottom: 10,
-    fontSize: 16,
-  },
+export const Container = styled.KeyboardAvoidingView.attrs({
+  enabled: Platform.OS === 'ios',
+  behavior: 'padding',
+})`
 
-  btnCadastrar: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 320,
-    height: 50,
-    backgroundColor: '#4BCB56',
-    borderRadius: 50,
-    padding: 10,
-    marginTop: 12,
-  },
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 0 30px
 
-  textCadastrar: {
-    fontSize: 20,
-    color: '#f9f9f9',
-    fontWeight: 'bold',
-  },  
-})
+`;
+
+export const Form = styled.View`
+  align-self: stretch;
+  margin-top: 50px;
+`;
+
+export const FormInput = styled(Input)`
+  margin-bottom: 10px;
+  border: 0.2px solid #000;
+`;
+
+export const SubmitButton = styled(Button)`
+  margin-top: 20px;
+  background: #4BCB56;
+
+`;
+
+export const SignLink = styled.TouchableOpacity`
+  margin-top: 20px;
+`;
+
+export const SignLinkText = styled.Text`
+  color: rgba(000,000,000, 0.4);
+  font-weight: bold;
+  font-size: 16px;
+`;

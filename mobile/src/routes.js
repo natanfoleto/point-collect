@@ -7,11 +7,11 @@ const AppStack = createStackNavigator();
 
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
-import Login from './pages/Login';
 import Maps from './pages/Maps';
+import Profile from './pages/Profile';
 
 
-export default function Routes() { 
+export default function Routes() {
   return (
     <NavigationContainer>
 
@@ -19,9 +19,9 @@ export default function Routes() {
 
           <AppStack.Screen name="Home" component={Home} />
           <AppStack.Screen name="SignUp" component={SignUp} />
-          <AppStack.Screen name="Login" component={Login} />
           <AppStack.Screen name="Maps" component={Maps} />
-          
+          <AppStack.Screen name="Profile" component={Profile} />
+
       </AppStack.Navigator>
 
     </NavigationContainer>

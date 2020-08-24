@@ -1,49 +1,78 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native'
-import { useNavigation } from '@react-navigation/native';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, {useRef} from 'react';
+import { Image } from 'react-native';
 
-import styles from './styles'
 
-import logo from '../../assets/logo3.png'
+import logo from '../../assets/logo.png';
 
-export default function SignUp() {
-  const navigation = useNavigation();
+import { Container, Form, FormInput, SubmitButton, SignLink, SignLinkText } from './styles';
 
-  function navigateToHome() {
-    navigation.navigate('Home')
+
+
+
+export default function SignUp({ navigation }) {
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
+
+  function handleRegister(){
+
   }
 
   return (
     <>
-      <View style={styles.statusBar}/>
-      
-      <TouchableOpacity 
-        style={styles.buttonBack}
-        onPress={navigateToHome}
-      >
-        <MaterialIcons name="keyboard-backspace" size={35} color="#4BCB56" />
-      </TouchableOpacity>
-    
-      <View style={styles.container}>
-        
-          <View>
-            <Image source={logo} />
-          </View>
+      <Container>
 
-          <View style={styles.form}>
-            <TextInput style={styles.input} placeholder="Nome" />
-            <TextInput style={styles.input} placeholder="Sobrenome" />
-            <TextInput style={styles.input} placeholder="Email" />
-            <TextInput style={styles.input} placeholder="Senha" />
-            <TextInput style={styles.input} placeholder="Confirma senha" />
+        <Image source={logo} />
 
-            <TouchableOpacity style={styles.btnCadastrar}>
-              <Text style={styles.textCadastrar}>CADASTRAR</Text>
-            </TouchableOpacity>
-          </View>
 
-      </View>
+        <Form>
+          <FormInput
+            icon="person-outline"
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="Digite seu nome completo"
+            returnKeyType="next"
+            onSubmitEditing={() => emailRef.current.focus()}
+          />
+
+          <FormInput
+            icon="mail-outline"
+            keyboardType="email-address"
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="Digite seu e-mail"
+            ref={emailRef}
+            returnKeyType="next"
+            onSubmitEditing={() => passwordRef.current.focus()}
+          />
+
+          <FormInput
+            icon="lock-outline"
+            secureTextEntry
+            placeholder="Digite sua senha"
+            ref={passwordRef}
+            returnKeyType="next"
+            onSubmitEditing={() => confirmPasswordRef.current.focus()}
+          />
+
+          <FormInput
+            icon="lock-outline"
+            secureTextEntry
+            placeholder="Confirme sua senha"
+            ref={confirmPasswordRef}
+            return="handleRegister"
+          />
+
+          <SubmitButton onPress={handleRegister}> CADASTRAR </SubmitButton>
+
+        </Form>
+
+        <SignLink onPress={() => { navigation.navigate('Home') }} >
+          <SignLinkText> Já tenho conta </SignLinkText>
+        </SignLink>
+      </Container>
     </>
+
   );
 }
