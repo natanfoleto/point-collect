@@ -1,7 +1,0 @@
-deploy:
-  tags:
-    - point-tag
-  script: 
-    - sudo mkdir /var/tcc/teste/
-  only:
-    - master
