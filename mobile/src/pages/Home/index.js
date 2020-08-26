@@ -5,7 +5,7 @@ import { Image } from 'react-native'
 import logo from '../../assets/logo.png';
 
 
-import { Container, Form, FormInput, SubmitButton, SignLink,
+import { Container, Form, FormInput, SignLink,
   SignLinkText, ButtonLink,ButtonLinkText }
 from './styles';
 
