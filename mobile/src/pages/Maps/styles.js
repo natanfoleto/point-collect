@@ -1,18 +1,45 @@
-import { Platform } from 'react-native'
+import { Platform, StyleSheet} from 'react-native'
 import styled from 'styled-components/native';
+import Constants from 'expo-constants';
 
-export const Container = styled.KeyboardAvoidingView.attrs({
-  enabled: Platform.OS === 'ios',
-  behavior: 'padding',
-})`
-  flex:1;
-  align-items: center;
-  justify-content: center;
-`;
+import Input from '../../components/Input';
 
 export const Text = styled.Text`
   font-size: 14px;
 `;
+
+export const SearchInput = styled(Input)`
+  width: 80%;
+  margin-top: 100px;
+  border: 1px solid #000;
+`;
+
+export const PointLocation = styled.Image`
+  width: 54px;
+  height: 54px;
+  background: #fff;
+  border-radius: 200px;
+  border-width: 4px;
+  border-color: rgba(71, 175, 80, 0.8);
+`;
+
+export const CalloutContainer = styled.View`
+  width: 260px;
+  height: 130px;
+  padding: 0px 5px;
+`;
+
+export const TextNameBold = styled.Text`
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+export const TextAddress = styled.Text`
+  font-size: 18px;
+  color: #666;
+`;
+
 
 export const BoxBottons = styled.View`
   flex-direction: row;
@@ -26,4 +53,7 @@ export const BoxBottons = styled.View`
   bottom: 0;
   left: 0;
 `;
+
+
+
 

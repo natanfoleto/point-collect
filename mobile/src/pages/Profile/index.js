@@ -1,11 +1,29 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Image} from 'react-native';
 
-export default function Profile(){
+import { Container, TopBox, PhotoContainer, NameContainer, TextName, Photo} from './styles';
 
-  return(
+export default function Profile({ navigation }) {
+
+  return (
     <>
-        <Text> Helloo </Text>
+      <Container>
+
+        <TopBox >
+          <PhotoContainer >
+
+          </PhotoContainer>
+        </TopBox>
+
+        <NameContainer >
+          <TextName>
+            Vinicius Faleiros
+          </TextName>
+        </NameContainer>
+
+
+      </Container>
+
     </>
   )
 }
