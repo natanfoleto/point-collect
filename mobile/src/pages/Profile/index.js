@@ -1,25 +1,41 @@
 import React from 'react';
-import {Image} from 'react-native';
+import {FlatList, Text} from 'react-native';
 
-import { Container, TopBox, PhotoContainer, NameContainer, TextName, Photo} from './styles';
+import Header from '../../components/Header';
+import CardFavorite from '../../components/CardFavorite';
+
+import {
+  Container, TopBox, PhotoContainer, NameContainer, TextName,
+  Photo, ButtonEdit
+} from './styles';
 
 export default function Profile({ navigation }) {
 
+
   return (
+
     <>
       <Container>
+        <Header handleNavigation={() => { navigation.goBack() }} />
 
         <TopBox >
-          <PhotoContainer >
 
+          <ButtonEdit icon="edit" />
+
+          <PhotoContainer >
+            <Photo source={{ uri: 'https://avatars0.githubusercontent.com/u/42284565?s=60&v=4' }} />
           </PhotoContainer>
+
+          <NameContainer >
+            <TextName>
+              Vinicius Faleiros
+            </TextName>
+          </NameContainer>
         </TopBox>
 
-        <NameContainer >
-          <TextName>
-            Vinicius Faleiros
-          </TextName>
-        </NameContainer>
+
+
+
 
 
       </Container>
