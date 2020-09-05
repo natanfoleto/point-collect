@@ -9,7 +9,7 @@ export default function Header({ icon, handleNavigation, ...rest}) {
   return (
 
       <ContainerHeader {...rest}>
-        <ButtonBar onPress={handleNavigation} icon="arrow-back"/>
+        <ButtonBar onPress={handleNavigation} icon="arrow-back" cor="#fff"/>
       </ContainerHeader>
   );
 };
