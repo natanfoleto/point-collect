@@ -8,7 +8,7 @@ export default function ButtonBar({ cor, children, icon,...rest }) {
   return (
 
       <ContainerButton {...rest}>
-        {icon && <Icon name={icon} size={32} color={cor} />}
+        {icon && <Icon name={icon} size={28} color={cor} />}
         <Text>{children}</Text>
       </ContainerButton>
 

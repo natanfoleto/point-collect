@@ -7,32 +7,48 @@ export const Container = styled.View`
   margin-top: ${Constants.statusBarHeight + 3};
 `;
 
-
 export const TopBox = styled.View`
-  height: 30%;
+  height: auto;
+  padding-bottom: 15px;
   width: 100%;
   background: #47AF50;
   justify-content: center;
-  align-items:flex-end;
-  margin-bottom: 50px;
+  align-items: flex-end;
+  margin-bottom: 30px;
 `;
 
 export const BoxWhite = styled.View`
-  flex-direction: row;
-  height: 85%;
+  flex-direction: column;
+  height: auto;
   width: 90%;
   align-items: center;
-  margin: 0 auto ;
+  margin: 0 auto;
   background: #fff;
   border-radius: 20px;
 `;
 
+export const BoxButton = styled.View`
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 10px;
+  margin-right: 10px;
+`;
+
+export const BoxData = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 25px 25px 25px 25px;
+`;
+
 export const PhotoContainer = styled.View`
-  height: 128px;
-  width: 128px;
+  height: 116px;
+  width: 116px;
   border-radius: 200px;
-  margin: 0 auto 20px ;
-  border : 1px solid #000;
+  margin: 0 0 0 20px;
+  border : 1px solid rgba(0, 0, 0, 0.5);
   background: #ddd;
 `;
 
@@ -44,19 +60,33 @@ export const Photo = styled.Image`
 `;
 
 export const NameContainer = styled.View`
-  height: 30px;
-  width: 200px;
-  justify-content:center;
-  align-items: center;
-  background: #fff;
-  border-radius: 200px;
-  margin: 0 auto ;
-  box-shadow: 1px 2px 5px black;
+  height: auto;
+  padding: 10px 10px 10px 10px;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 10px;
+  margin: 0 10px 0 10px;
 `;
 
 export const TextName = styled.Text`
-  font-size:18px;
+  font-size: 16px;
   font-weight: bold;
+  margin-top: 5px;
 `;
 
+export const Favorite = styled.View`
+  height: auto;
+  width: 90%;
+  padding: 20px 20px 20px 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+`;
 
+export const TitleFavorite = styled.Text`
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+`;

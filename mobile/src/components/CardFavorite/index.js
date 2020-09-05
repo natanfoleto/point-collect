@@ -7,10 +7,18 @@ export default function CardFavorite() {
     <>
      <ContainerCard>
         <CompanyImage />
-
-
+        
         <CompanyName>
             Empresa do kropinho
+        </CompanyName>
+        <CompanyName>
+            Almeida Reciclagem
+        </CompanyName>
+        <CompanyName>
+            Latinha nova
+        </CompanyName>
+        <CompanyName>
+            Reciclagem pese e pague
         </CompanyName>
      </ContainerCard>
 

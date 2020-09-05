@@ -1,11 +1,14 @@
 import styled from 'styled-components/native';
 
 export const ContainerCard = styled.View`
-  justify-content: space-between;
-  width: 85%;
-  height: 15%;
-  background: #fff;
-  margin-bottom: 5px;
+  flex-direction: column;
+  height: auto;
+  width: 90%;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px 20px 20px 20px;
+  background: #eee;
+  border-radius: 20px;
 `;
 
 export const CompanyImage = styled.Image`
@@ -13,6 +16,7 @@ export const CompanyImage = styled.Image`
 `;
 
 export const CompanyName = styled.Text`
-  font-size: 28px;
+  font-size: 20px;
   color: #000;
+  margin-bottom: 10px;
 `;
