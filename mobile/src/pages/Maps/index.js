@@ -4,21 +4,21 @@ import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 
 import ButtonBar from '../../components/ButtonBar'
 
-import logoCompany from '../../assets/company.png'
+import api from '../../services/api';
 
+import logoCompany from '../../assets/logo.png'
 
 import {
-  Container,Text, BoxBottons, PointLocation, CalloutContainer, TextNameBold,
+  Text, BoxBottons, PointLocation, CalloutContainer, TextNameBold,
   TextAddress, SearchInput
-}
-  from './styles'
+} from './styles'
 
 import './styles';
 
 export default function Maps({ navigation }) {
-
-
+  const [points, setPoints] = useState([]);
   const [currentRegion, setCurrentRegion] = useState(null);
+  const [userCoords, setUserCoords] = useState([]);
 
   useEffect(() => {
     async function loadInitialPosition() {
@@ -37,43 +37,62 @@ export default function Maps({ navigation }) {
           latitudeDelta: 0.03,
           longitudeDelta: 0.03,
         })
-
       }
-
     }
+
     loadInitialPosition();
+    loadPoints();
   }, []);
 
   async function initialPosition() {
+    const { granted } = await requestPermissionsAsync();
+
     if (granted) {
-      const coordenadas = await getCurrentPositionAsync({
+      const { coords } = await getCurrentPositionAsync({
         enableHighAccuracy: true,
       });
+
+      setUserCoords({
+        lat: coords.latitude,
+        long: coords.longitude
+      })
     }
   }
 
+  async function loadPoints() {
+    const response = await api.get('/collectors');
+
+    setPoints(response.data);
+  }
 
   return (
     <>
-
       <MapView initialRegion={currentRegion} style={{ flex: 1 }} >
 
-        <Marker coordinate={{ latitude: -20.7305509, longitude: -48.0491994 }} >
+        {/* <Marker coordinate={{ latitude: userCoords.lat, longitude: userCoords.long }} >
+        </Marker> */}
 
-          <PointLocation source={logoCompany} />
+        {points.map(point => (
+          <Marker 
+            key={point.id}
+            coordinate={{ latitude: point.latitude, longitude: point.longitude }} 
+          >
+            <PointLocation source={{ uri: point.avatar.url }} />
 
-          <Callout onPress={() => { navigation.navigate('Company') }}>
-            <CalloutContainer >
-              <TextNameBold> Nome empresa </TextNameBold>
+            <Callout onPress={() => { navigation.navigate('Company') }}>
+              <CalloutContainer >
+                <TextNameBold> {point.name} </TextNameBold>
+                <TextAddress>
+                  Morro Agudo, São Paulo
+                  Rua Antonio Belem, Jardim California
+                  n° 177
+                </TextAddress>
 
-              <TextAddress>
-                Morro Agudo, São Paulo
-                Rua Antonio Belem, Jardim California
-                n° 177
-              </TextAddress>
-            </CalloutContainer>
-          </Callout>
-        </Marker>
+
+              </CalloutContainer>
+            </Callout>
+          </Marker>
+        ))}
 
       </MapView>
 
@@ -86,7 +105,7 @@ export default function Maps({ navigation }) {
           <Text> Favoritos </Text>
         </ButtonBar>
 
-        <ButtonBar icon="place" cor="#fff" >
+        <ButtonBar icon="place" cor="#fff" onPress={() => { initialPosition() }}>
           <Text> Localização</Text>
         </ButtonBar>
 

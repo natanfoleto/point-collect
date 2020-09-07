@@ -1,6 +1,4 @@
-import { Platform, StyleSheet} from 'react-native'
 import styled from 'styled-components/native';
-import Constants from 'expo-constants';
 
 import Input from '../../components/Input';
 
@@ -15,11 +13,11 @@ export const SearchInput = styled(Input)`
 `;
 
 export const PointLocation = styled.Image`
-  width: 54px;
-  height: 54px;
+  width: 40px;
+  height: 40px;
   background: #fff;
   border-radius: 200px;
-  border-width: 4px;
+  border-width: 3px;
   border-color: rgba(71, 175, 80, 0.8);
 `;
 
@@ -53,7 +51,3 @@ export const BoxBottons = styled.View`
   bottom: 0;
   left: 0;
 `;
-
-
-
-

@@ -48,7 +48,7 @@ export const PhotoContainer = styled.View`
   width: 116px;
   border-radius: 200px;
   margin: 0 0 0 20px;
-  border : 1px solid rgba(0, 0, 0, 0.5);
+  border : 1px solid rgba(0, 0, 0, 0.2);
   background: #ddd;
 `;
 
@@ -70,7 +70,6 @@ export const NameContainer = styled.View`
 
 export const TextName = styled.Text`
   font-size: 16px;
-  font-weight: bold;
   margin-top: 5px;
 `;
 

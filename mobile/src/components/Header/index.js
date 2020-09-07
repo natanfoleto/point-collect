@@ -7,9 +7,8 @@ import ButtonBar from '../ButtonBar';
 
 export default function Header({ icon, handleNavigation, ...rest}) {
   return (
-
-      <ContainerHeader {...rest}>
-        <ButtonBar onPress={handleNavigation} icon="arrow-back" cor="#fff"/>
-      </ContainerHeader>
+    <ContainerHeader {...rest}>
+      <ButtonBar onPress={handleNavigation} icon="arrow-back" cor="#fff"/>
+    </ContainerHeader>
   );
 };

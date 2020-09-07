@@ -6,9 +6,6 @@ import logo from '../../assets/logo.png';
 
 import { Container, Form, FormInput, SubmitButton, SignLink, SignLinkText } from './styles';
 
-
-
-
 export default function SignUp({ navigation }) {
 
   const emailRef = useRef();

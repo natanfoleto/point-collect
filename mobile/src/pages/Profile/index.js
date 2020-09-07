@@ -1,9 +1,7 @@
 import React from 'react';
-import { FlatList, Text } from 'react-native';
 
 import Header from '../../components/Header';
 import ButtonBar from '../../components/ButtonBar';
-
 import CardFavorite from '../../components/CardFavorite';
 
 import {
@@ -14,13 +12,11 @@ import {
 export default function Profile({ navigation }) {
 
   return (
-
     <>
       <Container>
         <Header handleNavigation={navigation.goBack} />
 
         <TopBox >
-
           <BoxWhite>
             <BoxButton>
               <ButtonBar icon="edit" />

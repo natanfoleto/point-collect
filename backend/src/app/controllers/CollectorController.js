@@ -5,7 +5,15 @@ import User from '../models/User';
 
 class CollectorControler {
   async index(req, res) {
-    const collectors = await Collector.findAll();
+    const collectors = await Collector.findAll({
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
 
     return res.json(collectors);
   }

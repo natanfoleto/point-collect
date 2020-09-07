@@ -8,7 +8,7 @@ export const ContainerCard = styled.View`
   margin: 0 auto;
   padding: 20px 20px 20px 20px;
   background: #eee;
-  border-radius: 20px;
+  border-radius: 4px;
 `;
 
 export const CompanyImage = styled.Image`
