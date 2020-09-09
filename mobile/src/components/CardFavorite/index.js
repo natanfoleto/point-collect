@@ -7,7 +7,7 @@ export default function CardFavorite() {
     <>
      <ContainerCard>
         <CompanyImage />
-        
+
         <CompanyName>
             Empresa do kropinho
         </CompanyName>

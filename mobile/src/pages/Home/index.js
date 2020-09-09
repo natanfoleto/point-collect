@@ -45,14 +45,19 @@ export default function Home({ navigation }) {
             onSubmitEditing={handleSubmit}
           />
 
+
           <ButtonLink onPress={() => {navigation.navigate('Maps')}}>
-            <ButtonLinkText> Entrar </ButtonLinkText>
+            <ButtonLinkText> ENTRAR </ButtonLinkText>
           </ButtonLink>
 
         </Form>
 
         <SignLink onPress={() => {navigation.navigate('SignUp')}} >
           <SignLinkText> Cadastre-se </SignLinkText>
+        </SignLink>
+
+        <SignLink onPress={() => {navigation.navigate('ResetPassword')}} >
+          <SignLinkText> Esqueceu sua senha? </SignLinkText>
         </SignLink>
       </Container>
     </>

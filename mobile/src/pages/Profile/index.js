@@ -19,7 +19,7 @@ export default function Profile({ navigation }) {
         <TopBox >
           <BoxWhite>
             <BoxButton>
-              <ButtonBar icon="edit" />
+              <ButtonBar icon="edit" onPress={() => navigation.navigate('EditProfile')}/>
             </BoxButton>
 
             <BoxData>

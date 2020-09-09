@@ -10,7 +10,7 @@ import logoCompany from '../../assets/logo.png'
 
 import {
   Text, BoxBottons, PointLocation, CalloutContainer, TextNameBold,
-  TextAddress, SearchInput
+  TextAddress
 } from './styles'
 
 import './styles';
@@ -69,13 +69,10 @@ export default function Maps({ navigation }) {
     <>
       <MapView initialRegion={currentRegion} style={{ flex: 1 }} >
 
-        {/* <Marker coordinate={{ latitude: userCoords.lat, longitude: userCoords.long }} >
-        </Marker> */}
-
         {points.map(point => (
-          <Marker 
+          <Marker
             key={point.id}
-            coordinate={{ latitude: point.latitude, longitude: point.longitude }} 
+            coordinate={{ latitude: point.latitude, longitude: point.longitude }}
           >
             <PointLocation source={{ uri: point.avatar.url }} />
 

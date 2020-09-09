@@ -10,6 +10,8 @@ import SignUp from './pages/SignUp';
 import Maps from './pages/Maps';
 import Profile from './pages/Profile';
 import Company from './pages/Company';
+import ResetPassword from './pages/ResetPassword';
+import EditProfile from './pages/EditProfile';
 
 
 export default function Routes() {
@@ -23,6 +25,8 @@ export default function Routes() {
           <AppStack.Screen name="Maps" component={Maps} />
           <AppStack.Screen name="Profile" component={Profile} />
           <AppStack.Screen name="Company" component={Company} />
+          <AppStack.Screen name="ResetPassword" component={ResetPassword} />
+          <AppStack.Screen name="EditProfile" component={EditProfile} />
 
       </AppStack.Navigator>
 

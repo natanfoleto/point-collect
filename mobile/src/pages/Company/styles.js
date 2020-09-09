@@ -4,7 +4,6 @@ import Constants from 'expo-constants';
 export const Container = styled.View`
   flex:1;
   align-items:center;
-  margin-top: ${Constants.statusBarHeight + 3};
 `;
 
 export const TopBox = styled.View`
