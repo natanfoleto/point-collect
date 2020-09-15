@@ -4,17 +4,19 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Container, TInput} from './styles';
 
-function Input({style, icon, ...rest}, ref){
+function Input({children, style, icon, ...rest}, ref){
   return (
 
     <Container style={style}>
       { icon && <Icon name={icon} size={20} color="#4BCB56"/>}
       <TInput {...rest} ref={ref}/>
+      {children}
     </Container>
   )
 }
 
 Input.PropTypes ={
+  children: null,
   icon: PropTypes.string,
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };

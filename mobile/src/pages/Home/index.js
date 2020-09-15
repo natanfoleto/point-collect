@@ -1,9 +1,10 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import { Image } from 'react-native'
 
 
 import logo from '../../assets/logo.png';
 
+import ButtonBar from '../../components/ButtonBar';
 
 import { Container, Form, FormInput, SignLink,
   SignLinkText, ButtonLink,ButtonLinkText }
@@ -15,9 +16,7 @@ export default function Home({ navigation }) {
 
   const passwordRef = useRef();
 
-  function handleSubmit(){
-
-  }
+  function handleSubmit(){  }
 
   return (
     <>
@@ -39,11 +38,16 @@ export default function Home({ navigation }) {
           <FormInput
             icon="lock-outline"
             secureTextEntry
+            autoCorrect={false}
             placeholder="Digite sua senha"
             ref={passwordRef}
             returnKeyType="send"
             onSubmitEditing={handleSubmit}
-          />
+          >
+
+            <ButtonBar icon="remove-red-eye" cor="#4BCB56" onPress={() => onIconPress()}/>
+
+          </FormInput>
 
 
           <ButtonLink onPress={() => {navigation.navigate('Maps')}}>

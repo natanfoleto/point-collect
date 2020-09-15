@@ -1,5 +1,11 @@
 import styled from 'styled-components/native';
 
+import Header from '../../components/Header';
+
+export const HeaderProfile = styled(Header)`
+  background: #47AF50;
+`;
+
 export const Container = styled.View`
   flex:1;
   align-items:center;

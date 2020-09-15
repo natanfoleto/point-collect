@@ -1,12 +1,11 @@
 import React from 'react';
 
-import Header from '../../components/Header';
 import ButtonBar from '../../components/ButtonBar';
 import CardFavorite from '../../components/CardFavorite';
 
 import {
   Container, TopBox, PhotoContainer, NameContainer, TextName,
-  Photo, BoxWhite, BoxData, BoxButton, Favorite, TitleFavorite
+  Photo, BoxWhite, BoxData, BoxButton, Favorite, TitleFavorite, HeaderProfile
 } from './styles';
 
 export default function Profile({ navigation }) {
@@ -14,7 +13,7 @@ export default function Profile({ navigation }) {
   return (
     <>
       <Container>
-        <Header handleNavigation={navigation.goBack} />
+        <HeaderProfile handleNavigation={navigation.goBack} cor="#fff" />
 
         <TopBox >
           <BoxWhite>

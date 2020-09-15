@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import PropTypes from 'prop-types';
 
 import {Text, ContainerButton} from './styles';
 
@@ -13,4 +14,8 @@ export default function ButtonBar({ cor, children, icon,...rest }) {
       </ContainerButton>
 
   );
+};
+
+ButtonBar.propTypes = {
+  children: PropTypes.string,
 };

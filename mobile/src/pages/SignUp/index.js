@@ -20,7 +20,7 @@ export default function SignUp({ navigation }) {
   return (
     <>
 
-      <Header handleNavigation={navigation.goBack} />
+      <Header handleNavigation={navigation.goBack} cor="#47AF50"/>
 
       <Container>
 
