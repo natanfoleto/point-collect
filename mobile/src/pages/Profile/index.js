@@ -1,4 +1,5 @@
 import React from 'react';
+import {FlatList} from 'react-native';
 
 import ButtonBar from '../../components/ButtonBar';
 import CardFavorite from '../../components/CardFavorite';
@@ -13,12 +14,12 @@ export default function Profile({ navigation }) {
   return (
     <>
       <Container>
-        <HeaderProfile handleNavigation={navigation.goBack} cor="#fff" />
+        <HeaderProfile handleNavigation={navigation.goBack}  />
 
         <TopBox >
           <BoxWhite>
             <BoxButton>
-              <ButtonBar icon="edit" onPress={() => navigation.navigate('EditProfile')}/>
+              <ButtonBar icon="edit" cor="#4F4F4F" tamanho={25} onPress={() => navigation.navigate('EditProfile')}/>
             </BoxButton>
 
             <BoxData>
@@ -30,10 +31,6 @@ export default function Profile({ navigation }) {
                 <TextName>
                   Vinicius Faleiros
                 </TextName>
-
-                <TextName>
-                  vinicius@hotmail.com
-                </TextName>
               </NameContainer>
             </BoxData>
           </BoxWhite>
@@ -44,7 +41,14 @@ export default function Profile({ navigation }) {
             Locais Favoritos
           </TitleFavorite>
 
-          <CardFavorite />
+          <FlatList
+            data={[1,2,3,4]}
+            renderItem={() => <CardFavorite />}
+          />
+
+
+
+
         </Favorite>
 
       </Container>

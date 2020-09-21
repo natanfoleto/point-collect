@@ -1,25 +1,25 @@
 import React from 'react';
 
-import { ContainerCard, CompanyName, CompanyImage } from './styles';
+import ButtonBar from '../../components/ButtonBar'
 
-export default function CardFavorite() {
+import { ContainerCard, BoxButton, CompanyName, CompanyImage } from './styles';
+
+import Imagee from '../../assets/logoEco.png'
+
+export default function CardFavorite(...rest) {
   return (
     <>
-     <ContainerCard>
-        <CompanyImage />
+     <ContainerCard {...rest}>
+        <BoxButton>
+          <ButtonBar icon="delete" cor="#4F4F4F" tamanho={18}/>
+        </BoxButton>
+
+        <CompanyImage source={Imagee} />
 
         <CompanyName>
-            Empresa do kropinho
+          ECONEW
         </CompanyName>
-        <CompanyName>
-            Almeida Reciclagem
-        </CompanyName>
-        <CompanyName>
-            Latinha nova
-        </CompanyName>
-        <CompanyName>
-            Reciclagem pese e pague
-        </CompanyName>
+
      </ContainerCard>
 
     </>

@@ -7,7 +7,7 @@ import logo from '../../assets/logo.png';
 import ButtonBar from '../../components/ButtonBar';
 
 import { Container, Form, FormInput, SignLink,
-  SignLinkText, ButtonLink,ButtonLinkText }
+  SignLinkText, SubmitButton }
 from './styles';
 
 
@@ -45,14 +45,14 @@ export default function Home({ navigation }) {
             onSubmitEditing={handleSubmit}
           >
 
-            <ButtonBar icon="remove-red-eye" cor="#4BCB56" onPress={() => onIconPress()}/>
+            <ButtonBar icon="remove-red-eye" cor="#4BCB56" tamanho={22} />
 
           </FormInput>
 
 
-          <ButtonLink onPress={() => {navigation.navigate('Maps')}}>
-            <ButtonLinkText> ENTRAR </ButtonLinkText>
-          </ButtonLink>
+          <SubmitButton onPress={() => {navigation.navigate('Maps')}}>
+            ENTRAR
+          </SubmitButton>
 
         </Form>
 

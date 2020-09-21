@@ -94,20 +94,20 @@ export default function Maps({ navigation }) {
       </MapView>
 
       <BoxBottons>
-        <ButtonBar icon="search" cor="#fff">
-          <Text> Pesquisar </Text>
+        <ButtonBar icon="search" cor="#fff" tamanho={30}>
+         Pesquisar
         </ButtonBar>
 
-        <ButtonBar icon="favorite" cor="#fff">
-          <Text> Favoritos </Text>
+        <ButtonBar icon="favorite" cor="#fff" tamanho={30}>
+         Favoritos
         </ButtonBar>
 
-        <ButtonBar icon="place" cor="#fff" onPress={() => { initialPosition() }}>
-          <Text> Localização</Text>
+        <ButtonBar icon="place" cor="#fff" tamanho={30}>
+         Localização
         </ButtonBar>
 
-        <ButtonBar icon="person" cor="#fff" onPress={() => { navigation.navigate('Profile') }}>
-          <Text> Perfil </Text>
+        <ButtonBar icon="person" cor="#fff" tamanho={30} onPress={() => { navigation.navigate('Profile') }}>
+         Perfil
         </ButtonBar>
       </BoxBottons>
 
