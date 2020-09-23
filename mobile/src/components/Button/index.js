@@ -25,4 +25,5 @@ Button.propTypes = {
 
 Button.defaultProps = {
   loading: false,
+  color: '#fff',
 }

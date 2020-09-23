@@ -9,7 +9,7 @@ import api from '../../services/api';
 import logoCompany from '../../assets/logo.png'
 
 import {
-  Text, BoxBottons, PointLocation, CalloutContainer, TextNameBold,
+   BoxBottons, PointLocation, CalloutContainer, TextNameBold,
   TextAddress
 } from './styles'
 
@@ -65,20 +65,18 @@ export default function Maps({ navigation }) {
     setPoints(response.data);
   }
 
+
   return (
     <>
       <MapView initialRegion={currentRegion} style={{ flex: 1 }} >
 
-        {points.map(point => (
-          <Marker
-            key={point.id}
-            coordinate={{ latitude: point.latitude, longitude: point.longitude }}
-          >
-            <PointLocation source={{ uri: point.avatar.url }} />
+          <Marker coordinate={{ latitude: -20.7311388, longitude: -48.0544337 }} >
+
+            <PointLocation source={logoCompany} />
 
             <Callout onPress={() => { navigation.navigate('Company') }}>
               <CalloutContainer >
-                <TextNameBold> {point.name} </TextNameBold>
+                <TextNameBold> cu </TextNameBold>
                 <TextAddress>
                   Morro Agudo, São Paulo
                   Rua Antonio Belem, Jardim California
@@ -89,17 +87,13 @@ export default function Maps({ navigation }) {
               </CalloutContainer>
             </Callout>
           </Marker>
-        ))}
+
 
       </MapView>
 
       <BoxBottons>
         <ButtonBar icon="search" cor="#fff" tamanho={30}>
          Pesquisar
-        </ButtonBar>
-
-        <ButtonBar icon="favorite" cor="#fff" tamanho={30}>
-         Favoritos
         </ButtonBar>
 
         <ButtonBar icon="place" cor="#fff" tamanho={30}>

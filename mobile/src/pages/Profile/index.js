@@ -41,10 +41,12 @@ export default function Profile({ navigation }) {
             Locais Favoritos
           </TitleFavorite>
 
-          <FlatList
+          {/*<FlatList
             data={[1,2,3,4]}
-            renderItem={() => <CardFavorite />}
-          />
+            renderItem={() => }
+          />*/}
+
+          <CardFavorite />
 
 
 

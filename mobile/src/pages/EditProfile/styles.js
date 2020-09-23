@@ -35,6 +35,8 @@ export const SubmitButton = styled(Button)`
   margin-top: 20px;
   background: #FFF;
 
-  ${Text}
+  ${Text}{
+    color: #47AF50;
+  }
 
 `;

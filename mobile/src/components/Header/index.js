@@ -11,3 +11,4 @@ export default function Header({ handleNavigation, icon, cor,...rest}) {
     </ContainerHeader>
   );
 };
+

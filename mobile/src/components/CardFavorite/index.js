@@ -11,7 +11,7 @@ export default function CardFavorite(...rest) {
     <>
      <ContainerCard {...rest}>
         <BoxButton>
-          <ButtonBar icon="delete" cor="#4F4F4F" tamanho={18}/>
+          <ButtonBar icon="delete" cor="#4F4F4F" tamanho={20}/>
         </BoxButton>
 
         <CompanyImage source={Imagee} />

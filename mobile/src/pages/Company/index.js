@@ -1,12 +1,10 @@
 import React from 'react';
 
 import Header from '../../components/Header';
-import ButtonBar from '../../components/ButtonBar';
-import CardFavorite from '../../components/CardFavorite';
 
 import {
-  Container, TopBox, PhotoContainer,Photo, DataCompany,
-  CompanyName, CompanyAddress, Text
+  Container, TopBox, PhotoContainer, Photo, DataCompany,
+  CompanyName, CompanyAddress, Text, WrapperComposer, ButtonComposer
 } from './styles';
 
 export default function Profile({ navigation }) {
@@ -14,7 +12,7 @@ export default function Profile({ navigation }) {
   return (
     <>
       <Container>
-        <Header handleNavigation={navigation.goBack} />
+        <Header handleNavigation={navigation.goBack} cor={'#47AF50'} />
 
         <TopBox >
           <PhotoContainer >
@@ -36,6 +34,18 @@ export default function Profile({ navigation }) {
           <Text> Nº 177 </Text>
 
         </DataCompany>
+
+        <WrapperComposer>
+          <ButtonComposer>
+            WhatsApp
+          </ButtonComposer>
+
+          <ButtonComposer>
+            Email
+          </ButtonComposer>
+
+        </WrapperComposer>
+
 
       </Container>
 
