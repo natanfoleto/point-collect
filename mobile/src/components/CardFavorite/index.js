@@ -1,12 +1,17 @@
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+
 
 import ButtonBar from '../../components/ButtonBar'
 
-import { ContainerCard, BoxButton, CompanyName, CompanyImage } from './styles';
+import { ContainerCard, BoxButton, CompanyName, CompanyImage, Info, InfoText } from './styles';
 
 import Imagee from '../../assets/logoEco.png'
 
 export default function CardFavorite(...rest) {
+
+  const navigation = useNavigation();
+
   return (
     <>
      <ContainerCard {...rest}>
@@ -19,6 +24,13 @@ export default function CardFavorite(...rest) {
         <CompanyName>
           ECONEW
         </CompanyName>
+
+        <Info onPress={() => navigation.navigate('Company')} >
+          <InfoText>
+            Mais informações
+          </InfoText>
+          <ButtonBar icon="arrow-forward" cor="#1f6325" />
+        </Info>
 
      </ContainerCard>
 

@@ -1,4 +1,6 @@
 import React from 'react';
+import * as MailComposer from 'expo-mail-composer'
+import {Linking} from 'react-native';
 
 import Header from '../../components/Header';
 
@@ -9,6 +11,19 @@ import {
 
 export default function Profile({ navigation }) {
 
+  const message = 'Olá empresa de reciclagem, queria mais informações.'
+
+  function sendMail(){
+    MailComposer.composeAsync({
+      subject: 'Compania',
+      recipients: ['vinicius.faleiros@hotmail.com'],
+      body: message,
+    })
+  }
+
+  function sendWhatsapp(){
+    Linking.openURL(`whatsapp://send?phone=5516992904006&text=${message}`);
+  }
   return (
     <>
       <Container>
@@ -36,11 +51,11 @@ export default function Profile({ navigation }) {
         </DataCompany>
 
         <WrapperComposer>
-          <ButtonComposer>
+          <ButtonComposer onPress={sendWhatsapp}>
             WhatsApp
           </ButtonComposer>
 
-          <ButtonComposer>
+          <ButtonComposer onPress={sendMail}>
             Email
           </ButtonComposer>
 

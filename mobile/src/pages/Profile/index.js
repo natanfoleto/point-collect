@@ -6,7 +6,7 @@ import CardFavorite from '../../components/CardFavorite';
 
 import {
   Container, TopBox, PhotoContainer, NameContainer, TextName,
-  Photo, BoxWhite, BoxData, BoxButton, Favorite, TitleFavorite, HeaderProfile
+  Photo, BoxData, BoxButton, TitleFavorite, HeaderProfile
 } from './styles';
 
 export default function Profile({ navigation }) {
@@ -17,9 +17,14 @@ export default function Profile({ navigation }) {
         <HeaderProfile handleNavigation={navigation.goBack}  />
 
         <TopBox >
-          <BoxWhite>
+
             <BoxButton>
-              <ButtonBar icon="edit" cor="#4F4F4F" tamanho={25} onPress={() => navigation.navigate('EditProfile')}/>
+              <ButtonBar
+                icon="edit"
+                cor="#4F4F4F"
+                tamanho={25}
+                onPress={() => navigation.navigate('EditProfile')}
+              />
             </BoxButton>
 
             <BoxData>
@@ -33,25 +38,27 @@ export default function Profile({ navigation }) {
                 </TextName>
               </NameContainer>
             </BoxData>
-          </BoxWhite>
+
         </TopBox>
 
-        <Favorite>
+
           <TitleFavorite>
             Locais Favoritos
           </TitleFavorite>
 
-          {/*<FlatList
+          <FlatList
             data={[1,2,3,4]}
-            renderItem={() => }
-          />*/}
-
-          <CardFavorite />
-
-
+            keyExtractor={company => String(company)}
+            showsVerticalScrollIndicator={false}
+            renderItem={() => <CardFavorite /> }
+          />
 
 
-        </Favorite>
+
+
+
+
+
 
       </Container>
 

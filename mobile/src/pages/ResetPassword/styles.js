@@ -29,3 +29,8 @@ export const SubmitButton = styled(Button)`
   background: #4BCB56;
 
 `;
+
+export const ContainerLottie = styled.View`
+  height: 150px;
+  width: 150px;
+`

@@ -100,7 +100,12 @@ export default function Maps({ navigation }) {
          Localização
         </ButtonBar>
 
-        <ButtonBar icon="person" cor="#fff" tamanho={30} onPress={() => { navigation.navigate('Profile') }}>
+        <ButtonBar
+          icon="person"
+          cor="#fff"
+          tamanho={30}
+          onPress={() => { navigation.navigate('Profile') }}
+        >
          Perfil
         </ButtonBar>
       </BoxBottons>

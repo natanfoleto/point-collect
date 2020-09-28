@@ -13,13 +13,11 @@ export const Container = styled.View`
 `;
 
 export const TopBox = styled.View`
-  height: auto;
   padding-bottom: 15px;
   width: 100%;
   background: #47AF50;
   justify-content: center;
-  align-items: flex-end;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 `;
 
 export const BoxWhite = styled.View`
@@ -70,16 +68,16 @@ export const NameContainer = styled.View`
 
 export const TextName = styled.Text`
   font-size: 20px;
-  font-weight: 700;
+  font-weight: bold;
   margin-top: 5px;
-  color:#1C1C1C;
+  color:#fff;
 `;
 
 export const TitleFavorite = styled.Text`
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 10px;
-  color:#1C1C1C;
+  color:#1f6325;
 
 `;
 

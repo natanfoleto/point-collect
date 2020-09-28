@@ -1,13 +1,21 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Image} from 'react-native';
+import Lottie from 'lottie-react-native';
 
-import logo from '../../assets/logo.png';
+import mail from '../../assets/mail.json';
 
 import Header from '../../components/Header';
 
-import { PasswordInput, Container, SubmitButton, Form } from './styles';
+import { PasswordInput, Container, SubmitButton, Form, ContainerLottie} from './styles';
 
 export default function ResetPassword({ navigation }) {
+
+  const [play, setPlay] = useState(true)
+
+  function handlePlay(){
+    setPlay(!play);
+  }
+
   return (
     <>
 
@@ -15,7 +23,11 @@ export default function ResetPassword({ navigation }) {
 
       <Container>
 
-        <Image source={logo} />
+        {/*<Image source={logo} /> */}
+
+        <ContainerLottie>
+         <Lottie resizeMode="contain" source={mail} pause={play}/>
+        </ContainerLottie>
 
 
         <Form>
@@ -28,7 +40,7 @@ export default function ResetPassword({ navigation }) {
             returnKeyType="send"
           />
 
-          <SubmitButton >
+          <SubmitButton onPress={handlePlay}>
             ENVIAR
           </SubmitButton>
         </Form>
