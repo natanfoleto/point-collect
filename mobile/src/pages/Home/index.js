@@ -1,5 +1,6 @@
 import React, {useRef, useState} from 'react';
 import { Image } from 'react-native'
+import * as yup from 'yup';
 
 
 import logo from '../../assets/logo.png';
@@ -24,8 +25,9 @@ export default function Home({ navigation }) {
 
         <Image source={logo} />
 
-        <Form>
+        <Form >
           <FormInput
+            id="email"
             icon="mail-outline"
             keyboardType="email-address"
             autoCorrect={false}
@@ -37,12 +39,14 @@ export default function Home({ navigation }) {
 
           <FormInput
             icon="lock-outline"
+            id="senha"
             secureTextEntry
             autoCorrect={false}
             placeholder="Digite sua senha"
             ref={passwordRef}
             returnKeyType="send"
             onSubmitEditing={handleSubmit}
+
           >
 
             <ButtonBar icon="remove-red-eye" cor="#4BCB56" tamanho={22} />

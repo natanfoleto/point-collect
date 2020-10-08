@@ -30,7 +30,7 @@ export const BoxWhite = styled.View`
 
 `;
 
-export const BoxButton = styled.View`
+export const BoxButton = styled.TouchableOpacity`
   position: absolute;
   top: 0;
   right: 0;

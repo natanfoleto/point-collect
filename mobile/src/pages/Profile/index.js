@@ -53,13 +53,6 @@ export default function Profile({ navigation }) {
             renderItem={() => <CardFavorite /> }
           />
 
-
-
-
-
-
-
-
       </Container>
 
     </>

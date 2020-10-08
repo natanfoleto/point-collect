@@ -26,7 +26,7 @@ export default function ResetPassword({ navigation }) {
         {/*<Image source={logo} /> */}
 
         <ContainerLottie>
-         <Lottie resizeMode="contain" source={mail} pause={play}/>
+         <Lottie resizeMode="contain" source={mail} autoPlay loop/>
         </ContainerLottie>
 
 

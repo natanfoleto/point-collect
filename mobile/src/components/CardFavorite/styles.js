@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const ContainerCard = styled.View`
 
   flex-direction: column;
-  width: 280px;
+  width: 330px;
   align-items: center;
   margin-bottom: 10px;
   padding: 20px 20px;
