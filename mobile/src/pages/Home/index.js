@@ -35,16 +35,13 @@ export default function Home({ navigation }) {
 
           await SyncStorage.set('auth_user', response.data.user);
           await SyncStorage.set('auth_token', response.data.token);
+        }
+      }
 
-          const result = SyncStorage.get('auth_user');
-          console.log(result);
-        }
-        
-        if (response.data.error === 1) {
-          const msg = response.data.msg;
-  
-          Alert.alert('Falha no login', msg);
-        }
+      if (response.data.error === 1) {
+        const msg = response.data.msg;
+
+        Alert.alert('Falha no login', msg);
       }
     }
   }
