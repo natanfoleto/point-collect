@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
-import Constants from 'expo-constants';
+
+import Button from '../../components/Button';
 
 export const Container = styled.View`
   flex:1;
   align-items:center;
-  margin-top: ${Constants.statusBarHeight + 3};
 `;
 
 export const TopBox = styled.View`
@@ -12,7 +12,6 @@ export const TopBox = styled.View`
   background: #47AF50;
   justify-content: center;
   align-items: flex-end;
-  margin-bottom: 30px;
 `;
 
 export const PhotoContainer = styled.View`
@@ -31,11 +30,10 @@ export const Photo = styled.Image`
 export const DataCompany = styled.View`
   height: auto;
   width: 100%;
-  padding: 20px 20px 20px 20px;
-  display: flex;
+  padding: 20px 20px;
   flex-direction: column;
   align-items: center;
-  border-radius: 4px;
+
 `;
 
 export const CompanyName = styled.Text`
@@ -45,11 +43,30 @@ export const CompanyName = styled.Text`
 `;
 
 export const CompanyAddress = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 5px;
 `;
 
 export const Text = styled.Text`
   font-size: 16px;
+  color: #666;
 `;
+
+export const WrapperComposer = styled.View`
+  padding: 0 30px;
+  flex-direction: row;
+  align-self: stretch;
+  justify-content: space-between;
+  margin-top: 60px;
+`;
+
+export const ButtonComposer = styled(Button)`
+  background: #47AF50;
+  padding: 10px 10px;
+  width: 150px;
+
+
+`;
+
+

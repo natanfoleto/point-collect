@@ -10,6 +10,7 @@ export const SearchInput = styled(Input)`
   width: 80%;
   margin-top: 100px;
   border: 1px solid #000;
+
 `;
 
 export const PointLocation = styled.Image`

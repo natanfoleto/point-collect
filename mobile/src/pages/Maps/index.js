@@ -9,7 +9,7 @@ import api from '../../services/api';
 import logoCompany from '../../assets/logo.png'
 
 import {
-  Text, BoxBottons, PointLocation, CalloutContainer, TextNameBold,
+  BoxBottons, PointLocation, CalloutContainer, TextNameBold,
   TextAddress, SearchInput
 } from './styles'
 
@@ -65,28 +65,28 @@ export default function Maps({ navigation }) {
     setPoints(response.data);
   }
 
+
   return (
     <>
+
+
       <MapView initialRegion={currentRegion} style={{ flex: 1 }} >
 
-        {/* <Marker coordinate={{ latitude: userCoords.lat, longitude: userCoords.long }} >
-        </Marker> */}
-
         {points.map(point => (
-          <Marker 
+          <Marker
             key={point.id}
-            coordinate={{ latitude: point.latitude, longitude: point.longitude }} 
-          >
-            <PointLocation source={{ uri: point.avatar.url }} />
+            coordinate={{ latitude: point.latitude, longitude: point.longitude }} >
+
+            <PointLocation source={{uri: point.avatar.url}} />
 
             <Callout onPress={() => { navigation.navigate('Company') }}>
               <CalloutContainer >
-                <TextNameBold> {point.name} </TextNameBold>
+                <TextNameBold> cu </TextNameBold>
                 <TextAddress>
                   Morro Agudo, São Paulo
                   Rua Antonio Belem, Jardim California
                   n° 177
-                </TextAddress>
+              </TextAddress>
 
 
               </CalloutContainer>
@@ -94,23 +94,25 @@ export default function Maps({ navigation }) {
           </Marker>
         ))}
 
+
       </MapView>
 
       <BoxBottons>
-        <ButtonBar icon="search" cor="#fff">
-          <Text> Pesquisar </Text>
+        <ButtonBar icon="search" cor="#fff" tamanho={30}>
+          Pesquisar
         </ButtonBar>
 
-        <ButtonBar icon="favorite" cor="#fff">
-          <Text> Favoritos </Text>
+        <ButtonBar icon="place" cor="#fff" tamanho={30}>
+          Localização
         </ButtonBar>
 
-        <ButtonBar icon="place" cor="#fff" onPress={() => { initialPosition() }}>
-          <Text> Localização</Text>
-        </ButtonBar>
-
-        <ButtonBar icon="person" cor="#fff" onPress={() => { navigation.navigate('Profile') }}>
-          <Text> Perfil </Text>
+        <ButtonBar
+          icon="person"
+          cor="#fff"
+          tamanho={30}
+          onPress={() => { navigation.navigate('Profile') }}
+        >
+          Perfil
         </ButtonBar>
       </BoxBottons>
 

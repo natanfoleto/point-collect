@@ -1,11 +1,10 @@
 {
   "expo": {
-    "name": "GoRecicle",
-    "slug": "gorecicle",
+    "name": "Point Collect",
+    "slug": "pointcollect",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",

@@ -1,12 +1,12 @@
 import React from 'react';
+import {FlatList} from 'react-native';
 
-import Header from '../../components/Header';
 import ButtonBar from '../../components/ButtonBar';
 import CardFavorite from '../../components/CardFavorite';
 
 import {
   Container, TopBox, PhotoContainer, NameContainer, TextName,
-  Photo, BoxWhite, BoxData, BoxButton, Favorite, TitleFavorite
+  Photo, BoxData, BoxButton, TitleFavorite, HeaderProfile
 } from './styles';
 
 export default function Profile({ navigation }) {
@@ -14,12 +14,17 @@ export default function Profile({ navigation }) {
   return (
     <>
       <Container>
-        <Header handleNavigation={navigation.goBack} />
+        <HeaderProfile handleNavigation={navigation.goBack}  />
 
         <TopBox >
-          <BoxWhite>
+
             <BoxButton>
-              <ButtonBar icon="edit" />
+              <ButtonBar
+                icon="edit"
+                cor="#4F4F4F"
+                tamanho={25}
+                onPress={() => navigation.navigate('EditProfile')}
+              />
             </BoxButton>
 
             <BoxData>
@@ -31,22 +36,22 @@ export default function Profile({ navigation }) {
                 <TextName>
                   Vinicius Faleiros
                 </TextName>
-
-                <TextName>
-                  vinicius@hotmail.com
-                </TextName>
               </NameContainer>
             </BoxData>
-          </BoxWhite>
+
         </TopBox>
 
-        <Favorite>
+
           <TitleFavorite>
             Locais Favoritos
           </TitleFavorite>
 
-          <CardFavorite />
-        </Favorite>
+          <FlatList
+            data={[1,2,3,4]}
+            keyExtractor={company => String(company)}
+            showsVerticalScrollIndicator={false}
+            renderItem={() => <CardFavorite /> }
+          />
 
       </Container>
 

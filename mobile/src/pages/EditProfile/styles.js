@@ -1,19 +1,24 @@
-import { Platform } from 'react-native'
-import styled from 'styled-components/native';
+import styled from 'styled-components';
 
-
+import Header from '../../components/Header';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-
+import Text from '../../components/Button/styles';
 
 export const Container = styled.KeyboardAvoidingView.attrs({
   enabled: Platform.OS === 'ios',
   behavior: 'padding',
 })`
+
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding: 0 30px
+  padding: 0 20px;
+  background: #47AF50;
+`;
+
+export const HeaderEditProfile = styled(Header)`
+  background: #47AF50;
 `;
 
 export const Form = styled.View`
@@ -28,16 +33,10 @@ export const FormInput = styled(Input)`
 
 export const SubmitButton = styled(Button)`
   margin-top: 20px;
-  background: #4BCB56;
+  background: #FFF;
 
-`;
+  ${Text}{
+    color: #47AF50;
+  }
 
-export const SignLink = styled.TouchableOpacity`
-  margin-top: 20px;
-`;
-
-export const SignLinkText = styled.Text`
-  color: rgba(000,000,000, 0.4);
-  font-weight: bold;
-  font-size: 16px;
 `;

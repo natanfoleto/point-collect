@@ -1,10 +1,11 @@
 import React, {useRef} from 'react';
 import { Image } from 'react-native';
 
+import Header from '../../components/Header';
 
 import logo from '../../assets/logo.png';
 
-import { Container, Form, FormInput, SubmitButton, SignLink, SignLinkText } from './styles';
+import { Container, Form, FormInput, SubmitButton} from './styles';
 
 export default function SignUp({ navigation }) {
 
@@ -18,6 +19,9 @@ export default function SignUp({ navigation }) {
 
   return (
     <>
+
+      <Header handleNavigation={navigation.goBack} cor="#47AF50"/>
+
       <Container>
 
         <Image source={logo} />
@@ -65,9 +69,6 @@ export default function SignUp({ navigation }) {
 
         </Form>
 
-        <SignLink onPress={() => { navigation.navigate('Home') }} >
-          <SignLinkText> Já tenho conta </SignLinkText>
-        </SignLink>
       </Container>
     </>
 
