@@ -2,6 +2,8 @@ FROM node:13.12.0-alpine
 
 WORKDIR /app
 
+ENV PATH /app/node_modules/.bin:$PATH
+
 RUN apk add --update yarn
 
 RUN yarn -v
@@ -9,7 +11,8 @@ RUN yarn -v
 COPY package.json ./
 
 RUN yarn install
+RUN yarn add react-scripts@3.4.1 -g
 
 COPY . ./
 
-CMD ["yarn", "dev"]
+CMD ["npm", "start"]

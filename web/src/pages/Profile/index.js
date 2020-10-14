@@ -19,7 +19,6 @@ export default function Profile() {
 
   function handleSignOut() {
     dispatch(signOut());
-    
   }
 
   return (

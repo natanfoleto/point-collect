@@ -1,8 +1,8 @@
 module.exports = {
   dialect: 'postgres',
-  host: 'ec2-52-45-46-210.compute-1.amazonaws.com',
+  host: 'localhost',
   username: 'postgres',
-  password: 'pointcollect',
+  password: '143010',
   database: 'pointcollect',
   define: {
     timestamp: true,
