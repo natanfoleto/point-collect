@@ -5,6 +5,7 @@ const Auth = createStackNavigator();
 
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
+import Maps from './pages/Maps';
 
 export default function AuthRoutes() {
   return (
@@ -13,6 +14,7 @@ export default function AuthRoutes() {
     >
       <Auth.Screen name="Home" component={Home} />
       <Auth.Screen name="SignUp" component={SignUp} />
+      <Auth.Screen name="Maps" component={Maps} />
     </Auth.Navigator>
   )
 }

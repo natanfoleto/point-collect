@@ -5,6 +5,8 @@ import Header from '../../components/Header';
 
 import logo from '../../assets/logo.png';
 
+import api from '../../services/api';
+
 import { Container, Form, FormInput, SubmitButton} from './styles';
 
 export default function SignUp({ navigation }) {
@@ -26,17 +28,19 @@ export default function SignUp({ navigation }) {
 
         console.log(response);
   
-        // if (response.data.error === 0) {
-        //   if (response.data.user) {
-        //     Alert.alert('Sucesso', 'Cadastro feito com sucesso');
-        //   }
-        // }
+        if (response.data.error === 0) {
+          if (response.data.user) {
+            Alert.alert('Sucesso', 'Cadastro feito com sucesso');
 
-        // if (response.data.error === 1) {
-        //   const msg = response.data.msg;
+            navigation.navigate('Home');
+          }
+        }
+
+        if (response.data.error === 1) {
+          const msg = response.data.msg;
   
-        //   Alert.alert('Falha no login', msg);
-        // }
+          Alert.alert('Falha no login', msg);
+        }
       }
     } catch (err) {
       Alert.alert('Falha no cadastro', err);

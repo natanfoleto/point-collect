@@ -32,10 +32,10 @@ export default function Home({ navigation }) {
 
       if (response.data.user) {
         if (response.data.error === 0) {
-          Alert.alert('Sucesso', 'Dados encontrados');
-
           await SyncStorage.set('auth_user', response.data.user);
           await SyncStorage.set('auth_token', response.data.token);
+
+          navigation.navigate('Maps');
         }
       }
 
