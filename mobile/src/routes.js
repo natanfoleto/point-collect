@@ -1,8 +1,28 @@
 import React from 'react';
+import {createStackNavigator } from '@react-navigation/stack';
+
+
+const Auth = createStackNavigator();
+
+import Home from './pages/Home';
+import SignUp from './pages/SignUp';
+
+export default function AuthRoutes() {
+  return (
+    <Auth.Navigator
+      screenOptions={{headerShown: false}}
+    >
+      <Auth.Screen name="Home" component={Home} />
+      <Auth.Screen name="SignUp" component={SignUp} />
+    </Auth.Navigator>
+  )
+}
+
+
+
+{ /*
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-
 
 const AppStack = createStackNavigator();
 
@@ -34,3 +54,5 @@ export default function Routes() {
     </NavigationContainer>
   );
 }
+
+*/}

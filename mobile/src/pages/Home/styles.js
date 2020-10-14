@@ -1,5 +1,6 @@
 import { Platform } from 'react-native'
 import styled from 'styled-components/native';
+import { Form } from '@unform/mobile';
 
 
 import Input from '../../components/Input';
@@ -15,10 +16,9 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   justify-content: center;
   align-items: center;
   padding: 0 30px;
-
 `;
 
-export const Form = styled.View`
+export const FormRocket = styled(Form)`
   align-self: stretch;
   margin-top: 50px;
 `;
@@ -29,9 +29,9 @@ export const FormInput = styled(Input)`
 
 `
 
-
 export const SubmitButton = styled(Button)`
   margin-top: 20px;
+  width: 100%;
   background: #4BCB56;
 `;
 
