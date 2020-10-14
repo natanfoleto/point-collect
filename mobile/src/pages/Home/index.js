@@ -1,11 +1,13 @@
-import React, { useRef, useState, useCallback } from 'react';
-import { Image, Alert } from 'react-native'
-import * as yup from 'yup';
-import { FormHandles } from '@unform/core';
+import React, { useRef, useState } from 'react';
+import { Image, Alert } from 'react-native';
+
+import SyncStorage from 'sync-storage';
 
 import logo from '../../assets/logo.png';
 
 import ButtonBar from '../../components/ButtonBar';
+
+import api from '../../services/api';
 
 import {
   Container, FormInput, SignLink,
@@ -13,17 +15,35 @@ import {
 }
   from './styles';
 
-
-
 export default function Home({ navigation }) {
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [password, setPassword] = useState('');
 
-  const formRef = useRef(null);
   const passwordRef = useRef(null);
 
-  function handleSubmit() {
-    console.log(email, senha);
+  async function handleSubmit() {
+    const response = await api.post('/sessions', { email, password });
+
+    if (response.data) {
+      if (response.data.collector) {
+        Alert.alert('Falha no login', 'Usuário é um ponto de coleta, login apenas no site');
+      }
+
+      if (response.data.user) {
+        if (response.data.error === 0) {
+          Alert.alert('Sucesso', 'Dados encontrados');
+
+          await SyncStorage.set('auth_user', response.data.user);
+          await SyncStorage.set('auth_token', response.data.token);
+        }
+      }
+
+      if (response.data.error === 1) {
+        const msg = response.data.msg;
+
+        Alert.alert('Falha no login', msg);
+      }
+    }
   }
 
   return (
@@ -32,7 +52,7 @@ export default function Home({ navigation }) {
 
         <Image source={logo} />
 
-        <FormRocket ref={formRef} onSubmit={handleSubmit}>
+        <FormRocket>
 
           <FormInput
             id="email"
@@ -56,8 +76,8 @@ export default function Home({ navigation }) {
             ref={passwordRef}
             returnKeyType="send"
             onSubmitEditing={handleSubmit}
-            value={senha}
-            onChangeText={setSenha}
+            value={password}
+            onChangeText={setPassword}
           >
 
             <ButtonBar icon="remove-red-eye" cor="#4BCB56" tamanho={22} />
@@ -65,9 +85,7 @@ export default function Home({ navigation }) {
           </FormInput>
 
 
-          <SubmitButton onPress={()=> {
-            formRef.current?.submitForm();
-          }}>
+          <SubmitButton onPress={handleSubmit}>
             ENTRAR
           </SubmitButton>
 

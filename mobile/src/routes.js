@@ -1,7 +1,6 @@
 import React from 'react';
 import {createStackNavigator } from '@react-navigation/stack';
 
-
 const Auth = createStackNavigator();
 
 import Home from './pages/Home';
@@ -17,8 +16,6 @@ export default function AuthRoutes() {
     </Auth.Navigator>
   )
 }
-
-
 
 { /*
 import { NavigationContainer} from '@react-navigation/native';
