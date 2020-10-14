@@ -22,7 +22,10 @@ class UserController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Falha na validação' });
+      return res.json({ 
+        error: 1,
+        msg: 'Falha na validação dos campos' 
+      });
     }
 
     const userExists = await User.findOne({ 
@@ -34,15 +37,17 @@ class UserController {
     });
 
     if (userExists || collectorExists) {
-      return res.status(400).json({ error: 'Um usuário com este e-mail já existe.' });
+      return res.json({ 
+        error: 1,
+        msg: 'Um usuário com este e-mail já existe.' 
+      });
     }
 
-    const { id, name, email } = await User.create(req.body);
+    const user = await User.create(req.body);
 
     return res.json({
-      id, 
-      name, 
-      email
+      error: 0,
+      user
     });
   }
 

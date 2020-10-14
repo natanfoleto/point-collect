@@ -22,7 +22,8 @@ export default function Home({ navigation }) {
   const passwordRef = useRef(null);
 
   async function handleSubmit() {
-    const response = await api.post('/sessions', { email, password });
+    try {
+      const response = await api.post('/sessions', { email, password });
 
     if (response.data) {
       if (response.data.collector) {
@@ -43,6 +44,10 @@ export default function Home({ navigation }) {
 
         Alert.alert('Falha no login', msg);
       }
+    }
+    } catch (err) {
+      Alert.alert('Falha no login', err);
+      console.log(err);
     }
   }
 

@@ -1,5 +1,5 @@
-import React, {useRef} from 'react';
-import { Image } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Image, Alert } from 'react-native';
 
 import Header from '../../components/Header';
 
@@ -8,13 +8,40 @@ import logo from '../../assets/logo.png';
 import { Container, Form, FormInput, SubmitButton} from './styles';
 
 export default function SignUp({ navigation }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
 
-  function handleRegister(){
+  async function handleRegister() {
+    try {
+      if (password !== confirmPassword) {
+        Alert.alert('Falha no cadastro', 'As senhas não conferem');
+      } else {
+        const response = await api.post('/users', { name, email, password });
 
+        console.log(response);
+  
+        // if (response.data.error === 0) {
+        //   if (response.data.user) {
+        //     Alert.alert('Sucesso', 'Cadastro feito com sucesso');
+        //   }
+        // }
+
+        // if (response.data.error === 1) {
+        //   const msg = response.data.msg;
+  
+        //   Alert.alert('Falha no login', msg);
+        // }
+      }
+    } catch (err) {
+      Alert.alert('Falha no cadastro', err);
+      console.log(err);
+    }
   }
 
   return (
@@ -35,6 +62,8 @@ export default function SignUp({ navigation }) {
             placeholder="Digite seu nome completo"
             returnKeyType="next"
             onSubmitEditing={() => emailRef.current.focus()}
+            value={name}
+            onChangeText={setName}
           />
 
           <FormInput
@@ -46,6 +75,8 @@ export default function SignUp({ navigation }) {
             ref={emailRef}
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
+            value={email}
+            onChangeText={setEmail}
           />
 
           <FormInput
@@ -55,6 +86,8 @@ export default function SignUp({ navigation }) {
             ref={passwordRef}
             returnKeyType="next"
             onSubmitEditing={() => confirmPasswordRef.current.focus()}
+            value={password}
+            onChangeText={setPassword}
           />
 
           <FormInput
@@ -63,9 +96,13 @@ export default function SignUp({ navigation }) {
             placeholder="Confirme sua senha"
             ref={confirmPasswordRef}
             return="handleRegister"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
           />
 
-          <SubmitButton onPress={handleRegister}> CADASTRAR </SubmitButton>
+          <SubmitButton onPress={handleRegister}> 
+            CADASTRAR 
+          </SubmitButton>
 
         </Form>
 
