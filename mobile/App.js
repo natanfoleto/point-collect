@@ -12,7 +12,5 @@ export default function App() {
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <Routes />
     </NavigationContainer>
-
   );
 }
-

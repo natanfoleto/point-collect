@@ -17,7 +17,10 @@ class SessionController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Falha na validação' });
+      return res.json({ 
+        error: 1,
+        msg: 'Falha na validação' 
+      });
     }
 
     const { email, password } = req.body;
@@ -46,12 +49,16 @@ class SessionController {
 
     if (user) {
       if (!(await user.checkPassword(password))) {
-        return res.status(401).json({ error: 'A senha está incorreta.' });
+        return res.json({ 
+          error: 1,
+          msg: 'A senha está incorreta.' 
+        });
       }
 
       const { id, name, avatar } = user;
 
       return res.json({
+        error: 0,
         user: {
           id,
           name,
@@ -64,7 +71,10 @@ class SessionController {
       });
     } else if (collector) {
       if (!(await collector.checkPassword(password))) {
-        return res.status(401).json({ error: 'A senha está incorreta.' });
+        return res.json({ 
+          error: 1,
+          msg: 'A senha está incorreta.' 
+        });
       }
 
       const { id, name, avatar } = collector;
@@ -81,7 +91,10 @@ class SessionController {
         }),
       });
     } else {
-      return res.status(401).json({ error: 'Usuário não encontrado.' });
+      return res.json({ 
+        error: 1,
+        msg: 'Usuário não encontrado.' 
+      });
     }  
   }
 }
