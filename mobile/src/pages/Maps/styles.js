@@ -10,7 +10,6 @@ export const SearchInput = styled(Input)`
   width: 80%;
   margin-top: 100px;
   border: 1px solid #000;
-
 `;
 
 export const PointLocation = styled.Image`
@@ -24,8 +23,7 @@ export const PointLocation = styled.Image`
 
 export const CalloutContainer = styled.View`
   width: 260px;
-  height: 130px;
-  padding: 0px 5px;
+  height: auto;
 `;
 
 export const TextNameBold = styled.Text`
@@ -34,16 +32,26 @@ export const TextNameBold = styled.Text`
   margin-bottom: 10px;
 `;
 
-export const TextAddress = styled.Text`
-  font-size: 18px;
-  color: #666;
+export const Subtitle = styled.Text`
+  font-size: 16px;
+  font-weight: bold;
 `;
 
+export const TextInfo = styled.Text`
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 10px;
+`;
+
+export const TextMore = styled.Text`
+  font-size: 16px;
+  color: blue;
+`;
 
 export const BoxBottons = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  padding: 5px 5px;
+  padding: 5px 15px;
   height: 60px;
   width: 100%;
   background: #47AF50;

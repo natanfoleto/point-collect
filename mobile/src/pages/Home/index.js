@@ -23,28 +23,34 @@ export default function Home({ navigation }) {
 
   async function handleSubmit() {
     try {
-      const response = await api.post('/sessions', { email, password });
+      // if (email === '' || password === '') {
+      //   Alert.alert('Falha na validação', 'Preencha todos os campos');
+      // } else {
+      //   const response = await api.post('/sessions', { email, password });
 
-    if (response.data) {
-      if (response.data.collector) {
-        Alert.alert('Falha no login', 'Usuário é um ponto de coleta, login apenas no site');
-      }
+      //   if (response.data) {
+      //     if (response.data.collector) {
+      //       Alert.alert('Falha no login', 'Usuário é um ponto de coleta');
+      //     }
 
-      if (response.data.user) {
-        if (response.data.error === 0) {
-          await SyncStorage.set('auth_user', response.data.user);
-          await SyncStorage.set('auth_token', response.data.token);
+      //     if (response.data.user) {
+      //       if (response.data.error === 0) {
+      //         await SyncStorage.set('auth_user', response.data.user);
+      //         await SyncStorage.set('auth_token', response.data.token);
 
-          navigation.navigate('Maps');
-        }
-      }
+      //         navigation.navigate('Maps');
+      //       }
+      //     }
 
-      if (response.data.error === 1) {
-        const msg = response.data.msg;
+      //     if (response.data.error === 1) {
+      //       const msg = response.data.msg;
 
-        Alert.alert('Falha no login', msg);
-      }
-    }
+      //       Alert.alert('Falha no login', msg);
+      //     }
+      //   }
+      // }
+
+      navigation.navigate('Maps');
     } catch (err) {
       Alert.alert('Falha no login', err);
       console.log(err);
@@ -58,7 +64,6 @@ export default function Home({ navigation }) {
         <Image source={logo} />
 
         <FormRocket>
-
           <FormInput
             id="email"
             icon="mail-outline"

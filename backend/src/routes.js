@@ -8,10 +8,14 @@ import SessionController from './app/controllers/SessionController';
 import SearchController from './app/controllers/SearchController';
 import FileController from './app/controllers/FileController';
 
+import aws from './app/services/aws_sms';
+
 import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 const upload = multer(multerConfig);
+
+routes.post('/forgot', aws.send);
 
 routes.post('/users', UserController.store);
 routes.post('/collectors', CollectorController.store);

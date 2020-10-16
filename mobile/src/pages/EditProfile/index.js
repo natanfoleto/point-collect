@@ -11,8 +11,8 @@ export default function EditProfile({ navigation }) {
   return (
     <>
       <HeaderEditProfile handleNavigation={navigation.goBack} />
+      
       <Container>
-
         <Form>
           <FormInput
             icon="person-outline"

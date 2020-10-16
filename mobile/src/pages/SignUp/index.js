@@ -21,25 +21,29 @@ export default function SignUp({ navigation }) {
 
   async function handleRegister() {
     try {
-      if (password !== confirmPassword) {
-        Alert.alert('Falha no cadastro', 'As senhas não conferem');
+      if (name === '' || email === '' || password === '' || confirmPassword === '') {
+        Alert.alert('Falha na validação', 'Preencha todos os campos');
       } else {
-        const response = await api.post('/users', { name, email, password });
+        if (password !== confirmPassword) {
+          Alert.alert('Falha no cadastro', 'As senhas não conferem');
+        } else {
+          const response = await api.post('/users', { name, email, password });
 
-        console.log(response);
-  
-        if (response.data.error === 0) {
-          if (response.data.user) {
-            Alert.alert('Sucesso', 'Cadastro feito com sucesso');
+          console.log(response);
+    
+          if (response.data.error === 0) {
+            if (response.data.user) {
+              Alert.alert('Sucesso', 'Cadastro feito com sucesso');
 
-            navigation.navigate('Home');
+              navigation.navigate('Home');
+            }
           }
-        }
 
-        if (response.data.error === 1) {
-          const msg = response.data.msg;
-  
-          Alert.alert('Falha no login', msg);
+          if (response.data.error === 1) {
+            const msg = response.data.msg;
+    
+            Alert.alert('Falha no login', msg);
+          }
         }
       }
     } catch (err) {

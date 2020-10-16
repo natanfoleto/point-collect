@@ -6,6 +6,10 @@ const Auth = createStackNavigator();
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import Maps from './pages/Maps';
+import Profile from './pages/Profile';
+import Company from './pages/Company';
+import ResetPassword from './pages/ResetPassword';
+import EditProfile from './pages/EditProfile';
 
 export default function AuthRoutes() {
   return (
@@ -15,6 +19,10 @@ export default function AuthRoutes() {
       <Auth.Screen name="Home" component={Home} />
       <Auth.Screen name="SignUp" component={SignUp} />
       <Auth.Screen name="Maps" component={Maps} />
+      <Auth.Screen name="Profile" component={Profile} />
+      <Auth.Screen name="Company" component={Company} />
+      <Auth.Screen name="ResetPassword" component={ResetPassword} />
+      <Auth.Screen name="EditProfile" component={EditProfile} />
     </Auth.Navigator>
   )
 }

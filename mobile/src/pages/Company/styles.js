@@ -4,7 +4,11 @@ import Button from '../../components/Button';
 
 export const Container = styled.View`
   flex:1;
-  align-items:center;
+  align-items: center;
+`;
+
+export const FlatContainer = styled.View`
+  align-items: center;
 `;
 
 export const TopBox = styled.View`
@@ -14,15 +18,9 @@ export const TopBox = styled.View`
   align-items: flex-end;
 `;
 
-export const PhotoContainer = styled.View`
+export const Photo = styled.Image`
   height: 180px;
   width: 100%;
-  background: #ddd;
-`;
-
-export const Photo = styled.Image`
-  width: auto;
-  height: auto;
   max-width: 100%;
   max-height: 100%;
 `;
@@ -39,34 +37,49 @@ export const DataCompany = styled.View`
 export const CompanyName = styled.Text`
   font-size: 28px;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 `;
 
-export const CompanyAddress = styled.Text`
+export const Title = styled.Text`
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 5px;
+  margin-top: 15px;
 `;
 
 export const Text = styled.Text`
   font-size: 16px;
   color: #666;
+  text-align: center;
 `;
 
-export const WrapperComposer = styled.View`
+export const ButtonRoute = styled.TouchableOpacity`
+  margin-top: 10px;
+  height: 50px;
+  width: 50px;
+  background: #0069FF;
+  align-items: center;
+  border-radius: 5px;
+`;
+
+export const PlotRoute = styled.View`
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+`;
+
+export const Contacts = styled.View`
   padding: 0 30px;
   flex-direction: row;
   align-self: stretch;
   justify-content: space-between;
-  margin-top: 60px;
+  margin-top: 15px;
+  margin-bottom: 20px;
 `;
 
-export const ButtonComposer = styled(Button)`
+export const ButtonContacts = styled(Button)`
   background: #47AF50;
   padding: 10px 10px;
-  width: 150px;
-
-
+  margin: 0 10px 0 10px;
+  width: 130px;
 `;
-
-

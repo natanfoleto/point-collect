@@ -1,69 +1,110 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as MailComposer from 'expo-mail-composer'
-import {Linking} from 'react-native';
+import { Linking } from 'react-native';
+
+import SyncStorage from 'sync-storage';
 
 import Header from '../../components/Header';
 
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import {
-  Container, TopBox, PhotoContainer, Photo, DataCompany,
-  CompanyName, CompanyAddress, Text, WrapperComposer, ButtonComposer
+  Container, TopBox, Photo, DataCompany, CompanyName, FlatContainer,
+  Title, Text, Contacts, ButtonContacts, PlotRoute, ButtonRoute
 } from './styles';
+import { FlatList } from 'react-native-gesture-handler';
 
-export default function Profile({ navigation }) {
+export default function Profile({ navigation, route }) {
+  const [point, setPoint] = useState([]);
 
-  const message = 'Olá empresa de reciclagem, queria mais informações.'
+  useEffect(() => {
+    setPoint(route.params);
+  }, []);
 
-  function sendMail(){
+  function sendWhatsapp(){
+    Linking.openURL(`whatsapp://send?phone=55${point.whatsapp}&text=${''}`);
+  }
+
+  function sendMail() {
     MailComposer.composeAsync({
       subject: 'Compania',
-      recipients: ['vinicius.faleiros@hotmail.com'],
-      body: message,
+      recipients: [`${point.email}`],
+      body: '',
     })
   }
 
-  function sendWhatsapp(){
-    Linking.openURL(`whatsapp://send?phone=5516992904006&text=${message}`);
+  function plotRoute() {
+    const location = SyncStorage.get('location_currentRegion');
+
+    Linking.openURL(
+      `https://www.google.com/maps/dir/?api=1&origin=${location.latitude},${location.longitude}&destination=${point.latitude},${point.longitude}`
+    );
   }
+
   return (
     <>
       <Container>
         <Header handleNavigation={navigation.goBack} cor={'#47AF50'} />
 
-        <TopBox >
-          <PhotoContainer >
-            <Photo source={{ uri: 'https://i.ytimg.com/vi/Iyi4boL5Ta8/hqdefault.jpg' }} />
-          </PhotoContainer>
-        </TopBox>
+        <FlatList
+          data={[1]}
+          keyExtractor={company => String(company)}
+          showsVerticalScrollIndicator={false}
+          renderItem={() => (
+            <>
+              <FlatContainer>
+                <TopBox >
+                  {point.avatar && <Photo source={{ uri: point.avatar.url }} />}
+                </TopBox>
 
-        <DataCompany>
-          <CompanyName>
-            Nome Empresa
-          </CompanyName>
+                <DataCompany>
+                  <CompanyName>
+                    {point.name}
+                  </CompanyName>
 
-          <CompanyAddress>
-            Endereço
-          </CompanyAddress>
+                  <Title>
+                    Endereço
+                  </Title>
 
-          <Text> Morro Agudo, São Paulo </Text>
-          <Text> Rua Antonio Belem, Jardim Carlifornia </Text>
-          <Text> Nº 177 </Text>
+                  <Text> Morro Agudo, São Paulo </Text>
+                  <Text> Rua Antonio Belem, Jardim Carlifornia </Text>
+                  <Text> Nº 177 </Text>
 
-        </DataCompany>
+                  <Text> {point.materials}</Text>
 
-        <WrapperComposer>
-          <ButtonComposer onPress={sendWhatsapp}>
-            WhatsApp
-          </ButtonComposer>
+                  <PlotRoute>
+                    <Text> Rotas disponíveis até o local</Text>
 
-          <ButtonComposer onPress={sendMail}>
-            Email
-          </ButtonComposer>
+                    <ButtonRoute onPress={plotRoute}>
+                      <Icon 
+                        name="subdirectory-arrow-right"
+                        size={36}
+                        color='#fff'
+                        style={{ marginTop: 10 }}
+                      />
+                    </ButtonRoute>
+                    
+                  </PlotRoute>
+                </DataCompany>
 
-        </WrapperComposer>
+                <Title>
+                  Contatos
+                </Title>
 
+                <Contacts>
+                  <ButtonContacts onPress={sendWhatsapp}>
+                    WhatsApp
+                  </ButtonContacts>
 
+                  <ButtonContacts onPress={sendMail}>
+                    Email
+                  </ButtonContacts>
+                </Contacts>
+              </FlatContainer>
+            </>
+          )}
+        />          
       </Container>
-
     </>
   )
 }

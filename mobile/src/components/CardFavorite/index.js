@@ -6,7 +6,7 @@ import ButtonBar from '../../components/ButtonBar'
 
 import { ContainerCard, BoxButton, CompanyName, CompanyImage, Info, InfoText } from './styles';
 
-import Imagee from '../../assets/logoEco.png'
+import Image from '../../assets/logoEco.png';
 
 export default function CardFavorite(...rest) {
 
@@ -19,7 +19,7 @@ export default function CardFavorite(...rest) {
           <ButtonBar icon="delete" cor="#4F4F4F" tamanho={20}/>
         </BoxButton>
 
-        <CompanyImage source={Imagee} />
+        <CompanyImage source={Image} />
 
         <CompanyName>
           ECONEW
@@ -31,7 +31,6 @@ export default function CardFavorite(...rest) {
           </InfoText>
           <ButtonBar icon="arrow-forward" cor="#1f6325" />
         </Info>
-
      </ContainerCard>
 
     </>

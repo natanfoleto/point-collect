@@ -1,26 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MapView, { Marker, Callout } from 'react-native-maps';
+import { Alert } from 'react-native';
+
+import SyncStorage from 'sync-storage';
+
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 
 import ButtonBar from '../../components/ButtonBar'
 
 import api from '../../services/api';
 
-import logoCompany from '../../assets/logo.png'
-
 import {
   BoxBottons, PointLocation, CalloutContainer, TextNameBold,
-  TextAddress, SearchInput
+  Subtitle, TextInfo, TextMore, SearchInput
 } from './styles'
 
-import './styles';
-
-export default function Maps({ navigation }) {
+export default function Maps({ navigation: { navigate } }) {
   const [points, setPoints] = useState([]);
   const [currentRegion, setCurrentRegion] = useState(null);
-  const [userCoords, setUserCoords] = useState([]);
+
+  const mapRef = useRef(null);
 
   useEffect(() => {
+    Alert.alert('Aviso', 'Aguarde enquanto sua posição é encontrada no maps');
+
     async function loadInitialPosition() {
       const { granted } = await requestPermissionsAsync();
 
@@ -44,19 +47,12 @@ export default function Maps({ navigation }) {
     loadPoints();
   }, []);
 
+  useEffect(() => {
+    SyncStorage.set('location_currentRegion', currentRegion);
+  }, [currentRegion]);
+
   async function initialPosition() {
-    const { granted } = await requestPermissionsAsync();
-
-    if (granted) {
-      const { coords } = await getCurrentPositionAsync({
-        enableHighAccuracy: true,
-      });
-
-      setUserCoords({
-        lat: coords.latitude,
-        long: coords.longitude
-      })
-    }
+    
   }
 
   async function loadPoints() {
@@ -65,36 +61,61 @@ export default function Maps({ navigation }) {
     setPoints(response.data);
   }
 
-
   return (
     <>
+      <MapView 
+        initialRegion={currentRegion} style={{ flex: 1 }} 
+        ref={mapRef}
+      >
+        <Marker
+          coordinate={currentRegion} >
+            
+          <Callout onPress={() => navigate('Profile')}>
+            <CalloutContainer >
+              <TextNameBold> Você </TextNameBold>
 
-
-      <MapView initialRegion={currentRegion} style={{ flex: 1 }} >
+              <TextInfo>
+                Toque para ver seu perfil
+              </TextInfo>
+            </CalloutContainer>
+          </Callout>
+        </Marker>
 
         {points.map(point => (
           <Marker
             key={point.id}
             coordinate={{ latitude: point.latitude, longitude: point.longitude }} >
 
-            <PointLocation source={{uri: point.avatar.url}} />
+            {point.avatar && <PointLocation source={{uri: point.avatar.url}} />}
 
-            <Callout onPress={() => { navigation.navigate('Company') }}>
+            <Callout onPress={() => navigate('Company', point)}>
               <CalloutContainer >
-                <TextNameBold> cu </TextNameBold>
-                <TextAddress>
-                  Morro Agudo, São Paulo
-                  Rua Antonio Belem, Jardim California
-                  n° 177
-              </TextAddress>
+                <TextNameBold> {point.name} </TextNameBold>
 
+                <TextInfo>
+                  <Subtitle>Entidade:</Subtitle> {point.entity}
+                </TextInfo>
+
+                <TextInfo>
+                  <Subtitle>Telefone:</Subtitle> {point.telephone}
+                </TextInfo>
+
+                <TextInfo>
+                  <Subtitle>E-mail:</Subtitle> {point.email}
+                </TextInfo>
+
+                <TextInfo>
+                  <Subtitle>Materiais:</Subtitle> {point.materials}
+                </TextInfo>
+
+                <TextMore>
+                  Ver mais
+                </TextMore>
 
               </CalloutContainer>
             </Callout>
           </Marker>
         ))}
-
-
       </MapView>
 
       <BoxBottons>
@@ -102,7 +123,7 @@ export default function Maps({ navigation }) {
           Pesquisar
         </ButtonBar>
 
-        <ButtonBar icon="place" cor="#fff" tamanho={30}>
+        <ButtonBar icon="place" cor="#fff" tamanho={30} onPress={initialPosition}>
           Localização
         </ButtonBar>
 
@@ -110,14 +131,11 @@ export default function Maps({ navigation }) {
           icon="person"
           cor="#fff"
           tamanho={30}
-          onPress={() => { navigation.navigate('Profile') }}
+          onPress={() => navigate('Profile')}
         >
           Perfil
         </ButtonBar>
       </BoxBottons>
-
     </>
-
-
   )
 }
