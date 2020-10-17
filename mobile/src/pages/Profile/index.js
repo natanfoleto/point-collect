@@ -36,7 +36,7 @@ export default function Profile({ navigation }) {
   return (
     <>
       <Container>
-        <HeaderProfile handleNavigation={navigation.goBack} />
+        <HeaderProfile handleNavigation={() => { navigation.navigate('Maps') }} />
 
         <TopBox >
           <BoxData>

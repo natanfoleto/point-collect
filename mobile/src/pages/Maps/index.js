@@ -22,29 +22,36 @@ export default function Maps({ navigation: { navigate } }) {
   const mapRef = useRef(null);
 
   useEffect(() => {
-    Alert.alert('Aviso', 'Aguarde enquanto sua posição é encontrada no maps');
+    const myLocation = SyncStorage.get('location_currentRegion');
 
-    async function loadInitialPosition() {
-      const { granted } = await requestPermissionsAsync();
+    if(!myLocation) {
+      Alert.alert('Aviso', 'Aguarde enquanto sua posição é encontrada no maps');
 
-      if (granted) {
-        const { coords } = await getCurrentPositionAsync({
-          enableHighAccuracy: true,
-        });
-
-        const { latitude, longitude } = coords;
-
-        setCurrentRegion({
-          latitude,
-          longitude,
-          latitudeDelta: 0.03,
-          longitudeDelta: 0.03,
-        })
+      async function loadInitialPosition() {
+        const { granted } = await requestPermissionsAsync();
+  
+        if (granted) {
+          const { coords } = await getCurrentPositionAsync({
+            enableHighAccuracy: true,
+          });
+  
+          const { latitude, longitude } = coords;
+  
+          setCurrentRegion({
+            latitude,
+            longitude,
+            latitudeDelta: 0.03,
+            longitudeDelta: 0.03,
+          })
+        }
       }
-    }
 
-    loadInitialPosition();
-    loadPoints();
+      loadInitialPosition();
+      loadPoints();
+    } else {
+      setCurrentRegion(myLocation);
+      loadPoints();
+    }
   }, []);
 
   useEffect(() => {
