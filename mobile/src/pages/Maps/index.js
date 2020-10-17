@@ -6,7 +6,7 @@ import SyncStorage from 'sync-storage';
 
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 
-import ButtonBar from '../../components/ButtonBar'
+import Button from '../../components/Button'
 
 import api from '../../services/api';
 
@@ -126,22 +126,22 @@ export default function Maps({ navigation: { navigate } }) {
       </MapView>
 
       <BoxBottons>
-        <ButtonBar icon="search" cor="#fff" tamanho={30}>
+        <Button icon="search" cor="#fff" tamanho={30}>
           Pesquisar
-        </ButtonBar>
+        </Button>
 
-        <ButtonBar icon="place" cor="#fff" tamanho={30} onPress={initialPosition}>
+        <Button icon="place" cor="#fff" tamanho={30} onPress={initialPosition}>
           Localização
-        </ButtonBar>
+        </Button>
 
-        <ButtonBar
+        <Button
           icon="person"
           cor="#fff"
           tamanho={30}
           onPress={() => navigate('Profile')}
         >
           Perfil
-        </ButtonBar>
+        </Button>
       </BoxBottons>
     </>
   )

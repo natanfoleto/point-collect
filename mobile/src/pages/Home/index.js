@@ -22,7 +22,11 @@ export default function Home({ navigation }) {
   const passwordRef = useRef(null);
 
   async function handleSubmit() {
-    try {
+    const internet = SyncStorage.get('internet_connection');
+
+    if (internet) {
+      Alert.alert('Você está desconectado', 'Tente novamente mais tarde!');
+    } else {
       if (email === '' || password === '') {
         Alert.alert('Falha na validação', 'Preencha todos os campos');
       } else {
@@ -37,7 +41,7 @@ export default function Home({ navigation }) {
             if (response.data.error === 0) {
               await SyncStorage.set('auth_user', response.data.user);
               await SyncStorage.set('auth_token', response.data.token);
-               
+                
               navigation.reset({
                 routes: [{ name: 'Maps' }],
               });
@@ -51,9 +55,6 @@ export default function Home({ navigation }) {
           }
         }
       }
-    } catch (err) {
-      Alert.alert('Falha no login', err);
-      console.log(err);
     }
   }
 
@@ -89,9 +90,11 @@ export default function Home({ navigation }) {
             value={password}
             onChangeText={setPassword}
           >
-
-            <ButtonBar icon="remove-red-eye" cor="#4BCB56" tamanho={22} />
-
+            {/* <ButtonBar 
+              icon="remove-red-eye" 
+              cor="#4BCB56" 
+              tamanho={22} 
+            /> */}
           </FormInput>
 
 

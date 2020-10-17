@@ -1,13 +1,15 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { Container, Text } from './styles';
 
-export default function Button({ children, loading, ...rest }) {
+export default function Button({ icon, tamanho, cor, children, loading, ...rest }) {
   return (
 
     <Container {...rest}>
+      {icon && <Icon name={icon} size={tamanho} color={cor} />}
       {loading ? (
         <ActivityIndicator size="small" color="#fff" />
       ) : (
@@ -24,6 +26,8 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+  icon: null,
   loading: false,
-  color: '#fff',
+  tamanho: 16,
+  cor: "#fff",
 }

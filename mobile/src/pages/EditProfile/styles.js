@@ -10,11 +10,12 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   flex: 1;
   align-items: center;
   padding: 0 20px;
-  background: #47AF50;
+  background: #fff;
 `;
 
 export const HeaderEditProfile = styled(Header)`
   background: #47AF50;
+  padding: 10px 5px;
 `;
 
 export const Form = styled.View`
@@ -24,6 +25,7 @@ export const Form = styled.View`
 
 export const Title = styled.Text`
   color: rgba(255, 255, 255, 0.9);
+  color: #47AF50;
   font-weight: bold;
   font-size: 28px;
   margin-bottom: 25px;
@@ -32,11 +34,11 @@ export const Title = styled.Text`
 export const FormInput = styled(Input)`
   margin-bottom: 10px;
   background: rgba(255, 255, 255, 0.9);
-  border: 0.2px solid #000;
+  border: 0.7px solid #47AF50;
 `;
 
 export const SubmitButton = styled.TouchableOpacity`
-  background: rgba(255, 255, 255, 0.9);
+  background: #47AF50;
   height: 46px;
   border-radius: 4px;
   align-items: center;
@@ -45,7 +47,7 @@ export const SubmitButton = styled.TouchableOpacity`
 `;
 
 export const ButtonText = styled.Text`
-  color: #47AF50;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: bold;
   font-size: 16px;
 `;

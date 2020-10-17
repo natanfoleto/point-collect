@@ -26,7 +26,9 @@ export default function Profile({ navigation }) {
   function handleLogout() {
     SyncStorage.remove('auth_user');
 
-    navigation.navigate('Home');
+    navigation.reset({
+      routes: [{ name: 'Home' }],
+    });
   }
 
   function handleEdit() {

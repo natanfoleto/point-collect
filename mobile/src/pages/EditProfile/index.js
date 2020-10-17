@@ -1,5 +1,4 @@
 import React ,{ useState, useEffect, useRef} from 'react';
-import { unmountComponentAtNode } from 'react-dom';
 import { Alert } from 'react-native';
 
 import SyncStorage from 'sync-storage';
@@ -100,7 +99,9 @@ export default function EditProfile({ navigation }) {
 
   return (
     <>
-      <HeaderEditProfile handleNavigation={navigation.goBack} />
+      <HeaderEditProfile 
+        handleNavigation={navigation.goBack} 
+      />
       
       <Container>
         <Form>
