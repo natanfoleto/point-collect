@@ -27,7 +27,6 @@ export const FormInput = styled(Input)`
 export const SubmitButton = styled(Button)`
   margin-top: 20px;
   background: #4BCB56;
-
 `;
 
 export const SignLink = styled.TouchableOpacity`

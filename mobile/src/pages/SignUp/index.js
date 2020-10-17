@@ -28,8 +28,6 @@ export default function SignUp({ navigation }) {
           Alert.alert('Falha no cadastro', 'As senhas não conferem');
         } else {
           const response = await api.post('/users', { name, email, password });
-
-          console.log(response);
     
           if (response.data.error === 0) {
             if (response.data.user) {
@@ -54,13 +52,10 @@ export default function SignUp({ navigation }) {
 
   return (
     <>
-
       <Header handleNavigation={navigation.goBack} cor="#47AF50"/>
 
       <Container>
-
         <Image source={logo} />
-
 
         <Form>
           <FormInput

@@ -1,7 +1,5 @@
 import React from 'react';
-import {createStackNavigator } from '@react-navigation/stack';
-
-const Auth = createStackNavigator();
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
@@ -10,6 +8,8 @@ import Profile from './pages/Profile';
 import Company from './pages/Company';
 import ResetPassword from './pages/ResetPassword';
 import EditProfile from './pages/EditProfile';
+
+const Auth = createStackNavigator();
 
 export default function AuthRoutes() {
   return (

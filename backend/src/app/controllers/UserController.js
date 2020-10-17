@@ -69,12 +69,12 @@ class UserController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Falha na validação' });
+      return res.json({ error: 'Falha na validação' });
     }
 
-    const { email, oldPassword } = req.body;
+    const { id, email, oldPassword } = req.body;
 
-    const user = await User.findByPk(req.id);
+    const user = await User.findByPk(id);
 
     if (email !== user.email) {
       const userExists = await User.findOne({ 
@@ -86,20 +86,25 @@ class UserController {
       });
 
       if (userExists || collectorExists) {
-        return res.status(400).json({ error: 'Um usuário com este e-mail já existe.' });
+        return res.json({ error: 'Um usuário com este e-mail já existe.' });
       }
     }
 
     if (oldPassword && !(await user.checkPassword(oldPassword))) {
-      return res.status(401).json({ error: 'A senha está incorreta.' });
+      return res.json({ error: 'A senha está incorreta.' });
     }
 
-    const { id, name } = await user.update(req.body);
+    const { name } = await user.update(req.body);
 
-    return res.json({
+    const data = {
       id,
       name,
       email
+    };
+
+    return res.json({
+      error: 0,
+      user: data
     });
   }
 }

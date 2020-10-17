@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 
-import ButtonBar from '../../components/ButtonBar';
 import CardFavorite from '../../components/CardFavorite';
 
 import SyncStorage from 'sync-storage';
@@ -9,20 +8,30 @@ import SyncStorage from 'sync-storage';
 import Image from '../../assets/avatar.png';
 
 import {
-  Container, TopBox, PhotoContainer, NameContainer, TextName,
-  Photo, BoxData, TitleFavorite, HeaderProfile,
-  ButtonEdit, ButtonLogout, ButtonEditText, ButtonLogoutText, 
+  Container, TopBox, NameContainer, TextName, Photo, 
+  BoxData, TitleFavorite, HeaderProfile, ButtonEdit, 
+  ButtonLogout, ButtonEditText, ButtonLogoutText, 
   Info, Buttons, Favorite, Subtitle
 } from './styles';
 
 export default function Profile({ navigation }) {
   const [profile, setProfile] = useState({});
 
-  useState(async () => {
-    const profile = await SyncStorage.get('auth_user');
+  useEffect(() => {
+    const profile = SyncStorage.get('auth_user');
 
     setProfile(profile);
   }, []);
+
+  function handleLogout() {
+    SyncStorage.remove('auth_user');
+
+    navigation.navigate('Home');
+  }
+
+  function handleEdit() {
+    navigation.navigate('EditProfile');
+  }
 
   return (
     <>
@@ -37,17 +46,17 @@ export default function Profile({ navigation }) {
 
               <NameContainer>
                 <TextName>
-                  Natan Foleto
+                  {profile && profile.name}
                 </TextName>
               </NameContainer>
             </Info>
 
             <Buttons>
-              <ButtonEdit onPress={() => { navigation.navigate('EditProfile') }} >
+              <ButtonEdit onPress={handleEdit} >
                 <ButtonEditText> Editar </ButtonEditText>
               </ButtonEdit>
 
-              <ButtonLogout onPress={() => { navigation.navigate('Home') }} >
+              <ButtonLogout onPress={handleLogout} >
                 <ButtonLogoutText> Logout </ButtonLogoutText>
               </ButtonLogout>
             </Buttons>

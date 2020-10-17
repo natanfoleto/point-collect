@@ -46,6 +46,7 @@ export const Photo = styled.Image`
 
 export const NameContainer = styled.View`
   height: auto;
+  width: 60%;
   padding: 0 10px;
   border-radius: 10px;
 `;
