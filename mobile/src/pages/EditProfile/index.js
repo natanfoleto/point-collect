@@ -11,7 +11,6 @@ import {
 } from './styles';
 
 export default function EditProfile({ navigation }) {
-  const [token, setToken] = useState('');
   const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -26,9 +25,6 @@ export default function EditProfile({ navigation }) {
 
   useEffect(() => {
     const profile = SyncStorage.get('auth_user');
-    const token = SyncStorage.get('auth_token');
-
-    setToken(token);
 
     setId(profile.id);
     setName(profile.name);
@@ -56,10 +52,6 @@ export default function EditProfile({ navigation }) {
               oldPassword,
               password,
               confirmPassword  
-            }, { 
-              headers: {
-                authorization: 'Bearer ' + token
-              }
             });
           }
         }

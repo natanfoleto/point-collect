@@ -5,6 +5,7 @@ import User from '../models/User';
 
 class CollectorControler {
   async index(req, res) {
+    console.log(1);
     const collectors = await Collector.findAll({
       include: [
         {

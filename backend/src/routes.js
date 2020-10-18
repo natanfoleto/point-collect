@@ -27,7 +27,7 @@ routes.get('/users', UserController.index);
 routes.put('/users', UserController.update);
 routes.get('/collectors', CollectorController.index);
 routes.put('/collectors', CollectorController.update);
-routes.get('/search', SearchController.index);
+routes.post('/search', SearchController.index);
 
 routes.post('/files', upload.single('file'), FileController.store);
 

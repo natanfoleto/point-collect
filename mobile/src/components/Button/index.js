@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 

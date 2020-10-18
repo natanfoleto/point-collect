@@ -19,8 +19,6 @@ export default function Maps({ navigation: { navigate } }) {
   const [points, setPoints] = useState([]);
   const [currentRegion, setCurrentRegion] = useState(null);
 
-  const mapRef = useRef(null);
-
   useEffect(() => {
     const myLocation = SyncStorage.get('location_currentRegion');
 
@@ -62,8 +60,32 @@ export default function Maps({ navigation: { navigate } }) {
     
   }
 
+  async function searchInput() {
+    Alert.prompt(
+      "Pesquisa por materiais",
+      "Informe quais materiais você tem",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel"
+        },
+        {
+          text: "Pesquisar",
+          onPress: materials => loadPointsByMaterials(materials)
+        }
+      ],
+      "plain-text"
+    );
+  }
+
   async function loadPoints() {
     const response = await api.get('/collectors');
+
+    setPoints(response.data);
+  }
+
+  async function loadPointsByMaterials(materials) {
+    const response = await api.post('/search', { materials });
 
     setPoints(response.data);
   }
@@ -72,7 +94,6 @@ export default function Maps({ navigation: { navigate } }) {
     <>
       <MapView 
         initialRegion={currentRegion} style={{ flex: 1 }} 
-        ref={mapRef}
       >
         <Marker
           coordinate={currentRegion} >
@@ -122,18 +143,32 @@ export default function Maps({ navigation: { navigate } }) {
       </MapView>
 
       <BoxBottons>
-        <Button icon="search" cor="#fff" tamanho={30}>
+        <Button 
+          icon="magnifier" 
+          cor="#fff" 
+          tamanho={24}
+          onPress={searchInput}
+        >
           Pesquisar
         </Button>
 
-        <Button icon="place" cor="#fff" tamanho={30} onPress={initialPosition}>
+        <Button 
+          icon="magnifier-remove" 
+          cor="#fff" 
+          tamanho={24}
+          onPress={loadPoints}
+        >
+          Limpar
+        </Button>
+
+        <Button icon="location-pin" cor="#fff" tamanho={24} onPress={initialPosition}>
           Localização
         </Button>
 
         <Button
-          icon="person"
+          icon="user"
           cor="#fff"
-          tamanho={30}
+          tamanho={24}
           onPress={() => navigate('Profile')}
         >
           Perfil

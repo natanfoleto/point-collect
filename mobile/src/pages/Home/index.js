@@ -40,7 +40,8 @@ export default function Home({ navigation }) {
           if (response.data.user) {
             if (response.data.error === 0) {
               await SyncStorage.set('auth_user', response.data.user);
-              await SyncStorage.set('auth_token', response.data.token);
+
+              api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
                 
               navigation.reset({
                 routes: [{ name: 'Maps' }],

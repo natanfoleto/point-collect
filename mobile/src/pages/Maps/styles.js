@@ -51,6 +51,7 @@ export const TextMore = styled.Text`
 export const BoxBottons = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding: 5px 15px;
   height: 60px;
   width: 100%;

@@ -1,13 +1,29 @@
 import Collector from '../models/Collector';
+import File from '../models/File';
+
 import parseStringAsArray from '../utils/parseStringAsArray';
 
 class SearchController {
   async index(req, res) {
-    const { materials } = req.query;
+    const { materials } = req.body;
+    
+    if (!materials) {
+      return res.json({
+        msg: "Nenhum material especificado"
+      });
+    } 
     
     const materialsArray = parseStringAsArray(materials);
 
-    const collectors = await Collector.findAll();
+    const collectors = await Collector.findAll({
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
 
     const indexes = [];
 
