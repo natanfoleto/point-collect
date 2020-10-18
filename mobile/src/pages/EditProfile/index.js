@@ -36,22 +36,41 @@ export default function EditProfile({ navigation }) {
   }, []);
 
   async function handleUpdate() {
+    const internet = SyncStorage.get('internet_connection');
     let response = null;
 
-    if (oldPassword !== '') {
-      if (password === '' || confirmPassword === '') {
-        Alert.alert('Falha na validação dos campos', 'Digite a nova senha e a confirmação da senha');
-      } else {
-        if (password !== confirmPassword) {
-          Alert.alert('Falha na validação dos campos', 'As senhas não conferem');
+    if (internet) {
+      Alert.alert('Você está desconectado', 'Tente novamente mais tarde!');
+    } else {
+      if (oldPassword !== '') {
+        if (password === '' || confirmPassword === '') {
+          Alert.alert('Falha na validação dos campos', 'Digite a nova senha e a confirmação da senha');
         } else {
-          response = await api.put('/users', { 
+          if (password !== confirmPassword) {
+            Alert.alert('Falha na validação dos campos', 'As senhas não conferem');
+          } else {
+            response = await api.put('/users', { 
+              id, 
+              name, 
+              email, 
+              oldPassword,
+              password,
+              confirmPassword  
+            }, { 
+              headers: {
+                authorization: 'Bearer ' + token
+              }
+            });
+          }
+        }
+      } else {
+        if (password !== '' && oldPassword === '') {
+          Alert.alert('Falha na validação dos campos', 'Digite sua senha atual');
+        } else {
+          response = await api.put('/users', {
             id, 
             name, 
-            email, 
-            oldPassword,
-            password,
-            confirmPassword  
+            email
           }, { 
             headers: {
               authorization: 'Bearer ' + token
@@ -59,40 +78,26 @@ export default function EditProfile({ navigation }) {
           });
         }
       }
-    } else {
-      if (password !== '' && oldPassword === '') {
-        Alert.alert('Falha na validação dos campos', 'Digite sua senha atual');
-      } else {
-        response = await api.put('/users', {
-          id, 
-          name, 
-          email
-        }, { 
-          headers: {
-            authorization: 'Bearer ' + token
+
+      if (response !== null) {
+        if (response.data.error === 0) {
+          if (response.data.user) {
+            Alert.alert('Sucesso', 'Dados alterados com sucesso');
+
+            SyncStorage.remove('auth_user');
+            SyncStorage.set('auth_user', response.data.user);
+    
+            navigation.reset({
+              routes: [{ name: 'Profile' }],
+            });
           }
-        });
-      }
-    }
-
-    if (response !== null) {
-      if (response.data.error === 0) {
-        if (response.data.user) {
-          Alert.alert('Sucesso', 'Dados alterados com sucesso');
-
-          SyncStorage.remove('auth_user');
-          SyncStorage.set('auth_user', response.data.user);
-  
-          navigation.reset({
-            routes: [{ name: 'Profile' }],
-          });
         }
-      }
-  
-      if (response.data.error === 1) {
-        const msg = response.data.msg;
-  
-        Alert.alert('Falha na alteração do perfil', msg);
+    
+        if (response.data.error === 1) {
+          const msg = response.data.msg;
+    
+          Alert.alert('Falha na alteração do perfil', msg);
+        }
       }
     }
   }

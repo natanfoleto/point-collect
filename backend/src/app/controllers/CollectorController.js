@@ -28,9 +28,19 @@ class CollectorControler {
       password: Yup.string()
         .required()
         .min(6),
-        latitude: Yup.number()
+      latitude: Yup.number()
         .required(),
       longitude: Yup.number()
+        .required(),
+      logradouro: Yup.string()
+        .required(),
+      numero: Yup.string()
+        .required(),
+      bairro: Yup.string()
+        .required(),
+      localidade: Yup.string()
+        .required(),
+      uf: Yup.string()
         .required(),
       entity: Yup.string()
         .required(),
@@ -64,6 +74,11 @@ class CollectorControler {
       email, 
       latitude, 
       longitude, 
+      logradouro,
+      numero,
+      bairro,
+      localidade,
+      uf,
       entity,
       telephone,
       whatsapp,
@@ -77,6 +92,11 @@ class CollectorControler {
       email, 
       latitude, 
       longitude,
+      logradouro,
+      numero,
+      bairro,
+      localidade,
+      uf,
       entity,
       telephone,
       whatsapp,

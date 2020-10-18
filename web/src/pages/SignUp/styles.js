@@ -17,7 +17,7 @@ export const SelectGroup = styled.div`
   }
 `;
 
-export const Select = styled.div`
+export const SelectEntity = styled.div`
   .select {
     background: ${props => (props.selected ? '#ff8' : '')};
     display: flex;
@@ -91,6 +91,19 @@ export const Back = styled.div`
   }
 `;
 
+export const Text = styled.div`  
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  padding: 5px; 
+  margin: 10px 0 15px 0;
+
+  p {
+    text-align: left;
+    color: #1E9E76;
+    font-size: 16px;
+  }
+`;
+
 export const InputGroup = styled.div`
   display: ${props => (props.visibleValue ? 'flex' : 'none')};
   flex-direction: column;
@@ -117,7 +130,7 @@ export const InputGroup = styled.div`
 
 export const MaterialList = styled.div`
   position: absolute;
-  top: calc(50% + 32px);
+  top: calc(15% + 35px);
   left: calc(50% + 185px);
   width: 250px;
   background: rgba(255, 255, 255, 0.8);
@@ -145,7 +158,7 @@ export const MaterialList = styled.div`
     }
   }
 
-  &::before {
+  /* &::before {
     content: '';
     position: absolute;
     top: calc(50% - 20px);
@@ -155,7 +168,7 @@ export const MaterialList = styled.div`
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
     border-right: 20px solid rgba(0, 0, 0, 1);
-  }
+  } */
 `;
 
 export const Scroll = styled(PerfectScrollbar)`

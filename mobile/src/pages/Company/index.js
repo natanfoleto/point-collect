@@ -63,17 +63,30 @@ export default function Profile({ navigation, route }) {
                   </CompanyName>
 
                   <Title>
+                    Dados
+                  </Title>
+
+                  <Text> E-mail - {point.email} </Text>
+                  <Text> Telefone - {point.telephone} </Text>
+
+                  <Title>
                     Endereço
                   </Title>
 
-                  <Text> Morro Agudo, São Paulo </Text>
-                  <Text> Rua Antonio Belem, Jardim Carlifornia </Text>
-                  <Text> Nº 177 </Text>
+                  <Text> {point.localidade}, {point.uf} </Text>
+                  <Text> {point.logradouro}, {point.bairro} </Text>
+                  <Text> Nº {point.numero} </Text>
 
+                  <Title>
+                    Materiais trabalhados
+                  </Title>
                   <Text> {point.materials}</Text>
 
                   <PlotRoute>
-                    <Text> Rotas disponíveis até o local</Text>
+                    <Title>
+                      Rotas
+                    </Title>
+                    <Text> Traçe uma rota até o local</Text>
 
                     <ButtonRoute onPress={plotRoute}>
                       <Icon 

@@ -103,12 +103,8 @@ export default function Maps({ navigation: { navigate } }) {
                   <Subtitle>Entidade:</Subtitle> {point.entity}
                 </TextInfo>
 
-                <TextInfo>
-                  <Subtitle>Telefone:</Subtitle> {point.telephone}
-                </TextInfo>
-
-                <TextInfo>
-                  <Subtitle>E-mail:</Subtitle> {point.email}
+                <TextInfo> 
+                  <Subtitle>Endereço:</Subtitle> {point.logradouro}, {point.bairro}, Nº {point.numero}, {point.localidade}, {point.uf} 
                 </TextInfo>
 
                 <TextInfo>

@@ -65,7 +65,7 @@ export const ButtonRoute = styled.TouchableOpacity`
 export const PlotRoute = styled.View`
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 20px;
 `;
 
 export const Contacts = styled.View`

@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('collectors', { 
+    return queryInterface.createTable('collectors', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -28,6 +28,26 @@ module.exports = {
       },
       longitude: {
         type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
+      logradouro: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      numero: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      bairro: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      localidade: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      uf: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       entity: {

@@ -2,20 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
-import { Image, SelectGroup, Select, Go, Back, InputGroup, MaterialList, Scroll, Material, Trash } from './styles';
 import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import { GrFormClose, GrFormTrash } from 'react-icons/gr';
 
 import { signUpRequest } from '~/store/modules/auth/actions';
+
+import axios from 'axios';
+
+import { 
+  Image, SelectGroup, SelectEntity, Go, Back, InputGroup, MaterialList, 
+  Scroll, Material, Trash, Text 
+} from './styles';
 
 import logoImg from '~/assets/logo.png';
 import cooperativeImg from '~/assets/cooperative.png';
 import tradeImg from '~/assets/trade.png';
 import volunterImg from '~/assets/volunter.png';
 
-let materialList = ['Plásticos', 'Garrafas', 'Tubos e canos', 'Brinquedos', 'Sacos', 'Isopor', 
-'Alumínio', 'Papel', 'Papelão', 'Embalagens longa-vida', 'Vidros', 'Cerâmicas', 'Acrílico', 
-'Lâmpadas', 'Pilhas', 'Movéis'];
+let materialList = [
+  'Plásticos', 'Garrafas', 'Potes', 'Tubos', 'Canos', 'Brinquedos','Sacos', 'Sacolas', 
+  'Isopor', 'Alumínio', 'Molas', 'Latas', 'Papéis', 'Vidro', 'Outros'
+];
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -35,6 +42,7 @@ export default function SignUp() {
 
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
+  const [cep, setCep] = useState({});
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -52,6 +60,13 @@ export default function SignUp() {
       }
     );
   }, []);
+
+  function handleCep(cep) {
+    axios.get(`http://viacep.com.br/ws/${cep}/json/`)
+    .then(function(response){
+      setCep(response.data);
+    });
+  }
 
   function handleSubmit(data) {
     dispatch(signUpRequest(data));
@@ -115,9 +130,10 @@ export default function SignUp() {
       materialList.pop();
     }
 
-    materialList = ['Plásticos', 'Garrafas', 'Tubos e canos', 'Brinquedos', 'Sacos', 'Isopor', 
-      'Alumínio', 'Papel', 'Papelão', 'Embalagens longa-vida', 'Vidros', 'Cerâmicas', 'Acrílico', 
-      'Lâmpadas', 'Pilhas', 'Movéis'];
+    materialList = [
+      'Plásticos', 'Garrafas', 'Potes', 'Tubos', 'Canos', 'Brinquedos','Sacos', 'Sacolas', 
+      'Isopor', 'Alumínio', 'Molas', 'Latas', 'Papéis', 'Vidro', 'Outros'
+    ];
 
     setMaterials('');
     setVisibleTrash(!visibleTrash);
@@ -134,7 +150,7 @@ export default function SignUp() {
         <SelectGroup visibleValue={visibleTrue}>
           <h1>Selecione uma entidade</h1>
 
-          <Select selected={cooperative}>
+          <SelectEntity selected={cooperative}>
             <button type="button" className="select" onClick={() => handleSelect(1, 'Cooperativa')}>
               <img src={cooperativeImg} alt="Cooperativa"/>
               <div className="entity">
@@ -142,9 +158,9 @@ export default function SignUp() {
                 <p>Iniciativas sociais que trabalham com a coleta e triagem de materiais recicláveis</p>
               </div>
             </button>
-          </Select>
+          </SelectEntity>
 
-          <Select selected={trade}>
+          <SelectEntity selected={trade}>
             <button type="button" className="select" onClick={() => handleSelect(2, 'Comércio')}>
               <img src={tradeImg} alt="Comércio"/>
               <div className="entity">
@@ -152,9 +168,9 @@ export default function SignUp() {
                 <p>Locais que compram embalagens longa vida (entre outros recicláveis) para envio à reciclagem</p>
               </div>
             </button>
-          </Select>
+          </SelectEntity>
 
-          <Select selected={pev}>
+          <SelectEntity selected={pev}>
             <button type="button" className="select" onClick={() => handleSelect(3, 'PEV')}>
               <img src={volunterImg} alt="Voluntário"/>
               <div className="entity">
@@ -162,7 +178,7 @@ export default function SignUp() {
                 <p>Locais que recebem embalagens longa vida (entre outros recicláveis) para envio à reciclagem</p>
               </div>
             </button>
-          </Select>
+          </SelectEntity>
         </SelectGroup>
 
         <Back visibleValue={visibleFalse}>
@@ -173,8 +189,23 @@ export default function SignUp() {
 
         <InputGroup visibleValue={visibleFalse}>
 
+          <Text>
+            <p>Dados empresariais</p>
+          </Text>
+
           <Input name="entity" value={entity} disabled="disabled" required />
           <Input name="name" placeholder="Nome da empresa" maxLength="50" required />
+
+          <Input 
+            name="materials" 
+            className="material" 
+            placeholder="Materiais reciclados na empresa" 
+            required
+            value={materials}  
+            onClick={handleMaterial}
+            readOnly={true}
+          />
+
           <Input 
             name="email" 
             type="email" 
@@ -190,6 +221,10 @@ export default function SignUp() {
             minLength="6"
             required 
           />
+
+          <Text>
+            <p>Dados geográficos</p>
+          </Text>
 
           <div className="input-group">
             <Input 
@@ -210,17 +245,63 @@ export default function SignUp() {
             />
           </div>
 
-          <Input name="site" placeholder="Rede social / Website" maxLength="32" />
           <Input 
-            name="materials" 
-            className="material" 
-            placeholder="Materiais reciclados na empresa" 
-            required
-            value={materials}  
-            onClick={handleMaterial}
-            readOnly={true}
+            name="cep" 
+            type="cep" 
+            placeholder="CEP" 
+            maxLength="9"
+            onBlur={e => handleCep(e.target.value)}
+            required 
           />
-          
+
+          <Input 
+            name="logradouro" 
+            type="logradouro" 
+            placeholder="Rua" 
+            maxLength="50"
+            required 
+          />
+
+          <Input 
+            name="numero" 
+            type="numero" 
+            placeholder="Número" 
+            maxLength="10"
+            required 
+          />
+
+          <Input 
+            name="bairro" 
+            type="bairro" 
+            placeholder="Bairro" 
+            maxLength="50"
+            required 
+          />
+
+          <Input 
+            name="localidade" 
+            type="localidade" 
+            placeholder="Cidade" 
+            maxLength="50"
+            value={cep.localidade}
+            required 
+          />
+
+          <Input 
+            name="uf" 
+            type="uf" 
+            placeholder="Estado" 
+            maxLength="50"
+            value={cep.uf}
+            required 
+          />
+
+          <Text>
+            <p>Dados de contato</p>
+          </Text>
+
+          <Input name="site" placeholder="Rede social / Website" maxLength="32" />
+
           <div className="input-group">
             <Input 
               name="whatsapp" 
@@ -282,7 +363,8 @@ export default function SignUp() {
           </button>
         </Go> 
 
-        <Link to="/">Já tenho login</Link>
+        <Link to="/" style={{ marginBottom: "30px" }}>Já tenho login</Link>
+
       </Form>   
     </>
   );

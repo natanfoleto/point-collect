@@ -39,6 +39,8 @@ export function* signIn({ payload }) {
 
     const { token, collector } = response.data;
 
+    console.log(collector);
+
     if (!collector) {
       displayToast('Usuário não é um ponto de coleta!'); 
       yield put(signFailure());
@@ -64,6 +66,11 @@ export function* signUp({ payload }) {
       password, 
       latitude, 
       longitude, 
+      logradouro,
+      numero,
+      bairro,
+      localidade,
+      uf,
       entity, 
       telephone, 
       whatsapp,
@@ -77,6 +84,11 @@ export function* signUp({ payload }) {
       password, 
       latitude, 
       longitude, 
+      logradouro,
+      numero,
+      bairro,
+      localidade,
+      uf,
       entity, 
       telephone, 
       whatsapp,

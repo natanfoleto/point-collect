@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Image, Alert } from 'react-native';
 
+import SyncStorage from 'sync-storage';
+
 import Header from '../../components/Header';
 
 import logo from '../../assets/logo.png';
@@ -20,7 +22,11 @@ export default function SignUp({ navigation }) {
   const confirmPasswordRef = useRef();
 
   async function handleRegister() {
-    try {
+    const internet = SyncStorage.get('internet_connection');
+
+    if (internet) {
+      Alert.alert('Você está desconectado', 'Tente novamente mais tarde!');
+    } else {
       if (name === '' || email === '' || password === '' || confirmPassword === '') {
         Alert.alert('Falha na validação', 'Preencha todos os campos');
       } else {
@@ -44,9 +50,6 @@ export default function SignUp({ navigation }) {
           }
         }
       }
-    } catch (err) {
-      Alert.alert('Falha no cadastro', err);
-      console.log(err);
     }
   }
 

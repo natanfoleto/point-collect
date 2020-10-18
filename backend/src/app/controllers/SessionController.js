@@ -77,13 +77,43 @@ class SessionController {
         });
       }
 
-      const { id, name, avatar } = collector;
+      const { 
+        id,
+        name,
+        email,
+        latitude, 
+        longitude, 
+        logradouro,
+        numero,
+        bairro,
+        localidade,
+        uf,
+        entity, 
+        telephone, 
+        whatsapp,
+        site,
+        materials,
+        avatar
+      } = collector;
 
       return res.json({
         collector: {
           id,
           name,
           email,
+          name, 
+          latitude, 
+          longitude, 
+          logradouro,
+          numero,
+          bairro,
+          localidade,
+          uf,
+          entity, 
+          telephone, 
+          whatsapp,
+          site,
+          materials,
           avatar,
         },
         token: jwt.sign({ id }, authConfig.secret, {
