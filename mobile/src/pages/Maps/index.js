@@ -70,6 +70,16 @@ export default function Maps({ navigation: { navigate } }) {
           style: "cancel"
         },
         {
+          text: "Ajuda",
+          onPress: () => Alert.alert(
+            'Ajuda de pesquisa', 
+            `Você pode pesquisar por:
+            \nPlásticos, Garrafas, Potes, Tubos, Canos, Brinquedos,Sacos, Sacolas, 
+            Isopor, Alumínio, Molas, Latas, Papéis, Vidro, Outros
+            \nLembre-se de escrever os materiais com as iniciais maiúsculas, como mostra o exemplo acima.`
+          )
+        },
+        {
           text: "Pesquisar",
           onPress: materials => loadPointsByMaterials(materials)
         }
@@ -85,9 +95,13 @@ export default function Maps({ navigation: { navigate } }) {
   }
 
   async function loadPointsByMaterials(materials) {
-    const response = await api.post('/search', { materials });
-
-    setPoints(response.data);
+    if (materials === "") {
+      Alert.alert('Erro na pesquisa', 'Você precisa informar pelo menos um tipo de material');
+    } else {
+      const response = await api.post('/search', { materials });
+  
+      setPoints(response.data);
+    }
   }
 
   return (
