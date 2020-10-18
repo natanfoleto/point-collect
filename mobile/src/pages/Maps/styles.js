@@ -1,15 +1,7 @@
 import styled from 'styled-components/native';
 
-import Input from '../../components/Input';
-
 export const Text = styled.Text`
   font-size: 14px;
-`;
-
-export const SearchInput = styled(Input)`
-  width: 80%;
-  margin-top: 100px;
-  border: 1px solid #000;
 `;
 
 export const PointLocation = styled.Image`

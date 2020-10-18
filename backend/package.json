@@ -8,7 +8,6 @@
     "dev:debug": "nodemon --inspect src/server.js"
   },
   "dependencies": {
-    "aws-sdk": "^2.772.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -17,6 +16,7 @@
     "pg": "^8.0.0",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.5",
+    "socket.io": "^2.3.0",
     "yup": "^0.28.3"
   },
   "devDependencies": {

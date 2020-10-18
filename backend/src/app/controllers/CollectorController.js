@@ -3,9 +3,10 @@ import File from '../models/File';
 import Collector from '../models/Collector';
 import User from '../models/User';
 
+import { findConnections, sendMessage } from '../services/socket';
+
 class CollectorControler {
   async index(req, res) {
-    console.log(1);
     const collectors = await Collector.findAll({
       include: [
         {
@@ -86,6 +87,29 @@ class CollectorControler {
       site,
       materials
     } = await Collector.create(req.body);
+
+    // Socket.io
+
+    const sendSocketMessageTo = findConnections();
+    sendMessage(sendSocketMessageTo, 'new-point', {
+      avatar: null,
+      avatar_id: null,
+      id, 
+      name, 
+      email, 
+      latitude, 
+      longitude, 
+      logradouro,
+      numero,
+      bairro,
+      localidade,
+      uf,
+      entity,
+      telephone,
+      whatsapp,
+      site,
+      materials
+    });
 
     return res.json({
       id, 

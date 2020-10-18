@@ -9,15 +9,18 @@ import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import Button from '../../components/Button'
 
 import api from '../../services/api';
+import { connect, disconnect, subscribeToNewPoint } from '../../services/socket';
 
 import {
   BoxBottons, PointLocation, CalloutContainer, TextNameBold,
-  Subtitle, TextInfo, TextMore, SearchInput
+  Subtitle, TextInfo, TextMore
 } from './styles'
 
 export default function Maps({ navigation: { navigate } }) {
   const [points, setPoints] = useState([]);
   const [currentRegion, setCurrentRegion] = useState(null);
+
+  const mapView = React.createRef();
 
   useEffect(() => {
     const myLocation = SyncStorage.get('location_currentRegion');
@@ -40,7 +43,7 @@ export default function Maps({ navigation: { navigate } }) {
             longitude,
             latitudeDelta: 0.03,
             longitudeDelta: 0.03,
-          })
+          });
         }
       }
 
@@ -56,14 +59,46 @@ export default function Maps({ navigation: { navigate } }) {
     SyncStorage.set('location_currentRegion', currentRegion);
   }, [currentRegion]);
 
+  useEffect(() => {
+    subscribeToNewPoint(point => setPoints([...points, point]));
+  }, [points]);
+
   async function initialPosition() {
-    
+    mapView.current.animateToRegion({
+      latitude: currentRegion.latitude,
+      longitude: currentRegion.longitude,
+      latitudeDelta: 0.03,
+      longitudeDelta: 0.03,
+    }, 1000);
+  }
+
+  async function setupWebSocket() {
+    disconnect();
+    connect();
+  }
+
+  async function loadPoints() {
+    const response = await api.get('/collectors');
+    console.log(response.data);
+
+    setPoints(response.data);
+    setupWebSocket();
+  }
+
+  async function loadPointsByMaterials(materials) {
+    if (materials === "") {
+      Alert.alert('Erro na pesquisa', 'Você precisa informar pelo menos um tipo de material');
+    } else {
+      const response = await api.post('/search', { materials });
+  
+      setPoints(response.data);
+    }
   }
 
   async function searchInput() {
     Alert.prompt(
-      "Pesquisa por materiais",
-      "Informe quais materiais você tem",
+      'Pesquisa por materiais',
+      `Clique em "Ajuda" caso esteja tendo problemas com a pesquisa`,
       [
         {
           text: "Cancelar",
@@ -88,26 +123,12 @@ export default function Maps({ navigation: { navigate } }) {
     );
   }
 
-  async function loadPoints() {
-    const response = await api.get('/collectors');
-
-    setPoints(response.data);
-  }
-
-  async function loadPointsByMaterials(materials) {
-    if (materials === "") {
-      Alert.alert('Erro na pesquisa', 'Você precisa informar pelo menos um tipo de material');
-    } else {
-      const response = await api.post('/search', { materials });
-  
-      setPoints(response.data);
-    }
-  }
-
   return (
     <>
       <MapView 
-        initialRegion={currentRegion} style={{ flex: 1 }} 
+        initialRegion={currentRegion}
+        ref={mapView}
+        style={{ flex: 1 }} 
       >
         <Marker
           coordinate={currentRegion} >
@@ -175,7 +196,12 @@ export default function Maps({ navigation: { navigate } }) {
           Limpar
         </Button>
 
-        <Button icon="location-pin" cor="#fff" tamanho={24} onPress={initialPosition}>
+        <Button 
+          icon="location-pin" 
+          cor="#fff" 
+          tamanho={24} 
+          onPress={initialPosition}
+        >
           Localização
         </Button>
 
