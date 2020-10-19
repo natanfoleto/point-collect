@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { Alert } from 'react-native';
+import DialogInput from "react-native-dialog-input";
 
 import SyncStorage from 'sync-storage';
 
@@ -17,6 +18,8 @@ import {
 } from './styles'
 
 export default function Maps({ navigation: { navigate } }) {
+  const [inputVisible, setInputVisible] = useState(false);
+
   const [points, setPoints] = useState([]);
   const [currentRegion, setCurrentRegion] = useState(null);
 
@@ -56,7 +59,9 @@ export default function Maps({ navigation: { navigate } }) {
   }, []);
 
   useEffect(() => {
-    SyncStorage.set('location_currentRegion', currentRegion);
+    if (currentRegion) {
+      SyncStorage.set('location_currentRegion', currentRegion);
+    }
   }, [currentRegion]);
 
   useEffect(() => {
@@ -79,8 +84,7 @@ export default function Maps({ navigation: { navigate } }) {
 
   async function loadPoints() {
     const response = await api.get('/collectors');
-    console.log(response.data);
-
+    
     setPoints(response.data);
     setupWebSocket();
   }
@@ -95,42 +99,28 @@ export default function Maps({ navigation: { navigate } }) {
     }
   }
 
-  async function searchInput() {
-    Alert.prompt(
-      'Pesquisa por materiais',
-      `Clique em "Ajuda" caso esteja tendo problemas com a pesquisa`,
-      [
-        {
-          text: "Cancelar",
-          style: "cancel"
-        },
-        {
-          text: "Ajuda",
-          onPress: () => Alert.alert(
-            'Ajuda de pesquisa', 
-            `Você pode pesquisar por:
-            \nPlásticos, Garrafas, Potes, Tubos, Canos, Brinquedos,Sacos, Sacolas, 
-            Isopor, Alumínio, Molas, Latas, Papéis, Vidro, Outros
-            \nLembre-se de escrever os materiais com as iniciais maiúsculas, como mostra o exemplo acima.`
-          )
-        },
-        {
-          text: "Pesquisar",
-          onPress: materials => loadPointsByMaterials(materials)
-        }
-      ],
-      "plain-text"
-    );
+  async function searchInput(text) {
+    if (inputVisible) {
+      setInputVisible(false);
+
+      if (text) {
+        Alert.alert(text);
+  
+        loadPointsByMaterials(text);
+      }
+    } else {
+      setInputVisible(true);
+    } 
   }
 
   return (
     <>
-      <MapView 
+      {currentRegion && <MapView 
         initialRegion={currentRegion}
         ref={mapView}
         style={{ flex: 1 }} 
       >
-        <Marker
+        {currentRegion && <Marker
           coordinate={currentRegion} >
             
           <Callout onPress={() => navigate('Profile')}>
@@ -142,12 +132,12 @@ export default function Maps({ navigation: { navigate } }) {
               </TextInfo>
             </CalloutContainer>
           </Callout>
-        </Marker>
+        </Marker>}
 
         {points.map(point => (
           <Marker
             key={point.id}
-            coordinate={{ latitude: point.latitude, longitude: point.longitude }} >
+            coordinate={{ latitude: Number(point.latitude), longitude: Number(point.longitude) }} >
 
             {point.avatar && <PointLocation source={{uri: point.avatar.url}} />}
 
@@ -175,7 +165,19 @@ export default function Maps({ navigation: { navigate } }) {
             </Callout>
           </Marker>
         ))}
-      </MapView>
+      </MapView>}
+
+      <DialogInput isDialogVisible={inputVisible}
+        title="Pesquisa por materiais"
+        message={ 
+          `Você pode pesquisar por:
+          \nPlásticos, Garrafas, Potes, Tubos, Canos, Brinquedos,Sacos, Sacolas, 
+          Isopor, Alumínio, Molas, Latas, Papéis, Vidro, Outros
+          \nLembre-se de escrever os materiais com as iniciais maiúsculas, como mostra o exemplo acima.`
+        }
+        submitInput={(text) => { searchInput(text) }}
+        closeDialog={() => { searchInput() }}>
+      </DialogInput>
 
       <BoxBottons>
         <Button 
@@ -184,9 +186,9 @@ export default function Maps({ navigation: { navigate } }) {
           tamanho={24}
           onPress={searchInput}
         >
-          Pesquisar
+          Pesquis
         </Button>
-
+ 
         <Button 
           icon="magnifier-remove" 
           cor="#fff" 
@@ -202,7 +204,7 @@ export default function Maps({ navigation: { navigate } }) {
           tamanho={24} 
           onPress={initialPosition}
         >
-          Localização
+          Localizar
         </Button>
 
         <Button
