@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
 
-import CardFavorite from '../../components/CardFavorite';
+import { Alert, ScrollView } from 'react-native';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import SyncStorage from 'sync-storage';
 
@@ -9,18 +10,22 @@ import Image from '../../assets/avatar.png';
 
 import {
   Container, TopBox, NameContainer, TextName, Photo, 
-  BoxData, TitleFavorite, HeaderProfile, ButtonEdit, 
-  ButtonLogout, ButtonEditText, ButtonLogoutText, 
-  Info, Buttons, Favorite, Subtitle
+  BoxData, HeaderProfile, ButtonEdit, ButtonLogout, 
+  ButtonEditText, ButtonLogoutText, Info, Buttons, 
+  Activies, Activie, Subtitle, SubtitleActivies, TitleActivies, 
+  TitleActivie, PhotoActivie, ActivieData
 } from './styles';
 
 export default function Profile({ navigation }) {
   const [profile, setProfile] = useState({});
+  const [activies, setActivies] = useState([]);
 
   useEffect(() => {
     const profile = SyncStorage.get('auth_user');
+    const activies = SyncStorage.get('activies');
 
     setProfile(profile);
+    setActivies(activies);
   }, []);
 
   function handleLogout() {
@@ -66,23 +71,46 @@ export default function Profile({ navigation }) {
           </BoxData>   
         </TopBox>
 
-        <Favorite>
-          <TitleFavorite>
-            Locais Favoritos
-          </TitleFavorite>
+        <Activies>
+          <TitleActivies>
+            Atividades recentes
+          </TitleActivies>
 
-          <Subtitle>
-            Deslize para direita e veja seus favoritos
-          </Subtitle>
+          <SubtitleActivies>
+            Atividades realizadas durante este acesso
+          </SubtitleActivies>
 
-          <FlatList
-            horizontal
-            data={[1,2,3,4]}
-            keyExtractor={company => String(company)}
+          <ScrollView
             showsVerticalScrollIndicator={false}
-            renderItem={() => <CardFavorite /> }
-          />
-        </Favorite>
+          >
+            {activies && activies.map(activie => (
+              <Activie
+                key={activie.date}
+                onPress={() => navigation.navigate('Activie', activie)}
+              >
+                <PhotoActivie></PhotoActivie>
+
+                <ActivieData>
+                  <TitleActivie>
+                    {activie.title}
+                  </TitleActivie>
+
+                  <Subtitle>
+                    Local: {activie.data.name}
+                  </Subtitle>
+                </ActivieData>
+
+                <Icon 
+                  style={{ position: "absolute", right: 5 }}
+                  name="chevron-right"
+                  size={28}
+                />
+
+                </Activie>
+            ))}
+          </ScrollView>
+          
+        </Activies>
       </Container>
     </>
   )

@@ -63,10 +63,6 @@ export default function EditProfile({ navigation }) {
             id, 
             name, 
             email
-          }, { 
-            headers: {
-              authorization: 'Bearer ' + token
-            }
           });
         }
       }

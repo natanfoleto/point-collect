@@ -99,19 +99,55 @@ export const ButtonLogoutText = styled.Text`
   font-size: 16px;
 `;
 
-export const Subtitle = styled.Text`
-  color:#555;
-  font-size: 14px;
-  margin-bottom: 15px;
-`;
-
-export const Favorite = styled.View`
+export const Activies = styled.View`
   width: 80%;
   flex-direction: column;
 `;
 
-export const TitleFavorite = styled.Text`
+export const TitleActivie = styled.Text`
+  font-size: 14px;
+  font-weight: bold;
+  color: #555;
+`;
+
+export const SubtitleActivies = styled.Text`
+  color:#555;
+  font-size: 14px;
+  margin-bottom: 10px;
+`;
+
+export const Subtitle = styled.Text`
+  color:#555;
+  font-size: 14px;
+`;
+
+export const Activie = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+  height: auto;
+  width: 100%;
+  padding: 15px;
+  border: 0.3px solid #D6D6D6;
+  border-radius: 4px;
+  background: #fff;
+`;
+
+export const PhotoActivie = styled.View`
+  height: 32px;
+  width: 32px;
+  border-radius: 4px;
+  background: #D6D6D6;
+`;
+
+export const ActivieData = styled.View`
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+`;
+
+export const TitleActivies = styled.Text`
   font-size: 24px;
   font-weight: bold;
-  color:#555;
+  color: #555;
 `;

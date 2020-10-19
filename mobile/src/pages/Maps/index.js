@@ -10,6 +10,7 @@ import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import Button from '../../components/Button'
 
 import api from '../../services/api';
+
 import { connect, disconnect, subscribeToNewPoint } from '../../services/socket';
 
 import {
@@ -26,6 +27,7 @@ export default function Maps({ navigation: { navigate } }) {
   const mapView = React.createRef();
 
   useEffect(() => {
+    SyncStorage.set('activies', []);
     const myLocation = SyncStorage.get('location_currentRegion');
 
     if(!myLocation) {
@@ -103,9 +105,7 @@ export default function Maps({ navigation: { navigate } }) {
     if (inputVisible) {
       setInputVisible(false);
 
-      if (text) {
-        Alert.alert(text);
-  
+      if (text) {  
         loadPointsByMaterials(text);
       }
     } else {
