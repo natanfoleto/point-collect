@@ -42,7 +42,7 @@ export default function Home({ navigation }) {
               await SyncStorage.set('auth_user', response.data.user);
 
               api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-                
+
               navigation.reset({
                 routes: [{ name: 'Maps' }],
               });
@@ -91,10 +91,10 @@ export default function Home({ navigation }) {
             value={password}
             onChangeText={setPassword}
           >
-            {/* <ButtonBar 
-              icon="remove-red-eye" 
-              cor="#4BCB56" 
-              tamanho={22} 
+            {/* <ButtonBar
+              icon="remove-red-eye"
+              cor="#4BCB56"
+              tamanho={22}
             /> */}
           </FormInput>
 
@@ -110,9 +110,9 @@ export default function Home({ navigation }) {
           <SignLinkText> Cadastre-se </SignLinkText>
         </SignLink>
 
-        <SignLink onPress={() => { navigation.navigate('ResetPassword') }} >
+        {/* <SignLink onPress={() => { navigation.navigate('ResetPassword') }} >
           <SignLinkText> Esqueceu sua senha? </SignLinkText>
-        </SignLink>
+        </SignLink> */}
       </Container>
     </>
 

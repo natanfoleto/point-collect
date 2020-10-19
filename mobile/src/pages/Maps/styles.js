@@ -4,6 +4,17 @@ export const Text = styled.Text`
   font-size: 14px;
 `;
 
+export const DialogContainer = styled.KeyboardAvoidingView.attrs({
+  enabled: Platform.OS === 'ios',
+  behavior: 'padding',
+})`
+
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 0 30px;
+`;
+
 export const PointLocation = styled.Image`
   width: 40px;
   height: 40px;

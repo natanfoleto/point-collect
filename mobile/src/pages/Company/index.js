@@ -37,9 +37,9 @@ export default function Company({ navigation, route }) {
   function plotRoute() {
     const location = SyncStorage.get('location_currentRegion');
 
-    // Linking.openURL(
-    //   `https://www.google.com/maps/dir/?api=1&origin=${location.latitude},${location.longitude}&destination=${point.latitude},${point.longitude}`
-    // );
+    Linking.openURL(
+      `https://www.google.com/maps/dir/?api=1&origin=${location.latitude},${location.longitude}&destination=${point.latitude},${point.longitude}`
+    );
 
     let dt = new Date();
     let date = moment(dt);
@@ -51,7 +51,7 @@ export default function Company({ navigation, route }) {
 
   function addActivies(title, data, date) {
     let activies = SyncStorage.get('activies');
-    
+
     const newActivie = {
       title: title,
       data: data,
@@ -106,14 +106,14 @@ export default function Company({ navigation, route }) {
                 <Text> Traçe uma rota até o local</Text>
 
                 <ButtonRoute onPress={plotRoute}>
-                  <Icon 
+                  <Icon
                     name="subdirectory-arrow-right"
                     size={36}
                     color='#fff'
                     style={{ marginTop: 10 }}
                   />
                 </ButtonRoute>
-                
+
               </PlotRoute>
             </DataCompany>
 

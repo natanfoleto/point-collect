@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Alert, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -9,10 +9,9 @@ import SyncStorage from 'sync-storage';
 import Image from '../../assets/avatar.png';
 
 import {
-  Container, TopBox, NameContainer, TextName, Photo, 
-  BoxData, HeaderProfile, ButtonEdit, ButtonLogout, 
-  ButtonEditText, ButtonLogoutText, Info, Buttons, 
-  Activies, Activie, Subtitle, SubtitleActivies, TitleActivies, 
+  Container, TopBox, NameContainer, TextName, Photo,
+  BoxData, HeaderProfile, Button, ButtonText, Info, Buttons,
+  Activies, Activie, Subtitle, SubtitleActivies, TitleActivies,
   TitleActivie, PhotoActivie, ActivieData
 } from './styles';
 
@@ -59,16 +58,16 @@ export default function Profile({ navigation }) {
             </Info>
 
             <Buttons>
-              <ButtonEdit onPress={handleEdit} >
-                <ButtonEditText> Editar </ButtonEditText>
-              </ButtonEdit>
+              <Button onPress={handleEdit} >
+                <ButtonText> Editar </ButtonText>
+              </Button>
 
-              <ButtonLogout onPress={handleLogout} >
-                <ButtonLogoutText> Logout </ButtonLogoutText>
-              </ButtonLogout>
+              <Button onPress={handleLogout} >
+                <ButtonText> Logout </ButtonText>
+              </Button>
             </Buttons>
-            
-          </BoxData>   
+
+          </BoxData>
         </TopBox>
 
         <Activies>
@@ -88,7 +87,13 @@ export default function Profile({ navigation }) {
                 key={activie.date}
                 onPress={() => navigation.navigate('Activie', activie)}
               >
-                <PhotoActivie></PhotoActivie>
+                <PhotoActivie>
+                  <Icon
+                    name="map"
+                    size={26}
+                    color="#555"
+                  />
+                </PhotoActivie>
 
                 <ActivieData>
                   <TitleActivie>
@@ -100,7 +105,7 @@ export default function Profile({ navigation }) {
                   </Subtitle>
                 </ActivieData>
 
-                <Icon 
+                <Icon
                   style={{ position: "absolute", right: 5 }}
                   name="chevron-right"
                   size={28}
@@ -109,7 +114,7 @@ export default function Profile({ navigation }) {
                 </Activie>
             ))}
           </ScrollView>
-          
+
         </Activies>
       </Container>
     </>

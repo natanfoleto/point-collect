@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { RectButton } from 'react-native-gesture-handler';
+
 import Header from '../../components/Header';
 
 export const Container = styled.View`
@@ -70,30 +72,16 @@ export const Buttons = styled.View`
   margin-top: 15px;
 `;
 
-export const ButtonEdit = styled.TouchableOpacity`
+export const Button = styled(RectButton)`
   padding: 15px;
   width: 48%;
   align-items: center;
   border-radius: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-`;
-
-export const ButtonLogout = styled.TouchableOpacity`
-  padding: 15px;
-  width: 48%;
-  align-items: center;
-  border-radius: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
   background: #47AF50;
 `;
 
-export const ButtonEditText = styled.Text`
-  color: rgba(000,000,000, 0.4);
-  font-weight: bold;
-  font-size: 16px;
-`;
-
-export const ButtonLogoutText = styled.Text`
+export const ButtonText = styled.Text`
   color: #eee;
   font-weight: bold;
   font-size: 16px;
@@ -136,8 +124,10 @@ export const Activie = styled.TouchableOpacity`
 export const PhotoActivie = styled.View`
   height: 32px;
   width: 32px;
+  align-items: center;
+  justify-content: center;
+  border: 0.3px solid #666;
   border-radius: 4px;
-  background: #D6D6D6;
 `;
 
 export const ActivieData = styled.View`

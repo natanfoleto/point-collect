@@ -15,7 +15,7 @@ import { connect, disconnect, subscribeToNewPoint } from '../../services/socket'
 
 import {
   BoxBottons, PointLocation, CalloutContainer, TextNameBold,
-  Subtitle, TextInfo, TextMore
+  Subtitle, TextInfo, TextMore, DialogContainer
 } from './styles'
 
 export default function Maps({ navigation: { navigate } }) {
@@ -35,14 +35,14 @@ export default function Maps({ navigation: { navigate } }) {
 
       async function loadInitialPosition() {
         const { granted } = await requestPermissionsAsync();
-  
+
         if (granted) {
           const { coords } = await getCurrentPositionAsync({
             enableHighAccuracy: true,
           });
-  
+
           const { latitude, longitude } = coords;
-  
+
           setCurrentRegion({
             latitude,
             longitude,
@@ -86,7 +86,7 @@ export default function Maps({ navigation: { navigate } }) {
 
   async function loadPoints() {
     const response = await api.get('/collectors');
-    
+
     setPoints(response.data);
     setupWebSocket();
   }
@@ -96,7 +96,7 @@ export default function Maps({ navigation: { navigate } }) {
       Alert.alert('Erro na pesquisa', 'Você precisa informar pelo menos um tipo de material');
     } else {
       const response = await api.post('/search', { materials });
-  
+
       setPoints(response.data);
     }
   }
@@ -105,24 +105,24 @@ export default function Maps({ navigation: { navigate } }) {
     if (inputVisible) {
       setInputVisible(false);
 
-      if (text) {  
+      if (text) {
         loadPointsByMaterials(text);
       }
     } else {
       setInputVisible(true);
-    } 
+    }
   }
 
   return (
     <>
-      {currentRegion && <MapView 
+      {currentRegion && <MapView
         initialRegion={currentRegion}
         ref={mapView}
-        style={{ flex: 1 }} 
+        style={{ flex: 1 }}
       >
         {currentRegion && <Marker
           coordinate={currentRegion} >
-            
+
           <Callout onPress={() => navigate('Profile')}>
             <CalloutContainer >
               <TextNameBold> Você </TextNameBold>
@@ -149,8 +149,8 @@ export default function Maps({ navigation: { navigate } }) {
                   <Subtitle>Entidade:</Subtitle> {point.entity}
                 </TextInfo>
 
-                <TextInfo> 
-                  <Subtitle>Endereço:</Subtitle> {point.logradouro}, {point.bairro}, Nº {point.numero}, {point.localidade}, {point.uf} 
+                <TextInfo>
+                  <Subtitle>Endereço:</Subtitle> {point.logradouro}, {point.bairro}, Nº {point.numero}, {point.localidade}, {point.uf}
                 </TextInfo>
 
                 <TextInfo>
@@ -167,41 +167,43 @@ export default function Maps({ navigation: { navigate } }) {
         ))}
       </MapView>}
 
-      <DialogInput isDialogVisible={inputVisible}
+      <DialogInput
+        isDialogVisible={inputVisible}
         title="Pesquisa por materiais"
-        message={ 
+        message={
           `Você pode pesquisar por:
-          \nPlásticos, Garrafas, Potes, Tubos, Canos, Brinquedos,Sacos, Sacolas, 
-          Isopor, Alumínio, Molas, Latas, Papéis, Vidro, Outros
+          \nPlásticos, Garrafas, Potes, Tubos, Canos, Brinquedos,Sacos, Sacolas, Isopor, Alumínio, Molas, Latas, Papéis, Vidro, Outros
           \nLembre-se de escrever os materiais com as iniciais maiúsculas, como mostra o exemplo acima.`
         }
+        submitText="Pesquisar"
+        cancelText="Cancelar"
         submitInput={(text) => { searchInput(text) }}
         closeDialog={() => { searchInput() }}>
       </DialogInput>
 
       <BoxBottons>
-        <Button 
-          icon="magnifier" 
-          cor="#fff" 
+        <Button
+          icon="magnifier"
+          cor="#fff"
           tamanho={24}
           onPress={searchInput}
         >
           Pesquis
         </Button>
- 
-        <Button 
-          icon="magnifier-remove" 
-          cor="#fff" 
+
+        <Button
+          icon="magnifier-remove"
+          cor="#fff"
           tamanho={24}
           onPress={loadPoints}
         >
           Limpar
         </Button>
 
-        <Button 
-          icon="location-pin" 
-          cor="#fff" 
-          tamanho={24} 
+        <Button
+          icon="location-pin"
+          cor="#fff"
+          tamanho={24}
           onPress={initialPosition}
         >
           Localizar

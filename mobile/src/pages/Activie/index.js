@@ -18,19 +18,38 @@ export default function Activie({ navigation, route }) {
       <Container>
         <Header handleNavigation={navigation.goBack} cor={'#47AF50'} />
 
-        <Content>
+        {activie && <Content>
           <Title>
             {activie.title}
           </Title>
 
           <Card>
             <TitleCard>
-              Local
+              {activie.data && activie.data.entity}
             </TitleCard>
 
             <Text>
               {activie.data && activie.data.name}
             </Text>
+          </Card>
+
+          <Card>
+            <TitleCard>
+              Endereço
+            </TitleCard>
+
+            <Text>
+              {activie.data && activie.data.logradouro}, {activie.data && activie.data.numero}
+            </Text>
+
+            <Text>
+              {activie.data && activie.data.bairro}
+            </Text>
+
+            <Text>
+              {activie.data && activie.data.localidade}, {activie.data && activie.data.uf}
+            </Text>
+
           </Card>
 
           <Card>
@@ -42,8 +61,8 @@ export default function Activie({ navigation, route }) {
               {activie.date}
             </Text>
           </Card>
-          
-        </Content>
+
+        </Content>}
       </Container>
     </>
   )
