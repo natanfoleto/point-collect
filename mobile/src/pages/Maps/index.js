@@ -188,7 +188,7 @@ export default function Maps({ navigation: { navigate } }) {
           tamanho={24}
           onPress={searchInput}
         >
-          Pesquis
+          Pesquisa
         </Button>
 
         <Button

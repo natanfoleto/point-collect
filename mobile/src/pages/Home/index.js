@@ -1,11 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { Image, Alert } from 'react-native';
 
+
 import SyncStorage from 'sync-storage';
 
 import logo from '../../assets/logo.png';
-
-import ButtonBar from '../../components/ButtonBar';
 
 import api from '../../services/api';
 
@@ -110,9 +109,9 @@ export default function Home({ navigation }) {
           <SignLinkText> Cadastre-se </SignLinkText>
         </SignLink>
 
-        {/* <SignLink onPress={() => { navigation.navigate('ResetPassword') }} >
+        <SignLink onPress={() => { console.log(varNot) }} >
           <SignLinkText> Esqueceu sua senha? </SignLinkText>
-        </SignLink> */}
+        </SignLink>
       </Container>
     </>
 
