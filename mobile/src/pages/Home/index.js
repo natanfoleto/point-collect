@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Image, Alert } from 'react-native';
 
-
 import SyncStorage from 'sync-storage';
 
 import logo from '../../assets/logo.png';

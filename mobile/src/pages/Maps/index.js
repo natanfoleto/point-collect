@@ -15,7 +15,7 @@ import { connect, disconnect, subscribeToNewPoint } from '../../services/socket'
 
 import {
   BoxBottons, PointLocation, CalloutContainer, TextNameBold,
-  Subtitle, TextInfo, TextMore, DialogContainer
+  Subtitle, TextInfo, TextMore
 } from './styles'
 
 export default function Maps({ navigation: { navigate } }) {
@@ -74,8 +74,8 @@ export default function Maps({ navigation: { navigate } }) {
     mapView.current.animateToRegion({
       latitude: currentRegion.latitude,
       longitude: currentRegion.longitude,
-      latitudeDelta: 0.03,
-      longitudeDelta: 0.03,
+      latitudeDelta: 0.005,
+      longitudeDelta: 0.005,
     }, 1000);
   }
 
@@ -206,7 +206,7 @@ export default function Maps({ navigation: { navigate } }) {
           tamanho={24}
           onPress={initialPosition}
         >
-          Localizar
+          Minha Loc.
         </Button>
 
         <Button
